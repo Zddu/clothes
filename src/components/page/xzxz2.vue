@@ -50,26 +50,15 @@
                             <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
                                 <a-form-item label>
                                     <div class="lie">
-                                        <div class="box">
-                                            <img src="./../../assets/img/xiuyi.jpg" alt class="imgs" />
+                                        <div class="box" v-for="(item,index) in colorInfo" :key="index">
+                                            <img :src="item.contrastColorImg" alt class="imgs" />
                                             <div class="kuang" @click="showDrawer">
                                                 <a style="color: #f9d532">
-                                                    驳头眼撞色
+                                                    {{item.contrastColorName}}
                                                     <a-icon type="down" />
                                                 </a>
                                             </div>
                                         </div>
-
-                                        <div class="box">
-                                            <img src="./../../assets/img/xiuyi.jpg" alt class="imgs" />
-                                            <div class="kuang" @click="showDrawer">
-                                                <a style="color: #f9d532">
-                                                    驳头眼撞色
-                                                    <a-icon type="down" />
-                                                </a>
-                                            </div>
-                                        </div>
-
                                         <div style="width: 202px"></div>
                                         <div style="width: 202px"></div>
                                         <div style="width: 202px"></div>
@@ -148,6 +137,7 @@
 </template>
 
 <script>
+import {AllContrastcolorInfo} from "./../../api/ml"
 export default {
     name: 'xzxz2',
     data() {
@@ -156,11 +146,18 @@ export default {
             form: this.$form.createForm(this, { name: 'coordinated' }),
             visible: false,
             flag: false,
-            bottomImg: require('../../assets/cut1/icon88.png')
+            bottomImg: require('../../assets/cut1/icon88.png'),
+            colorInfo: []
         };
     },
     created() {},
-    mounted() {},
+    mounted() {
+        AllContrastcolorInfo().then(res => {
+            console.log(res)
+            this.colorInfo = res.data
+            this.$set(this.colorInfo)
+        })
+    },
     methods: {
         changeStyle() {
             this.flag = !this.flag;
@@ -304,9 +301,9 @@ export default {
 }
 .lie {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
-    width: 800px;
+    width: 840px;
 }
 .v-enter {
     width: 712px;
