@@ -323,25 +323,6 @@
         transition: all 0.75s ease;
     }
 
-    .spot-style {
-        width: 85px;
-        height: 85px;
-        background: #555555;
-        border-radius: 45px;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        right: -34px;
-        bottom: -30px;
-    }
-
-    .bottom-menu {
-        list-style: none;
-        margin: 0;
-        display: flex;
-    }
 
     .bottom-menu li {
         float: left;

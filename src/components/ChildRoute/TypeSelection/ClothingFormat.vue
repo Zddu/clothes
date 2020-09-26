@@ -261,22 +261,6 @@
         width: 110px;
     }
 
-    .active {
-        border-right: 4px solid #000c17;
-    }
-
-    .line {
-        width: 175px;
-        padding: 18px 0px 0px 0px;
-        border-right: 1px solid #eeeeee;
-    }
-
-    .left-menu {
-        list-style: none;
-        padding: 0;
-        text-align: end;
-    }
-
     .left-menu li {
         line-height: 59px;
         padding: 0 20px 0px 0px;
