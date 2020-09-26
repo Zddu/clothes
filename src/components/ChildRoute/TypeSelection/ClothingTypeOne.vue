@@ -1,73 +1,23 @@
 <template>
-    <div class="head-step">
-        <div class="head-item-step">
-            <el-steps :active="2" align-center>
-                <el-step space="20%" title="填写基本信息" @click.native="steptitle(1)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon109.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="品类版型选择" @click.native="steptitle(2)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon67.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="选择面料辅料" @click.native="steptitle(3)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon718.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="服装类别工艺" @click.native="steptitle(4)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon115.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="选择绣字撞色" @click.native="steptitle(5)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon127.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="量体信息录入" @click.native="steptitle(6)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon121.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-            </el-steps>
-        </div>
         <div class="main-container">
-            <div>
-                <a-row>
-                    <a-col :span="4">
-                        <div class="line">
-                            <ul class="left-menu">
-                                <li :class="{active: xuanze == 1}" @click="xuanze = 1">
-                                    面料
-                                </li>
-                                <li :class="{active: xuanze == 2}" @click="xuanze = 2">
-                                    西服里
-                                </li>
-                                <li :class="{active: xuanze == 3}" @click="xuanze = 3">
-                                    马甲里
-                                </li>
-                                <li :class="{active: xuanze == 4}" @click="xuanze = 4">
-                                    底领
-                                </li>
-                                <li :class="{active: xuanze == 5}" @click="xuanze = 5">
-                                    纽扣
-                                </li>
-                            </ul>
-                        </div>
-                    </a-col>
-                    <a-col :span="20">
-                        <div class="content">
-                            <FabricPage v-show="xuanze == 1"/>
-                            <SuitPage v-show="xuanze == 2"/>
-                            <VestPage v-show="xuanze == 3"/>
-                            <BottomCollarPage v-show="xuanze == 4"/>
-                            <ButtonPage v-show="xuanze == 5"/>
-                        </div>
-                    </a-col>
-                </a-row>
+            <div class="content">
+                <div class="type-main">
+                    <a-card
+                            v-for="item in categoryinfoData"
+                            style="
+                                width: 156px;
+                                height: 197px;
+                                background: #ffffff;
+                                border-radius: 3px;
+                                border: 1px solid #f9d805;
+                                margin-right: 14px;
+                                margin-bottom: 14px;
+                                    ">
+                        <img :src="item.img" alt=""/>
+                        <p class="type-font-style">{{item.categoryName}}</p>
+                    </a-card>
+
+                </div>
             </div>
             <transition>
                 <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
@@ -95,25 +45,25 @@
                 <img :src="bottomImg" alt=""/>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
-    import FabricPage from '../ChildRoute/FabricAccessories/FabricPage';
-    import SuitPage from '../ChildRoute/FabricAccessories/SuitPage';
-    import VestPage from '../ChildRoute/FabricAccessories/VestPage';
-    import BottomCollarPage from '../ChildRoute/FabricAccessories/BottomCollarPage';
-    import ButtonPage from '../ChildRoute/FabricAccessories/ButtonPage';
-
+    import {queryMstemplateinfo,queryCategoryinfo} from '@/api/ml'
     export default {
-        name: 'order7',
-        components: { ButtonPage, BottomCollarPage, VestPage, SuitPage, FabricPage },
+        name: 'ClothingTypeOne',
         data() {
             return {
-                bottomImg: require('../../assets/cut1/icon88.png'),
-                xuanze: 1,
-                flag: false,
-                flagV: true,
+                module:{
+                    module_id:'',
+                    category_id:2,
+                },
+                //服装品类  数据
+                categoryinfoData:[],
+                categoryinfo:{
+                    template_id:'2'
+                },
+                moduleData:[],
+                flag: true,
                 formModel: {
                     layout: 'horizontal',
                     orderId: ''
@@ -124,33 +74,30 @@
                     type: ['type1'],
                     series: ['type1']
                 },
+                niukouImg: require('../../../assets/img/ml.jpg'),
+                bottomImg: require('../../../assets/cut1/icon88.png')
             };
         },
-        computed: {
-            formItemLayout() {
-                const { layout } = this.formModel;
-                return layout === 'horizontal'
-                    ? {
-                        labelCol: { span: 2 },
-                        wrapperCol: { span: 12 }
-                    }
-                    : {};
-            },
-            formItemLayoutType() {
-                const { layout } = this.formModelType;
-                return layout === 'horizontal'
-                    ? {
-                        labelCol: { span: 2 },
-                        wrapperCol: { span: 22 }
-                    }
-                    : {};
-            }
-        },
+        computed: {},
         created() {
+            this.module.module_id = this.$route.params.id
         },
         mounted() {
+            this.getMstemplateinfo()
         },
         methods: {
+            getMstemplateinfo(){
+                queryMstemplateinfo(this.module).then(res=>{
+                    console.log(res);
+                    this.moduleData  = res.data
+                })
+            },
+            getCategoryinfo(){
+                queryCategoryinfo(this.categoryinfo).then(res=>{
+                    console.log(res);
+                    this.categoryinfoData = res.data
+                })
+            },
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({
@@ -178,15 +125,44 @@
                     });
                 }
             },
+            routeLink(index){
+                if (index === 1) {
+                    this.$router.push({path:'/plbx1/1'})
+                }else if (index === 2) {
+                    this.$router.push({path:'/order4/2'})
+                }else if (index === 3) {
+                    this.$router.push({path:'/order5/3'})
+                }else if (index === 4) {
+                    this.$router.push({path:'/order6/4'})
+                };
+            },
             changeStyle() {
                 this.flag = !this.flag;
                 let div = document.getElementById('footer_choice');
+                console.log(div);
                 div.style.width = 0 + 'px';
+            },
+            formItemLayout() {
+                const { layout } = this.formModel;
+                return layout === 'horizontal'
+                    ? {
+                        labelCol: { span: 2 },
+                        wrapperCol: { span: 12 }
+                    }
+                    : {};
+            },
+            formItemLayoutType() {
+                const { layout } = this.formModelType;
+                return layout === 'horizontal'
+                    ? {
+                        labelCol: { span: 2 },
+                        wrapperCol: { span: 22 }
+                    }
+                    : {};
             },
             searchCode() {
                 alert(1);
             },
-
             onChange() {
             }
         }
@@ -194,26 +170,16 @@
 </script>
 
 <style scoped>
-
-    .content{
-        padding: 25px 0 0 0;
-    }
-    .v-enter {
-        width: 712px;
-    }
-
+    .v-enter,
     .v-leave-to {
         /* 透明度为0 */
-        opacity: 0;
+        width: 712px;
         /* 位移(x) */
     }
 
     /* v-enter-active [入场动画的时间段] */
     /* v-leave-active [离场动画的时间段] */
-    .v-enter-active {
-        transition: all 0.75s ease;
-    }
-
+    .v-enter-active,
     .v-leave-active {
         /* 渐变 */
         transition: all 0.75s ease;
@@ -265,6 +231,27 @@
         bottom: -30px;
         display: flex;
         align-items: center;
+    }
+
+    .content .type-main {
+        display: flex;
+        display: -webkit-flex;
+        /* justify-content: end; */
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+    }
+
+    .content .type-main .type-font-style {
+        width: 110px;
+        background: #f9d532;
+        border-radius: 3px;
+        font-size: 14px;
+        font-family: PingFangSC-Light, PingFang SC;
+        font-weight: 300;
+        color: #303030;
+        text-align: center;
     }
 
     .content .type-main img {
@@ -330,6 +317,8 @@
         width: 1257px;
         min-height: 900px;
         background: #ffffff;
+        padding: 45px 0 0 0;
         position: relative;
     }
 </style>
+

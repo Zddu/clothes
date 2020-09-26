@@ -61,66 +61,7 @@
                         </div>
                     </a-col>
                     <a-col :span="20">
-                        <div class="content">
-                            <div class="type-main">
-                                <a-card
-                                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                                >
-                                    <img src="../../assets/fwdp9.png" alt="" />
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                                <a-card
-                                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                                >
-                                    <img src="../../assets/fwdp8.png" alt="" />
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                                <a-card
-                                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                                >
-                                    <img src="../../assets/fwdp10.png" alt="" />
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                                <a-card
-                                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                                >
-                                    <img src="../../assets/fwdp11.png" alt="" />
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                            </div>
-                        </div>
+
                     </a-col>
                 </a-row>
             </div>

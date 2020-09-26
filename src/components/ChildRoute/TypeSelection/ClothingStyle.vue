@@ -1,70 +1,9 @@
 <template>
-    <div class="head-step">
-        <div class="head-item-step">
-            <el-steps :active="1" align-center>
-                <el-step space="20%" title="填写基本信息" @click.native="steptitle(1)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon109.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="品类版型选择" @click.native="steptitle(2)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon68.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="选择面料辅料" @click.native="steptitle(3)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon78.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="服装类别工艺" @click.native="steptitle(4)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon115.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="选择绣字撞色" @click.native="steptitle(5)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon127.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="量体信息录入" @click.native="steptitle(6)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon121.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-            </el-steps>
-        </div>
-        <div class="main-container">
-            <div>
-                <a-row>
-                    <a-col :span="4">
-                        <div class="line">
-                            <ul class="left-menu">
-                                <li @click="routeLink(1)">
-                                    <a-tag style="color: #ffec70" color="#303030"> 男装</a-tag>
-                                    服装类别
-                                </li>
-                                <li @click="routeLink(2)">
-                                    <a-tag style="color: #ffec70" color="#303030"> 单衣</a-tag>   
-                                    服装品类
-                                </li>
-                                <li @click="routeLink(3)" class="active">
-                                    <a-tag style="color: #ffec70" color="#303030"> LIUH001</a-tag>
-                                    服装款式
-                                </li>
-                                <li @click="routeLink(4)">
-                                    <a-tag style="color: #ffec70" color="#303030"> LIUH001</a-tag>
-                                    服装版型
-                                </li>
-                                <li @click="routeLink(5)">工艺类型</li>
-                            </ul>
-                        </div>
-                    </a-col>
-                    <a-col :span="20">
-                        <div class="content">
-                            <div class="type-main">
-                                <a-card
-                                        style="
+    <div class="main-container">
+        <div class="content">
+            <div class="type-main">
+                <a-card
+                        style="
                                         width: 156px;
                                         height: 197px;
                                         background: #ffffff;
@@ -73,12 +12,12 @@
                                         margin-right: 14px;
                                         margin-bottom: 14px;
                                     "
-                                >
-                                    <img src="../../assets/fwdp5.png" alt=""/>
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                                <a-card
-                                        style="
+                >
+                    <img src="../../../assets/fwdp5.png" alt=""/>
+                    <p class="type-font-style">LV0034</p>
+                </a-card>
+                <a-card
+                        style="
                                         width: 156px;
                                         height: 197px;
                                         background: #ffffff;
@@ -87,12 +26,12 @@
                                         margin-right: 14px;
                                         margin-bottom: 14px;
                                     "
-                                >
-                                    <img src="../../assets/fwdp5.png" alt=""/>
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                                <a-card
-                                        style="
+                >
+                    <img src="../../../assets/fwdp5.png" alt=""/>
+                    <p class="type-font-style">LV0034</p>
+                </a-card>
+                <a-card
+                        style="
                                         width: 156px;
                                         height: 197px;
                                         background: #ffffff;
@@ -101,12 +40,12 @@
                                         margin-right: 14px;
                                         margin-bottom: 14px;
                                     "
-                                >
-                                    <img src="../../assets/fwdp5.png" alt=""/>
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                                <a-card
-                                        style="
+                >
+                    <img src="../../../assets/fwdp5.png" alt=""/>
+                    <p class="type-font-style">LV0034</p>
+                </a-card>
+                <a-card
+                        style="
                                         width: 156px;
                                         height: 197px;
                                         background: #ffffff;
@@ -114,41 +53,36 @@
                                         border: 1px solid #f9d805;
                                         margin-right: 14px;
                                         margin-bottom: 14px;
-                                    "
-                                >
-                                    <img src="../../assets/fwdp5.png" alt=""/>
-                                    <p class="type-font-style">LV0034</p>
-                                </a-card>
-                            </div>
-                        </div>
-                    </a-col>
-                </a-row>
+                                    ">
+                    <img src="../../../assets/fwdp5.png" alt=""/>
+                    <p class="type-font-style">LV0034</p>
+                </a-card>
             </div>
-            <transition>
-                <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                    <li>
-                        产品列表
-                        <a-badge
-                                :number-style="{
+        </div>
+        <transition>
+            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
+                <li>
+                    产品列表
+                    <a-badge
+                            :number-style="{
                                 color: '#F9D532FF',
                                 position: 'absolute',
                                 right: '8px',
                                 bottom: '0px'
                             }"
-                                count="3"
-                        />
-                    </li>
-                    <li>重建订单</li>
-                    <li>保存模版</li>
-                    <li>特殊要求</li>
-                    <li>提交信息</li>
-                </ul>
-                <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
-                <!--                </div>-->
-            </transition>
-            <div @click="changeStyle" class="spot-style">
-                <img :src="bottomImg" alt=""/>
-            </div>
+                            count="3"
+                    />
+                </li>
+                <li>重建订单</li>
+                <li>保存模版</li>
+                <li>特殊要求</li>
+                <li>提交信息</li>
+            </ul>
+            <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
+            <!--                </div>-->
+        </transition>
+        <div @click="changeStyle" class="spot-style">
+            <img :src="bottomImg" alt=""/>
         </div>
     </div>
 </template>
@@ -157,20 +91,20 @@
     import { queryMstemplateinfo, queryCategoryinfo } from '@/api/ml';
 
     export default {
-        name: 'order5',
+        name: 'ClothingStyle',
 
         data() {
             return {
-                module:{
-                    module_id:'',
-                    category_id:0,
+                module: {
+                    module_id: '',
+                    category_id: 0
                 },
                 //服装品类  数据
-                categoryinfoData:[],
-                categoryinfo:{
-                    template_id:'3'
+                categoryinfoData: [],
+                categoryinfo: {
+                    template_id: '3'
                 },
-                moduleData:[],
+                moduleData: [],
                 flag: true,
                 formModel: {
                     layout: 'horizontal',
@@ -182,8 +116,8 @@
                     type: ['type1'],
                     series: ['type1']
                 },
-                niukouImg: require('../../assets/img/ml.jpg'),
-                bottomImg: require('../../assets/cut1/icon88.png')
+                niukouImg: require('../../../assets/img/ml.jpg'),
+                bottomImg: require('../../../assets/cut1/icon88.png')
             };
         },
         computed: {
@@ -207,23 +141,23 @@
             }
         },
         created() {
-            this.module.module_id = this.$route.params.id
+            this.module.module_id = this.$route.params.id;
         },
         mounted() {
-            this.getMstemplateinfo()
+            this.getMstemplateinfo();
         },
         methods: {
-            getMstemplateinfo(){
-                queryMstemplateinfo(this.module).then(res=>{
+            getMstemplateinfo() {
+                queryMstemplateinfo(this.module).then(res => {
                     console.log(res);
-                    this.moduleData  = res.data
-                })
+                    this.moduleData = res.data;
+                });
             },
-            getCategoryinfo(){
-                queryCategoryinfo(this.categoryinfo).then(res=>{
+            getCategoryinfo() {
+                queryCategoryinfo(this.categoryinfo).then(res => {
                     console.log(res);
-                    this.categoryinfoData = res.data
-                })
+                    this.categoryinfoData = res.data;
+                });
             },
             steptitle(index) {
                 if (index == 1) {
@@ -424,11 +358,5 @@
     }
 
     .main-container {
-        margin-top: 20px;
-        width: 1257px;
-        min-height: 900px;
-        background: #ffffff;
-        padding: 45px 0 0 0;
-        position: relative;
     }
 </style>
