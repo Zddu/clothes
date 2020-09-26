@@ -213,11 +213,11 @@ export default {
                 });
             } else if (index == 2) {
                 this.$router.push({
-                    path: '/plbx1'
+                    path: '/plbx1/2'
                 });
             } else if (index == 3) {
                 this.$router.push({
-                    path: '/order7'
+                    path: '/order7/3'
                 });
             } else if (index == 4) {
                 this.$router.push({
@@ -247,7 +247,7 @@ export default {
         handleSelectChange(value) {
             console.log( this.shoplist[value]);
             this.shopname = this.shoplist[value].storeName
-           
+
         }
     }
 };

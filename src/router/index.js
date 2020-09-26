@@ -50,7 +50,7 @@ export default new Router({
                     meta: { title: '量体信息录入' }
                 },
                 {
-                    path: "/plbx1",
+                    path: "/plbx1/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/plbx1.vue'),
                     meta: { title: '品类版型选择' }
                 },
@@ -60,50 +60,50 @@ export default new Router({
                     meta: { title: '服装类别工艺' }
                 },
                 {
-                    path: "/order7",
+                    path: "/order7/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order7.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order8",
+                    path: "/order8/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order8.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order9",
+                    path: "/order9/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order9.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order2",
+                    path: "/order2/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order2.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order3",
+                    path: "/order3/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order3.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order4",
+                    path: "/order4/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order4.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order5",
+                    path: "/order5/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order5.vue'),
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order6",
+                    path: "/order6/:id",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order6.vue'),
                     meta: { title: '选择面料辅料' }
                 },
-                {
-                    path: "/order1",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order1.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
+                // {
+                //     path: "/order1",
+                //     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order1.vue'),
+                //     meta: { title: '选择面料辅料' }
+                // },
                 {
                     path: "/order10",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order10.vue'),

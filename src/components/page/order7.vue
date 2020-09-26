@@ -342,27 +342,27 @@ export default {
         steptitle(index) {
             if (index == 1) {
                 this.$router.push({
-                    path: '/jbxx1'
+                    path: '/jbxx1/1'
                 });
             } else if (index == 2) {
                 this.$router.push({
-                    path: '/plbx1'
+                    path: '/plbx1/2'
                 });
             } else if (index == 3) {
-                // this.$router.push({
-                //     path: '/order7'
-                // });
+                this.$router.push({
+                    path: '/order7/3'
+                });
             } else if (index == 4) {
                 this.$router.push({
-                    path: '/fzlb'
+                    path: '/fzlb/4'
                 });
             } else if (index == 5) {
                 this.$router.push({
-                    path: '/xzxz1'
+                    path: '/xzxz1/5'
                 });
             } else if (index == 6) {
                 this.$router.push({
-                    path: '/ltxx'
+                    path: '/ltxx/6'
                 });
             }
         },

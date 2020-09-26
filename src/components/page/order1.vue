@@ -1,26 +1,38 @@
 <template>
   <div class="head-step">
     <div class="head-item-step">
-      <a-steps>
-        <a-step status="finish" title="填写基本信息">
-          <a-icon slot="icon" type="smile-o"/>
-        </a-step>
-        <a-step status="finish" title="品类版型选择">
-          <a-icon slot="icon" type="smile-o"/>
-        </a-step>
-        <a-step status="process" title="选择面料辅料">
-          <a-icon slot="icon" type="smile-o"/>
-        </a-step>
-        <a-step status="wait" title="服装类别工艺">
-          <a-icon slot="icon" type="smile-o"/>
-        </a-step>
-        <a-step status="wait" title="选择绣字撞色">
-          <a-icon slot="icon" type="smile-o"/>
-        </a-step>
-        <a-step status="wait" title="量体信息录入">
-          <a-icon slot="icon" type="smile-o"/>
-        </a-step>
-      </a-steps>
+      <el-steps :active="2" align-center>
+        <el-step space="20%" title="填写基本信息" @click.native="steptitle(1)">
+          <template slot="icon">
+            <img src="../../assets/cut1/icon109.png" style="height: 25px; width: 25px" />
+          </template>
+        </el-step>
+        <el-step space="20%" title="品类版型选择" @click.native="steptitle(2)">
+          <template slot="icon">
+            <img src="../../assets/cut1/icon67.png" style="height: 25px; width: 25px" />
+          </template>
+        </el-step>
+        <el-step space="20%" title="选择面料辅料" @click.native="steptitle(3)">
+          <template slot="icon">
+            <img src="../../assets/cut1/icon718.png" style="height: 25px; width: 25px" />
+          </template>
+        </el-step>
+        <el-step space="20%" title="服装类别工艺" @click.native="steptitle(4)">
+          <template slot="icon">
+            <img src="../../assets/cut1/icon115.png" style="height: 25px; width: 25px" />
+          </template>
+        </el-step>
+        <el-step space="20%" title="选择绣字撞色" @click.native="steptitle(5)">
+          <template slot="icon">
+            <img src="../../assets/cut1/icon127.png" style="height: 25px; width: 25px" />
+          </template>
+        </el-step>
+        <el-step space="20%" title="量体信息录入" @click.native="steptitle(6)">
+          <template slot="icon">
+            <img src="../../assets/cut1/icon121.png" style="height: 25px; width: 25px" />
+          </template>
+        </el-step>
+      </el-steps>
     </div>
     <div class="main-container">
       <div>
@@ -126,12 +138,12 @@
 </template>
 
 <script>
-
-
+  import { queryModule } from '@/api/ml'
   export default {
     name: 'order1',
     data() {
       return {
+        menuData:[],
         flag:true,
         niukouImg: require('../../assets/img/dl.jpg'),
         bottomImg:require('../../assets/cut1/icon88.png')
@@ -140,8 +152,43 @@
     created() {
     },
     mounted() {
+      this.getDhl()
     },
     methods: {
+      steptitle(index) {
+        if (index == 1) {
+          this.$router.push({
+            path: '/jbxx1'
+          });
+        } else if (index == 2) {
+          this.$router.push({
+            path: '/plbx1'
+          });
+        } else if (index == 3) {
+          // this.$router.push({
+          //     path: '/order7'
+          // });
+        } else if (index == 4) {
+          this.$router.push({
+            path: '/fzlb'
+          });
+        } else if (index == 5) {
+          this.$router.push({
+            path: '/xzxz1'
+          });
+        } else if (index == 6) {
+          this.$router.push({
+            path: '/ltxx'
+          });
+        }
+      },
+      //导航栏菜单数据
+      getDhl(){
+        queryModule().then(res=>{
+          console.log(res);
+          this.menuData = res.data
+        })
+      },
       changeStyle() {
         this.flag = !this.flag;
         let div = document.getElementById("footer_choice");

@@ -173,10 +173,18 @@
 </template>
 
 <script>
+    import {queryMstemplateinfo,queryCategoryinfo} from '@/api/ml'
     export default {
         name: 'plbx1',
         data() {
             return {
+                templateData:[],
+                //侧边导航菜单数据
+                menuData:[],
+                module:{
+                    module_id:'',
+                    category_id:0,
+                },
                 flag: true,
                 visible: false,
                 formModel: {
@@ -193,19 +201,35 @@
             };
         },
         created() {
+            this.module.module_id = this.$route.params.id
         },
         mounted() {
+            this.getMstemplateinfo()
+            this.getCategoryinfo()
         },
         methods: {
+            getCategoryinfo(){
+                queryCategoryinfo({"template_id":"1"}).then(res=>{
+                    console.log(res);
+
+                })
+            },
+            //请求module菜单
+            getMstemplateinfo(){
+                queryMstemplateinfo(this.module).then(res=>{
+                    console.log(res);
+                    this.menuData = res.data;
+                })
+            },
             routeLink(index){
                 if (index === 1) {
-                    this.$router.push({path:'/plbx1'})
+                    this.$router.push({path:'/plbx1/1'})
                 }else if (index === 2) {
-                    this.$router.push({path:'/order4'})
+                    this.$router.push({path:'/order4/2'})
                 }else if (index === 3) {
-                    this.$router.push({path:'/order5'})
+                    this.$router.push({path:'/order5/3'})
                 }else if (index === 4) {
-                    this.$router.push({path:'/order6'})
+                    this.$router.push({path:'/order6/4'})
                 };
             },
             changeStyle() {
@@ -216,27 +240,27 @@
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({
-                        path: '/jbxx1'
+                        path: '/jbxx1/1'
                     });
                 } else if (index == 2) {
                     this.$router.push({
-                        path: '/plbx1'
+                        path: '/plbx1/2'
                     });
                 } else if (index == 3) {
                     this.$router.push({
-                        path: '/order7'
+                        path: '/order7/3'
                     });
                 } else if (index == 4) {
                     this.$router.push({
-                        path: '/fzlb'
+                        path: '/fzlb/4'
                     });
                 } else if (index == 5) {
                     this.$router.push({
-                        path: '/xzxz1'
+                        path: '/xzxz1/5'
                     });
                 } else if (index == 6) {
                     this.$router.push({
-                        path: '/ltxx'
+                        path: '/ltxx/6'
                     });
                 }
             },
