@@ -229,7 +229,7 @@ export default {
     data() {
         return {
             flag: true,
-            niukouImg: require('../../assets/img/dl.jpg'),
+
             bottomImg: require('../../assets/cut1/icon88.png')
         };
     },
