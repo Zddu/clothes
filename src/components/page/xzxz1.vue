@@ -40,89 +40,20 @@
                     <a-col :span="4">
                         <div class="line">
                             <ul class="left-menu">
-                                <li class="active">绣字选项</li>
-                                <li @click="routerlink">撞色选项</li>
+                                <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">绣字选项</li>
+                                <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">撞色选项</li>
                             </ul>
                         </div>
                     </a-col>
                     <a-col :span="20">
                         <div class="content">
-                            <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
-                                <a-form-item label="绣字类型">
-                                    <a-select
-                                        size="large"
-                                        v-decorator="['gender', { rules: [{ required: true, message: '请选择门店编号' }] }]"
-                                        placeholder="请选择门店编号"
-                                        style="width: 337px"
-                                        @change="handleSelectChange"
-                                    >
-                                        <a-select-option value="male">male</a-select-option>
-                                        <a-select-option value="female">female</a-select-option>
-                                    </a-select>
-                                </a-form-item>
-
-                                <a-form-item label="绣字位置">
-                                    <a-select
-                                        size="large"
-                                        v-decorator="['gender', { rules: [{ required: true, message: '请选择门店编号' }] }]"
-                                        placeholder="请选择门店编号"
-                                        style="width: 337px"
-                                        @change="handleSelectChange"
-                                    >
-                                        <a-select-option value="male">male</a-select-option>
-                                        <a-select-option value="female">female</a-select-option>
-                                    </a-select>
-                                </a-form-item>
-
-                                <a-form-item label="绣字第一行">
-                                    <a-input size="large" style="width: 337px" />
-                                </a-form-item>
-
-                                <a-form-item label="绣字第二行">
-                                    <a-input size="large" style="width: 337px" />
-                                </a-form-item>
-
-                                <a-form-item label="字体选择">
-                                    <div class="lie">
-                                        <div class="box">
-                                            <img src="./../../assets/img/xiuyi.jpg" alt class="imgs" />
-                                            <div class="kuang">LV0034</div>
-                                        </div>
-                                        <div class="box1">
-                                            <img src="./../../assets/img/xiuyi.jpg" alt class="imgs" />
-                                            <div class="kuang1">LV0034</div>
-                                        </div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                    </div>
-                                </a-form-item>
-
-                                <a-form-item label="颜色选择">
-                                    <div class="lie">
-                                        <div class="box1">
-                                            <img src="./../../assets/img/xiuyi.jpg" alt class="imgs" />
-                                            <div class="kuang1">LV0034</div>
-                                        </div>
-                                        <div class="box1">
-                                            <img src="./../../assets/img/xiuyi.jpg" alt class="imgs" />
-                                            <div class="kuang1">LV0034</div>
-                                        </div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                        <div style="width: 156px"></div>
-                                    </div>
-                                </a-form-item>
-                            </a-form>
+                            <EmbroideryOptions v-show="xuanze == 1"></EmbroideryOptions>
+                            <ColorOptions v-show="xuanze == 2"></ColorOptions>
                         </div>
                     </a-col>
                 </a-row>
             </div>
-            <div style="height:90px"></div>
+            <div style="height: 90px"></div>
             <transition>
                 <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
                     <li>
@@ -151,18 +82,35 @@
 </template>
 
 <script>
+import EmbroideryOptions from './../ChildRoute/ColorContrast/EmbroideryOptions';
+import ColorOptions from './../ChildRoute/ColorContrast/ColorOptions';
 export default {
     name: 'xzxz1',
     data() {
         return {
             flag: false,
             formLayout: 'horizontal',
-            form: this.$form.createForm(this, { name: 'coordinated' }),
-            bottomImg: require('../../assets/cut1/icon88.png')
+            bottomImg: require('../../assets/cut1/icon88.png'),
+            xuanze: 1
         };
     },
+    components: {
+        EmbroideryOptions,
+        ColorOptions
+    },
     created() {},
-    mounted() {},
+    mounted() {
+        AllembroiderFont().then((res) => {
+            console.log(res);
+            this.fontsizelist = res.data;
+            this.$set(this.fontsizelist);
+        });
+        AllembroiderColor().then((res) => {
+            console.log(res);
+            this.colorlist = res.data;
+            this.$set(this.colorlist);
+        });
+    },
     methods: {
         changeStyle() {
             this.flag = !this.flag;
@@ -220,71 +168,6 @@ export default {
 </script>
 
 <style scoped>
-.lie {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 800px;
-}
-
-.kuang1 {
-    width: 91px;
-    height: 23px;
-
-    background: #e9e9e9;
-    border-radius: 3px;
-    font-size: 14px;
-    font-family: PingFangSC-Light, PingFang SC;
-    font-weight: 300;
-    color: #303030;
-    text-align: center;
-    line-height: 23px;
-    margin-top: 12px;
-}
-
-.kuang {
-    width: 91px;
-    height: 23px;
-    background: #f9d532;
-    border-radius: 3px;
-    font-size: 14px;
-    font-family: PingFangSC-Light, PingFang SC;
-    font-weight: 300;
-    color: #303030;
-    text-align: center;
-    line-height: 23px;
-    margin-top: 12px;
-}
-
-.imgs {
-    width: 143px;
-    height: 143px;
-    margin-top: 6px;
-}
-
-.box1 {
-    width: 156px;
-    height: 197px;
-    background: #ffffff;
-    border-radius: 3px;
-
-    border: 1px solid #e3e3e3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.box {
-    width: 156px;
-    height: 197px;
-    background: #ffffff;
-    border-radius: 3px;
-    border: 1px solid #f9d805;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .v-enter {
     width: 712px;
 }

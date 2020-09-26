@@ -117,6 +117,8 @@
             提交信息
           </li>
         </ul>
+        <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
+        <!--                </div>-->
       </transition>
       <div @click="changeStyle" class="spot-style">
         <img :src="bottomImg" alt="">
