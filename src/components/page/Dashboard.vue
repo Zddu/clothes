@@ -125,7 +125,7 @@ export default {
   methods: {
     routelink(index) {
         this.$router.push({
-            path: "/jbxx1"
+            path: "/IndividualOrder"
         })
         this.titleList.push(
           this.scricon[index]

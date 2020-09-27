@@ -1,39 +1,4 @@
 <template>
-    <div class="head-step">
-        <div class="head-item-step">
-            <el-steps :active="1" align-center>
-                <el-step space="20%" title="填写基本信息" @click.native="steptitle(1)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon109.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="品类版型选择" @click.native="steptitle(2)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon68.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="选择面料辅料" @click.native="steptitle(3)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon78.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="服装类别工艺" @click.native="steptitle(4)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon115.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="选择绣字撞色" @click.native="steptitle(5)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon127.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-                <el-step space="20%" title="量体信息录入" @click.native="steptitle(6)">
-                    <template slot="icon">
-                        <img src="../../assets/cut1/icon121.png" style="height: 25px; width: 25px"/>
-                    </template>
-                </el-step>
-            </el-steps>
-        </div>
         <div class="main-container">
             <div>
                 <a-row>
@@ -74,7 +39,6 @@
                 </a-row>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
