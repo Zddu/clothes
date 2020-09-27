@@ -48,16 +48,12 @@
 </template>
 
 <script>
-    import { queryMstemplateinfo, queryCategoryinfo } from '@/api/ml';
+    import {  queryCategoryinfo } from '@/api/ml';
 
     export default {
         name: 'ClothingStyle',
         data() {
             return {
-                module: {
-                    module_id: '',
-                    category_id: 0
-                },
                 //服装品类  数据
                 categoryinfoData: [],
                 categoryinfo: {
@@ -107,7 +103,6 @@
         methods: {
             getCategoryinfo() {
                 queryCategoryinfo(this.categoryinfo).then(res => {
-                    console.log(res);
                     this.categoryinfoData = res.data;
                 });
             },

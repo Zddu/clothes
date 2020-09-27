@@ -99,6 +99,7 @@
 </template>
 
 <script>
+    import {getButtonSelect} from '@/api/ml'
     import FabricPage from '../ChildRoute/FabricAccessories/FabricPage';
     import SuitPage from '../ChildRoute/FabricAccessories/SuitPage';
     import VestPage from '../ChildRoute/FabricAccessories/VestPage';
@@ -110,6 +111,10 @@
         components: { ButtonPage, BottomCollarPage, VestPage, SuitPage, FabricPage },
         data() {
             return {
+                module:{
+                    moudleId:'2',
+                },
+                moduleData:[],
                 bottomImg: require('../../assets/cut1/icon88.png'),
                 xuanze: 1,
                 flag: false,
@@ -149,8 +154,14 @@
         created() {
         },
         mounted() {
+            this.getButtonSelectType()
         },
         methods: {
+            getButtonSelectType(){
+                getButtonSelect(this.module).then(res=>{
+                    this.moduleData = res.data
+                })
+            },
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({

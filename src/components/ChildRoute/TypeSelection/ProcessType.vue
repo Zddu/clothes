@@ -2,61 +2,9 @@
     <div class="main-container">
         <div class="content">
             <div class="type-main">
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp1.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp2.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp3.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp4.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
+                <a-card v-for="item in categoryinfoData" class="card-style">
+                    <img :src="item.img" alt="" />
+                    <p class="type-font-style">{{item.categoryName}}</p>
                 </a-card>
             </div>
         </div>
@@ -89,10 +37,16 @@
 </template>
 
 <script>
+    import {  queryCategoryinfo } from '@/api/ml';
     export default {
         name: 'ProcessType',
         data() {
             return {
+                //服装品类  数据
+                categoryinfoData: [],
+                categoryinfo: {
+                    template_id: '3'
+                },
                 flag: true,
                 formModel: {
                     layout: 'horizontal',
@@ -110,8 +64,15 @@
         },
         computed: {},
         created() {},
-        mounted() {},
+        mounted() {
+            this.getCategoryinfo()
+        },
         methods: {
+            getCategoryinfo() {
+                queryCategoryinfo(this.categoryinfo).then(res => {
+                    this.categoryinfoData = res.data;
+                });
+            },
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({
@@ -139,23 +100,9 @@
                     });
                 }
             },
-            routeLink(index) {
-                if (index === 1) {
-                    this.$router.push({ path: '/plbx1' });
-                } else if (index === 2) {
-                    this.$router.push({ path: '/order4' });
-                } else if (index === 3) {
-                    this.$router.push({ path: '/order5' });
-                } else if (index === 4) {
-                    this.$router.push({ path: '/order6' });
-                } else if (index === 5) {
-                    this.$router.push({ path: '/order10' });
-                }
-            },
             changeStyle() {
                 this.flag = !this.flag;
                 let div = document.getElementById('footer_choice');
-                console.log(div);
                 div.style.width = 0 + 'px';
             },
             formItemLayout() {
@@ -185,6 +132,15 @@
 </script>
 
 <style scoped>
+    .card-style{
+        width: 156px;
+        height: 197px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #f9d805;
+        margin-right: 14px;
+        margin-bottom: 14px;
+    }
     .v-enter,
     .v-leave-to {
         /* 透明度为0 */
