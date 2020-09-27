@@ -78,7 +78,7 @@
 </template>
 
 <script>
-    import {queryMstemplateinfo,queryCategoryinfo} from '@/api/ml'
+    import {queryMstemplateinfo} from '@/api/ml'
     import ClothingType from '../ChildRoute/TypeSelection/ClothingType';
     import ClothingTypeOne from '../ChildRoute/TypeSelection/ClothingTypeOne';
     import ClothingStyle from '../ChildRoute/TypeSelection/ClothingStyle';
@@ -94,8 +94,8 @@
                 //侧边导航菜单数据
                 menuData:[],
                 module:{
-                    module_id:'',
-                    category_id:0,
+                    module_id:'1',
+                    category_id:'0',
                 },
                 flag: true,
                 visible: false,
@@ -113,23 +113,14 @@
             };
         },
         created() {
-            this.module.module_id = this.$route.params.id
         },
         mounted() {
             this.getMstemplateinfo()
-            this.getCategoryinfo()
         },
         methods: {
-            getCategoryinfo(){
-                queryCategoryinfo({"template_id":"1"}).then(res=>{
-                    console.log(res);
-
-                })
-            },
             //请求module菜单
             getMstemplateinfo(){
                 queryMstemplateinfo(this.module).then(res=>{
-                    console.log(res);
                     this.menuData = res.data;
                 })
             },

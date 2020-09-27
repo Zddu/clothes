@@ -16,47 +16,47 @@
                     <img src="../../../assets/fwdp5.png" alt=""/>
                     <p class="type-font-style">LV0034</p>
                 </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp5.png" alt=""/>
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp5.png" alt=""/>
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    ">
-                    <img src="../../../assets/fwdp5.png" alt=""/>
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
+<!--                <a-card-->
+<!--                        style="-->
+<!--                                        width: 156px;-->
+<!--                                        height: 197px;-->
+<!--                                        background: #ffffff;-->
+<!--                                        border-radius: 3px;-->
+<!--                                        border: 1px solid #f9d805;-->
+<!--                                        margin-right: 14px;-->
+<!--                                        margin-bottom: 14px;-->
+<!--                                    "-->
+<!--                >-->
+<!--                    <img src="../../../assets/fwdp5.png" alt=""/>-->
+<!--                    <p class="type-font-style">LV0034</p>-->
+<!--                </a-card>-->
+<!--                <a-card-->
+<!--                        style="-->
+<!--                                        width: 156px;-->
+<!--                                        height: 197px;-->
+<!--                                        background: #ffffff;-->
+<!--                                        border-radius: 3px;-->
+<!--                                        border: 1px solid #f9d805;-->
+<!--                                        margin-right: 14px;-->
+<!--                                        margin-bottom: 14px;-->
+<!--                                    "-->
+<!--                >-->
+<!--                    <img src="../../../assets/fwdp5.png" alt=""/>-->
+<!--                    <p class="type-font-style">LV0034</p>-->
+<!--                </a-card>-->
+<!--                <a-card-->
+<!--                        style="-->
+<!--                                        width: 156px;-->
+<!--                                        height: 197px;-->
+<!--                                        background: #ffffff;-->
+<!--                                        border-radius: 3px;-->
+<!--                                        border: 1px solid #f9d805;-->
+<!--                                        margin-right: 14px;-->
+<!--                                        margin-bottom: 14px;-->
+<!--                                    ">-->
+<!--                    <img src="../../../assets/fwdp5.png" alt=""/>-->
+<!--                    <p class="type-font-style">LV0034</p>-->
+<!--                </a-card>-->
             </div>
         </div>
         <transition>
@@ -92,7 +92,6 @@
 
     export default {
         name: 'ClothingStyle',
-
         data() {
             return {
                 module: {
@@ -141,24 +140,23 @@
             }
         },
         created() {
-            this.module.module_id = this.$route.params.id;
         },
         mounted() {
-            this.getMstemplateinfo();
+            // this.getMstemplateinfo();
         },
         methods: {
-            getMstemplateinfo() {
-                queryMstemplateinfo(this.module).then(res => {
-                    console.log(res);
-                    this.moduleData = res.data;
-                });
-            },
-            getCategoryinfo() {
-                queryCategoryinfo(this.categoryinfo).then(res => {
-                    console.log(res);
-                    this.categoryinfoData = res.data;
-                });
-            },
+            // getMstemplateinfo() {
+            //     queryMstemplateinfo(this.module).then(res => {
+            //         console.log(res);
+            //         this.moduleData = res.data;
+            //     });
+            // },
+            // getCategoryinfo() {
+            //     queryCategoryinfo(this.categoryinfo).then(res => {
+            //         console.log(res);
+            //         this.categoryinfoData = res.data;
+            //     });
+            // },
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({
@@ -184,19 +182,6 @@
                     this.$router.push({
                         path: '/ltxx'
                     });
-                }
-            },
-            routeLink(index) {
-                if (index === 1) {
-                    this.$router.push({ path: '/plbx1' });
-                } else if (index === 2) {
-                    this.$router.push({ path: '/order4' });
-                } else if (index === 3) {
-                    this.$router.push({ path: '/order5' });
-                } else if (index === 4) {
-                    this.$router.push({ path: '/order6' });
-                } else if (index === 5) {
-                    this.$router.push({ path: '/order10' });
                 }
             },
             changeStyle() {

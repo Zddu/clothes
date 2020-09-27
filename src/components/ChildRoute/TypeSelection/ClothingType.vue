@@ -108,18 +108,16 @@
 </template>
 
 <script>
-    import {queryMstemplateinfo,queryCategoryinfo} from '@/api/ml'
+    import {queryCategoryinfo} from '@/api/ml'
     export default {
         name: 'ClothingType',
         data() {
             return {
-                templateData:[],
-                //侧边导航菜单数据
-                menuData:[],
-                module:{
-                    module_id:'',
-                    category_id:0,
+                template:{
+                    template_id:"3"
                 },
+                //每个目录数据
+                templateData:[],
                 flag: true,
                 visible: false,
                 formModel: {
@@ -136,36 +134,16 @@
             };
         },
         created() {
-            this.module.module_id = this.$route.params.id
         },
         mounted() {
-            this.getMstemplateinfo()
             this.getCategoryinfo()
         },
         methods: {
             getCategoryinfo(){
-                queryCategoryinfo({"template_id":"1"}).then(res=>{
+                queryCategoryinfo(this.template).then(res=>{
                     console.log(res);
-
+                    this.templateData = res.data
                 })
-            },
-            //请求module菜单
-            getMstemplateinfo(){
-                queryMstemplateinfo(this.module).then(res=>{
-                    console.log(res);
-                    this.menuData = res.data;
-                })
-            },
-            routeLink(index){
-                if (index === 1) {
-                    this.$router.push({path:'/plbx1'})
-                }else if (index === 2) {
-                    this.$router.push({path:'/order4'})
-                }else if (index === 3) {
-                    this.$router.push({path:'/order5'})
-                }else if (index === 4) {
-                    this.$router.push({path:'/order6'})
-                };
             },
             changeStyle() {
                 this.flag = !this.flag;

@@ -38,8 +38,6 @@
                     <li>特殊要求</li>
                     <li>提交信息</li>
                 </ul>
-                <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
-                <!--                </div>-->
             </transition>
             <div @click="changeStyle" class="spot-style">
                 <img :src="bottomImg" alt=""/>
@@ -78,12 +76,30 @@
                 bottomImg: require('../../../assets/cut1/icon88.png')
             };
         },
-        computed: {},
+        computed: {
+            formItemLayout() {
+                const { layout } = this.formModel;
+                return layout === 'horizontal'
+                    ? {
+                        labelCol: { span: 2 },
+                        wrapperCol: { span: 12 }
+                    }
+                    : {};
+            },
+            formItemLayoutType() {
+                const { layout } = this.formModelType;
+                return layout === 'horizontal'
+                    ? {
+                        labelCol: { span: 2 },
+                        wrapperCol: { span: 22 }
+                    }
+                    : {};
+            },
+        },
         created() {
-            this.module.module_id = this.$route.params.id
         },
         mounted() {
-            this.getMstemplateinfo()
+
         },
         methods: {
             getMstemplateinfo(){
@@ -125,41 +141,13 @@
                     });
                 }
             },
-            routeLink(index){
-                if (index === 1) {
-                    this.$router.push({path:'/plbx1/1'})
-                }else if (index === 2) {
-                    this.$router.push({path:'/order4/2'})
-                }else if (index === 3) {
-                    this.$router.push({path:'/order5/3'})
-                }else if (index === 4) {
-                    this.$router.push({path:'/order6/4'})
-                };
-            },
             changeStyle() {
                 this.flag = !this.flag;
                 let div = document.getElementById('footer_choice');
                 console.log(div);
                 div.style.width = 0 + 'px';
             },
-            formItemLayout() {
-                const { layout } = this.formModel;
-                return layout === 'horizontal'
-                    ? {
-                        labelCol: { span: 2 },
-                        wrapperCol: { span: 12 }
-                    }
-                    : {};
-            },
-            formItemLayoutType() {
-                const { layout } = this.formModelType;
-                return layout === 'horizontal'
-                    ? {
-                        labelCol: { span: 2 },
-                        wrapperCol: { span: 22 }
-                    }
-                    : {};
-            },
+
             searchCode() {
                 alert(1);
             },
