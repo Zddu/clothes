@@ -141,7 +141,6 @@
         methods: {
             getCategoryinfo(){
                 queryCategoryinfo(this.template).then(res=>{
-                    console.log(res);
                     this.templateData = res.data
                 })
             },

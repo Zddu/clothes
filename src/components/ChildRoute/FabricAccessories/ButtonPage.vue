@@ -7,129 +7,39 @@
             <a-checkbox style="margin-left: 15px" @change="onChange"> 金属扣 </a-checkbox>
         </div>
         <div class="type-main">
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
+            <a-card class="card-style" >
                 <img :src="niukouImg" alt="" />
                 <p class="type-font-style">LV0034</p>
             </a-card>
@@ -187,6 +97,15 @@
 </script>
 
 <style scoped>
+    .card-style{
+        width: 156px;
+        height: 197px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #f9d805;
+        margin-right: 14px;
+        margin-bottom: 14px;
+    }
     .v-enter,
     .v-leave-to {
         /* 透明度为0 */

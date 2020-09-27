@@ -2,61 +2,22 @@
     <div class="main-container">
         <div class="content">
             <div class="type-main">
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp9.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
+                <a-card v-for="item in categoryinfoData" class="card-style">
+                    <img :src="item.img" alt="" />
+                    <p class="type-font-style">{{item.categoryName}}</p>
                 </a-card>
-                <a-card
-                    style="
-                            width: 156px;
-                            height: 220px;
-                            background: #ffffff;
-                            border-radius: 3px;
-                            border: 1px solid #f9d805;
-                            margin-right: 14px;
-                            margin-bottom: 14px;
-                                ">
-                    <img src="../../../assets/fwdp8.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp10.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
-                <a-card
-                        style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-                >
-                    <img src="../../../assets/fwdp11.png" alt="" />
-                    <p class="type-font-style">LV0034</p>
-                </a-card>
+<!--                <a-card class="card-style">-->
+<!--                    <img src="../../../assets/fwdp8.png" alt="" />-->
+<!--                    <p class="type-font-style">LV0034</p>-->
+<!--                </a-card>-->
+<!--                <a-card class="card-style" >-->
+<!--                    <img src="../../../assets/fwdp10.png" alt="" />-->
+<!--                    <p class="type-font-style">LV0034</p>-->
+<!--                </a-card>-->
+<!--                <a-card class="card-style" >-->
+<!--                    <img src="../../../assets/fwdp11.png" alt="" />-->
+<!--                    <p class="type-font-style">LV0034</p>-->
+<!--                </a-card>-->
             </div>
         </div>
         <transition>
@@ -88,10 +49,16 @@
 </template>
 
 <script>
+    import { queryCategoryinfo } from '@/api/ml';
     export default {
         name: 'ClothingFormat',
         data() {
             return {
+                //服装品类  数据
+                categoryinfoData: [],
+                categoryinfo: {
+                    template_id: '4'
+                },
                 flag: true,
                 formModel: {
                     layout: 'horizontal',
@@ -128,8 +95,15 @@
             }
         },
         created() {},
-        mounted() {},
+        mounted() {
+            this.getCategoryinfo()
+        },
         methods: {
+            getCategoryinfo() {
+                queryCategoryinfo(this.categoryinfo).then(res => {
+                    this.categoryinfoData = res.data;
+                });
+            },
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({
@@ -157,7 +131,6 @@
                     });
                 }
             },
-
             changeStyle() {
                 this.flag = !this.flag;
                 let div = document.getElementById('footer_choice');
@@ -173,6 +146,15 @@
 </script>
 
 <style scoped>
+    .card-style{
+        width: 156px;
+        height: 210px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #f9d805;
+        margin-right: 14px;
+        margin-bottom: 14px;
+    }
     .v-enter,
     .v-leave-to {
         /* 透明度为0 */
