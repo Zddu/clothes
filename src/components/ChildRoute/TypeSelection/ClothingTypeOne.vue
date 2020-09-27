@@ -99,15 +99,9 @@
         created() {
         },
         mounted() {
-
+            this.getCategoryinfo()
         },
         methods: {
-            getMstemplateinfo(){
-                queryMstemplateinfo(this.module).then(res=>{
-                    console.log(res);
-                    this.moduleData  = res.data
-                })
-            },
             getCategoryinfo(){
                 queryCategoryinfo(this.categoryinfo).then(res=>{
                     console.log(res);
@@ -282,31 +276,6 @@
         font-weight: 600;
         color: #585858;
         line-height: 28px;
-    }
-
-    .head-step {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #f5f6f7;
-        padding-bottom: 20px;
-        min-height: 1170px;
-    }
-
-    .head-item-step {
-        width: 1257px;
-        height: 125px;
-        background: #ffffff;
-        padding: 44px 53px;
-    }
-
-    .main-container {
-        margin-top: 20px;
-        width: 1257px;
-        min-height: 900px;
-        background: #ffffff;
-        padding: 45px 0 0 0;
-        position: relative;
     }
 </style>
 

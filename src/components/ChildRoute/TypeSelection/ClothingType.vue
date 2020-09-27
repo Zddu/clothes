@@ -114,7 +114,7 @@
         data() {
             return {
                 template:{
-                    template_id:"3"
+                    template_id:"1"
                 },
                 //每个目录数据
                 templateData:[],

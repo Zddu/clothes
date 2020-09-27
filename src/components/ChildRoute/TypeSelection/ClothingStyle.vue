@@ -3,6 +3,7 @@
         <div class="content">
             <div class="type-main">
                 <a-card
+                        v-for="item in categoryinfoData"
                         style="
                                         width: 156px;
                                         height: 197px;
@@ -13,50 +14,9 @@
                                         margin-bottom: 14px;
                                     "
                 >
-                    <img src="../../../assets/fwdp5.png" alt=""/>
-                    <p class="type-font-style">LV0034</p>
+                    <img :src="item.img" alt=""/>
+                    <p class="type-font-style">{{item.categoryName}}</p>
                 </a-card>
-<!--                <a-card-->
-<!--                        style="-->
-<!--                                        width: 156px;-->
-<!--                                        height: 197px;-->
-<!--                                        background: #ffffff;-->
-<!--                                        border-radius: 3px;-->
-<!--                                        border: 1px solid #f9d805;-->
-<!--                                        margin-right: 14px;-->
-<!--                                        margin-bottom: 14px;-->
-<!--                                    "-->
-<!--                >-->
-<!--                    <img src="../../../assets/fwdp5.png" alt=""/>-->
-<!--                    <p class="type-font-style">LV0034</p>-->
-<!--                </a-card>-->
-<!--                <a-card-->
-<!--                        style="-->
-<!--                                        width: 156px;-->
-<!--                                        height: 197px;-->
-<!--                                        background: #ffffff;-->
-<!--                                        border-radius: 3px;-->
-<!--                                        border: 1px solid #f9d805;-->
-<!--                                        margin-right: 14px;-->
-<!--                                        margin-bottom: 14px;-->
-<!--                                    "-->
-<!--                >-->
-<!--                    <img src="../../../assets/fwdp5.png" alt=""/>-->
-<!--                    <p class="type-font-style">LV0034</p>-->
-<!--                </a-card>-->
-<!--                <a-card-->
-<!--                        style="-->
-<!--                                        width: 156px;-->
-<!--                                        height: 197px;-->
-<!--                                        background: #ffffff;-->
-<!--                                        border-radius: 3px;-->
-<!--                                        border: 1px solid #f9d805;-->
-<!--                                        margin-right: 14px;-->
-<!--                                        margin-bottom: 14px;-->
-<!--                                    ">-->
-<!--                    <img src="../../../assets/fwdp5.png" alt=""/>-->
-<!--                    <p class="type-font-style">LV0034</p>-->
-<!--                </a-card>-->
             </div>
         </div>
         <transition>
@@ -142,21 +102,15 @@
         created() {
         },
         mounted() {
-            // this.getMstemplateinfo();
+            this.getCategoryinfo();
         },
         methods: {
-            // getMstemplateinfo() {
-            //     queryMstemplateinfo(this.module).then(res => {
-            //         console.log(res);
-            //         this.moduleData = res.data;
-            //     });
-            // },
-            // getCategoryinfo() {
-            //     queryCategoryinfo(this.categoryinfo).then(res => {
-            //         console.log(res);
-            //         this.categoryinfoData = res.data;
-            //     });
-            // },
+            getCategoryinfo() {
+                queryCategoryinfo(this.categoryinfo).then(res => {
+                    console.log(res);
+                    this.categoryinfoData = res.data;
+                });
+            },
             steptitle(index) {
                 if (index == 1) {
                     this.$router.push({
