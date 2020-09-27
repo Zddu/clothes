@@ -117,6 +117,7 @@ export default {
           titleicon: "我的报表",
         },
       ],
+      titleList: []
     };
   },
   mounted() {
@@ -126,6 +127,10 @@ export default {
         this.$router.push({
             path: "/jbxx1"
         })
+        this.titleList.push(
+          this.scricon[index]
+        )
+        this.$emit('getMessage', this.titleList);
     },
     onSearch(value) {
       console.log(value);

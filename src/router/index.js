@@ -30,18 +30,8 @@ export default new Router({
                     meta: { title: '基本信息填写' }
                 },
                 {
-                    path: "/jbxx2",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/jbxx2.vue'),
-                    meta: { title: '基本信息填写' }
-                },
-                {
                     path: "/xzxz1",
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/xzxz1.vue'),
-                    meta: { title: '选择绣字撞色' }
-                },
-                {
-                    path: "/xzxz2",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/xzxz2.vue'),
                     meta: { title: '选择绣字撞色' }
                 },
                 {
@@ -65,49 +55,8 @@ export default new Router({
                     meta: { title: '选择面料辅料' }
                 },
                 {
-                    path: "/order8",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order8.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                {
-                    path: "/order9",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order9.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                {
-                    path: "/order2",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order2.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                {
-                    path: "/order3",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order3.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                {
-                    path: "/order4",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order4.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                {
-                    path: "/order5",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order5.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                {
-                    path: "/order6",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order6.vue'),
-                    meta: { title: '选择面料辅料' }
-                },
-                // {
-                //     path: "/order1",
-                //     component: () => import(/* webpackChunkName: "icon" */ '../components/page/order1.vue'),
-                //     meta: { title: '选择面料辅料' }
-                // },
-                {
-                    path: "/order10",
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/order10.vue'),
-                    meta: { title: '服装类别工艺' }
+                    path: "/OrderDetails",
+                    component: () => import('./../components/page/OrderDetails.vue')
                 }
             ]
         },

@@ -87,7 +87,9 @@ export default {
     data() {
         return {
 			formLayout: 'horizontal',
-			xuanze: 1
+            xuanze: 1,
+            bottomImg: require('../../assets/cut1/icon88.png'),
+            flag: false,
         };
 	},
 	components: {
@@ -96,7 +98,6 @@ export default {
 	},
     created() {},
     mounted() {
-        this.getStoreCodeList();
     },
     methods: {
         
@@ -152,6 +153,74 @@ export default {
 </script>
 
 <style scoped>
+.v-enter {
+    width: 712px;
+}
+
+.v-leave-to {
+    /* 透明度为0 */
+    opacity: 0;
+    /* 位移(x) */
+}
+
+/* v-enter-active [入场动画的时间段] */
+/* v-leave-active [离场动画的时间段] */
+.v-enter-active {
+    transition: all 0.75s ease;
+}
+
+.v-leave-active {
+    /* 渐变 */
+    transition: all 0.75s ease;
+}
+
+.spot-style {
+    width: 85px;
+    height: 85px;
+    background: #555555;
+    border-radius: 45px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    right: -34px;
+    bottom: -30px;
+}
+
+.bottom-menu {
+    list-style: none;
+    margin: 0;
+    display: flex;
+}
+
+.bottom-menu li {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    align-items: flex-start;
+    margin-left: 30px;
+}
+
+.bottom-menu li {
+    font-size: 20px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #585858;
+    line-height: 28px;
+}
+
+.footer-choice {
+    position: absolute;
+    width: 712px;
+    height: 86px;
+    background: #e7e7e7;
+    border-radius: 43px;
+    right: -35px;
+    bottom: -30px;
+    display: flex;
+    align-items: center;
+}
 .head-type {
     width: 100%;
     padding: 6px 0;

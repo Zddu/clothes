@@ -58,7 +58,10 @@
                     </div>
                     <div class="button1" style="margin-top: 40px">驳宽</div>
                     <div class="paixu">
-                        <a-cascader size="large" :options="options" @change="onChange" placeholder="请选择" style="width: 337px" />
+                        <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
+                            <a-select-option value="male">male</a-select-option>
+                            <a-select-option value="female">female</a-select-option>
+                        </a-select>
                     </div>
 
                     <div class="button1" style="margin-top: 40px">门襟扣</div>
@@ -203,7 +206,10 @@
 
                     <div class="button1" style="margin-top: 40px">珠边宽度</div>
                     <div class="paixu">
-                        <a-cascader size="large" :options="options" @change="onChange" placeholder="请选择" style="width: 337px" />
+                         <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
+                            <a-select-option value="male">male</a-select-option>
+                            <a-select-option value="female">female</a-select-option>
+                        </a-select>
                     </div>
 
                     <div class="button1" style="margin-top: 40px">里布款式</div>
@@ -247,19 +253,19 @@
                     </div>
                 </div>
             </div>
-            <div style="height:90px"></div>
+            <div style="height: 90px"></div>
             <transition>
                 <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
                     <li>
                         产品列表
                         <a-badge
-                                :number-style="{
+                            :number-style="{
                                 color: '#F9D532FF',
                                 position: 'absolute',
                                 right: '8px',
                                 bottom: '0px'
                             }"
-                                count="3"
+                            count="3"
                         />
                     </li>
                     <li>重建订单</li>
@@ -309,6 +315,10 @@ export default {
     created() {},
     mounted() {},
     methods: {
+        handleSelectChange(value) {
+            console.log(this.shoplist[value]);
+            this.shopname = this.shoplist[value].storeName;
+        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');

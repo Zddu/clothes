@@ -1,24 +1,26 @@
 <template>
     <div class="header">
         <div class="logo">铭朗云定制</div>
+        <div class="titlt12">
+            <el-menu
+                :default-active="activeIndex2"
+                class="el-menu-demo"
+                mode="horizontal"
+                @select="handleSelect"
+                background-color="#242f42"
+                text-color="#fff"
+                active-text-color="#ffd04b"
+            >
+                <el-menu-item index="1">处理中心</el-menu-item>
+                <el-menu-item index="2">消息中心</el-menu-item>
+                <el-menu-item index="3">订单管理</el-menu-item>
+            </el-menu>
+        </div>
         <div class="header-right">
             <div class="header-user-con">
-                <!-- 全屏显示 -->
-                <!-- <div class="btn-fullscreen" @click="handleFullScreen">
-                    <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
-                        <i class="el-icon-rank"></i>
-                    </el-tooltip>
-                </div> -->
-                <!-- 消息中心 -->
-                
-                <!-- 用户头像 -->
-                <!-- <div class="user-avator">
-                    <img src="../../assets/img/img.jpg" />
-                </div> -->
-                <!-- 用户名下拉菜单 --> 
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{username}}
+                        {{ username }}
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
@@ -34,7 +36,7 @@
 
                 <div class="btn-bell">
                     <el-badge :value="200" :max="99" class="item">
-                    <i class="el-icon-bell"></i>
+                        <i class="el-icon-bell"></i>
                     </el-badge>
                 </div>
             </div>
@@ -42,14 +44,14 @@
     </div>
 </template>
 <script>
-import bus from '../common/bus';
 export default {
     data() {
         return {
             collapse: false,
             fullscreen: false,
             name: 'linxin',
-            message: 2
+            message: 2,
+            activeIndex2: '1'
         };
     },
     computed: {
@@ -59,10 +61,13 @@ export default {
         }
     },
     methods: {
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        },
         homevue() {
             this.$router.push({
-                path:"/"
-            })
+                path: '/'
+            });
         },
         // 用户名下拉菜单选择事件
         handleCommand(command) {
@@ -71,47 +76,21 @@ export default {
                 this.$router.push('/login');
             }
         },
-        // 侧边栏折叠
-        collapseChage() {
-            this.collapse = !this.collapse;
-            bus.$emit('collapse', this.collapse);
-        },
-        // 全屏事件
-        handleFullScreen() {
-            let element = document.documentElement;
-            if (this.fullscreen) {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            } else {
-                if (element.requestFullscreen) {
-                    element.requestFullscreen();
-                } else if (element.webkitRequestFullScreen) {
-                    element.webkitRequestFullScreen();
-                } else if (element.mozRequestFullScreen) {
-                    element.mozRequestFullScreen();
-                } else if (element.msRequestFullscreen) {
-                    // IE11
-                    element.msRequestFullscreen();
-                }
-            }
-            this.fullscreen = !this.fullscreen;
-        }
     },
     mounted() {
-        if (document.body.clientWidth < 1500) {
-            this.collapseChage();
-        }
     }
 };
 </script>
+<style>
+.el-menu--horizontal > .el-menu-item {
+    height: 70px;
+    line-height: 70px;
+}
+</style>
 <style scoped>
+.titlt12 {
+    float: left;
+}
 .header {
     position: relative;
     box-sizing: border-box;
@@ -129,12 +108,12 @@ export default {
 .header .logo {
     float: left;
     margin-left: 20px;
-    width: 250px;
+    width: 120px;
     line-height: 70px;
-font-size: 20px;
-font-family: PingFangSC-Semibold, PingFang SC;
-font-weight: 600;
-color: #F9D532;
+    font-size: 20px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #f9d532;
 }
 .header-right {
     float: right;
