@@ -1,7 +1,7 @@
 <template>
     <div>
-        <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
-            <a-form-item label="门店编号">
+        <el-form :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="门店编号" prop="name2">
                 <a-space>
                     <a-select
                         size="large"
@@ -16,8 +16,8 @@
                     </a-select>
                     <a-input size="large" placeholder="门店名称" disabled v-model="shopname" style="width: 337px" />
                 </a-space>
-            </a-form-item>
-            <a-form-item label="面料来源">
+            </el-form-item>
+            <el-form-item label="面料来源" prop="name">
                 <a-space>
                     <div
                         :class="{ box: index == mianxuan, box1: index != mianxuan }"
@@ -27,16 +27,10 @@
                     >
                         {{ item.dataname }}
                     </div>
-                    <a-input
-                        size="large"
-                        v-decorator="['note', { rules: [{ required: true, message: '请选择面料来源' }] }]"
-                        v-show="false"
-                        style="width: 0"
-                    />
                 </a-space>
-            </a-form-item>
+            </el-form-item>
 
-            <a-form-item label="业务类型">
+            <el-form-item label="业务类型" prop="name">
                 <a-space>
                     <div
                         :class="{ box: index == yewuxuan, box1: index != yewuxuan }"
@@ -46,17 +40,10 @@
                     >
                         {{ item.dataname }}
                     </div>
-                    <!-- <div class="box1">样衣业务</div> -->
-                    <a-input
-                        size="large"
-                        v-decorator="['note1', { rules: [{ required: true, message: '请选择业务类型' }] }]"
-                        v-show="false"
-                        style="width: 0"
-                    />
                 </a-space>
-            </a-form-item>
+            </el-form-item>
 
-            <a-form-item label="选择包装">
+            <el-form-item label="选择包装" prop="name">
                 <a-space>
                     <div
                         :class="{ box: index == baoxuan, box1: index != baoxuan }"
@@ -66,57 +53,46 @@
                     >
                         {{ item.dataname }}
                     </div>
-                    <!-- <div class="box1">立体箱(费用较高)</div> -->
-                    <a-input
-                        size="large"
-                        v-decorator="['note2', { rules: [{ required: true, message: '请选择包装' }] }]"
-                        v-show="false"
-                        style="width: 0"
-                    />
                 </a-space>
-            </a-form-item>
+            </el-form-item>
 
-            <a-form-item label="快递方式">
+            <el-form-item label="快递方式" prop="name">
                 <a-space>
-                    <div class="box">顺丰</div>
-                    <div class="box1">EMS</div>
-                    <div class="box1">顺丰特惠（慢）</div>
-                    <a-input
-                        size="large"
-                        v-decorator="['note3', { rules: [{ required: true, message: '请选择快递方式' }] }]"
-                        v-show="false"
-                        style="width: 0"
-                    />
+                    <div
+                        :class="{ box: index == kuaixuan, box1: index != kuaixuan }"
+                        v-for="(item, index) in kuaidi"
+                        :key="index"
+                        @click="xuanzea(4, index)"
+                    >
+                        {{ item.courierName }}
+                    </div>
                 </a-space>
-            </a-form-item>
+            </el-form-item>
 
-            <a-form-item label="地址类型">
+            <el-form-item label="地址类型" prop="name">
                 <a-space>
-                    <div class="box">门店地址</div>
-                    <div class="box1">其他地址</div>
-                    <a-input
-                        size="large"
-                        v-decorator="['note4', { rules: [{ required: true, message: '请选择地址类型' }] }]"
-                        v-show="false"
-                        style="width: 0"
-                    />
+                    <div
+                        :class="{ box: index == dizhixuan, box1: index != dizhixuan }"
+                        v-for="(item, index) in address"
+                        :key="index"
+                        @click="xuanzea(5, index)"
+                    >
+                        {{ item.dizhi }}
+                    </div>
                 </a-space>
-            </a-form-item>
+            </el-form-item>
 
-            <a-form-item label="收货地址">
-                <a-input
-                    size="large"
-                    v-decorator="['note5', { rules: [{ required: true, message: '请选择收货地址' }] }]"
-                    style="width: 482px"
-                />
-            </a-form-item>
-
-            <a-form-item label="第三方运单号"><a-input size="large" style="width: 482px" /></a-form-item>
-        </a-form>
+            <el-form-item label="收货地址" prop="name3">
+                <el-input v-model="shouhuodizhi" size="large" style="width: 482px"></el-input>
+            </el-form-item>
+            <el-form-item label="第三方运单号">
+                <el-input size="large" style="width: 482px"></el-input>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 <script>
-import { getStoreList, queryDataBytype } from './../../../api/ml';
+import { getStoreList, queryDataBytype, queryAllCourier } from './../../../api/ml';
 export default {
     name: 'jbxx1',
     data() {
@@ -129,9 +105,24 @@ export default {
             mianliao: [],
             yewulx: [],
             choosebao: [],
+            kuaidi: [],
+            address: [{ dizhi: '门店地址' }, { dizhi: '其他地址' }],
             mianxuan: '100000',
             yewuxuan: '100000',
-            baoxuan: '1000000'
+            baoxuan: '1000000',
+            kuaixuan: '1000000',
+            dizhixuan: '0',
+            // 收货地址是否可以修改
+            addressxuan: false,
+            shouhuodizhi: '',
+            rules: {
+                name2: [{ required: true, message: '', trigger: 'blur' }],
+                name: [
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ],
+                name3: [{ required: true, message: '请填写收货地址', trigger: 'blur' }]
+            }
         };
     },
     created() {},
@@ -146,6 +137,13 @@ export default {
                 this.yewuxuan = index;
             } else if (val == 3) {
                 this.baoxuan = index;
+            } else if (val == 4) {
+                this.kuaixuan = index;
+            } else if (val == 5) {
+                this.dizhixuan = index;
+                if (index == 2) {
+                    this.shouhuodizhi = '';
+                }
             }
         },
         getStoreCodeList() {
@@ -178,6 +176,12 @@ export default {
                 this.choosebao = res.data;
                 this.$set(this.choosebao);
             });
+
+            queryAllCourier().then((res) => {
+                console.log(res);
+                this.kuaidi = res.data;
+                this.$set(this.kuaidi);
+            });
         },
         changeStyle() {
             this.flag = !this.flag;
@@ -195,6 +199,7 @@ export default {
         handleSelectChange(value) {
             console.log(this.shoplist[value]);
             this.shopname = this.shoplist[value].storeName;
+            this.shouhuodizhi = this.shoplist[value].storeAddress;
         }
     }
 };

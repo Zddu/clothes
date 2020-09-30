@@ -117,6 +117,51 @@
                     <div style="width: 300px;margin-top: 2px;"></div>
                 </div>
             </div>
+
+            <div class="table">
+                <div style="padding-top: 35px">
+                    <a-space>
+                        <div class="line"></div>
+                        <div class="size">款式工艺</div>
+                    </a-space>
+                </div>
+                <div class="haode">
+                    <div class="content12">
+                        <div class="tou">品类</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">外大袋</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">驳头眼</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">领口款式</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">背叉</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">外珠边</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">驳宽</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">袖口款式</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+
+                    <div style="width: 300px;margin-top: 2px;"></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

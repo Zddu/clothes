@@ -52,8 +52,8 @@
             <a-form-item label="颜色选择">
                 <div class="lie">
                     <div class="box1" v-for="(item, index) in colorlist" :key="index">
-                        <img :src="item.embroideredImage" alt class="imgs" />
-                        <div class="kuang1">{{ item.embroideredName }}</div>
+                        <img :src="item.colorImg" alt class="imgs" />
+                        <div class="kuang1">{{ item.colorName }}</div>
                     </div>
                     <div style="width: 156px"></div>
                     <div style="width: 156px"></div>
@@ -88,7 +88,7 @@ export default {
             this.$set(this.fontsizelist);
         });
         AllembroiderColor().then((res) => {
-            console.log(res);
+            console.log(res,"123213123123");
             this.colorlist = res.data;
             this.$set(this.colorlist);
         });

@@ -1,71 +1,67 @@
 <template>
-    
-        <div class="main-container">
-            <div>
-                <a-row>
-                    <a-col :span="4">
-                        <div class="line">
-                            <ul class="left-menu">
-                                <li  :class="{active: xuanze == 1}" @click="xuanze = 1">门店信息</li>
-                                <li :class="{active: xuanze == 2}" @click="xuanze = 2">客户信息</li>
-                            </ul>
-                        </div>
-                    </a-col>
-                    <a-col :span="20">
-                        <div class="content">
-							<StoreInformation v-show="xuanze == 1"></StoreInformation>
-							<CustomernIformation v-show="xuanze == 2"></CustomernIformation>
-						</div>
-                    </a-col>
-                </a-row>
-            </div>
-            <transition>
-                <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                    <li>
-                        产品列表
-                        <a-badge
-                            :number-style="{
-                                color: '#F9D532FF',
-                                position: 'absolute',
-                                right: '8px',
-                                bottom: '0px'
-                            }"
-                            count="3"
-                        />
-                    </li>
-                    <li>重建订单</li>
-                    <li>保存模版</li>
-                    <li>特殊要求</li>
-                    <li>提交信息</li>
-                </ul>
-            </transition>
-            <div @click="changeStyle" class="spot-style"><img :src="bottomImg" alt="" /></div>
+    <div class="main-container">
+        <div>
+            <a-row>
+                <a-col :span="4">
+                    <div class="line">
+                        <ul class="left-menu">
+                            <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">门店信息</li>
+                            <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">客户信息</li>
+                        </ul>
+                    </div>
+                </a-col>
+                <a-col :span="20">
+                    <div class="content">
+                        <StoreInformation v-show="xuanze == 1"></StoreInformation>
+                        <CustomernIformation v-show="xuanze == 2"></CustomernIformation>
+                    </div>
+                </a-col>
+            </a-row>
         </div>
+        <transition>
+            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
+                <li>
+                    产品列表
+                    <a-badge
+                        :number-style="{
+                            color: '#F9D532FF',
+                            position: 'absolute',
+                            right: '8px',
+                            bottom: '0px'
+                        }"
+                        count="3"
+                    />
+                </li>
+                <li>重建订单</li>
+                <li>保存模版</li>
+                <li>特殊要求</li>
+                <li>提交信息</li>
+            </ul>
+        </transition>
+        <div @click="changeStyle" class="spot-style"><img :src="bottomImg" alt="" /></div>
+    </div>
 </template>
 
 <script>
-import { getStoreList, queryDataBytype } from './../../api/ml';
-import StoreInformation from "./../ChildRoute/basicInformation/StoreInformation"
-import CustomernIformation from "./../ChildRoute/basicInformation/CustomernIformation"
+import StoreInformation from './../ChildRoute/basicInformation/StoreInformation';
+import CustomernIformation from './../ChildRoute/basicInformation/CustomernIformation';
 export default {
     name: 'jbxx1',
     data() {
         return {
-			formLayout: 'horizontal',
+            formLayout: 'horizontal',
             xuanze: 1,
             bottomImg: require('../../assets/cut1/icon88.png'),
-            flag: false,
+            flag: false
         };
-	},
-	components: {
-		StoreInformation,
-		CustomernIformation
-	},
-    created() {},
-    mounted() {
     },
+    components: {
+        StoreInformation,
+        CustomernIformation
+    },
+    created() {},
+    mounted() {},
     methods: {
-        
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');

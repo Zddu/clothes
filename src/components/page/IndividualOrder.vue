@@ -55,10 +55,12 @@ import order7 from "./order7"
 import fzlb from "./fzlb"
 import xzxz1 from "./xzxz1"
 import ltxx from "./ltxx"
+import {queryModule} from "./../../api/ml"
 export default {
     data() {
         return {
-			active: 0
+            active: 0,
+            titleList: []
         };
     },
     components: {
@@ -71,9 +73,16 @@ export default {
     },
     created() {},
     mounted() {
+        this.queryModule()
     },
     methods: {
-        
+        // 模块导航栏菜单
+        queryModule() {
+            queryModule().then(res => {
+                console.log(res,"模块导航栏菜单")
+                this.titleList = res.data
+            })
+        },
         steptitle(index) {
             this.active = index
         },

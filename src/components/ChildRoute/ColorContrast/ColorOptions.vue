@@ -3,9 +3,15 @@
         <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
             <a-form-item label>
                 <div class="lie">
-                    <div class="box" v-for="(item, index) in colorInfo" :key="index">
+                    <div
+                        :class="{ box: index != mianxuan, box1: index == mianxuan }"
+                        v-for="(item, index) in colorInfo"
+                        :key="index"
+                        @mouseover="mouseOver(index)"
+                        @mouseleave="mouseLeave"
+                    >
                         <img :src="item.contrastColorImg" alt class="imgs" />
-                        <div class="kuang" @click="showDrawer">
+                        <div class="kuang" @click="showDrawer(index)">
                             <a style="color: #f9d532">
                                 {{ item.contrastColorName }}
                                 <a-icon type="down" />
@@ -37,22 +43,18 @@
                 </div>
 
                 <div class="drawerbox">
-                    <div class="boxdrawer">
-                        <img src="./../../../assets/img/xiuyi.jpg" alt class="imgsdrawer" />
-                        <div class="sizedrawer">LV0034</div>
+                    <div
+                        :class="{ boxdrawer: index != drawerboxxuan, boxdrawer1: index == drawerboxxuan }"
+                        v-for="(item, index) in drawerList"
+                        :key="index"
+                        @mouseover="mouseOverDrawer(index)"
+                        @mouseleave="mouseLeaveDrawer"
+                        @click="drawerxuan(index)"
+                    >
+                        <img :src="item.colorImg" alt class="imgsdrawer" />
+                        <div class="sizedrawer">{{ item.colorName }}</div>
                     </div>
-                    <div class="boxdrawer">
-                        <img src="./../../../assets/img/xiuyi.jpg" alt class="imgsdrawer" />
-                        <div class="sizedrawer">LV0034</div>
-                    </div>
-                    <div class="boxdrawer">
-                        <img src="./../../../assets/img/xiuyi.jpg" alt class="imgsdrawer" />
-                        <div class="sizedrawer">LV0034</div>
-                    </div>
-                    <div class="boxdrawer">
-                        <img src="./../../../assets/img/xiuyi.jpg" alt class="imgsdrawer" />
-                        <div class="sizedrawer">LV0034</div>
-                    </div>
+                    >
                 </div>
             </a-drawer>
         </div>
@@ -60,7 +62,7 @@
 </template>
 
 <script>
-import { AllContrastcolorInfo } from './../../../api/ml';
+import { AllContrastcolorInfo, AllembroiderColor, updateContrastcolorcolor } from './../../../api/ml';
 export default {
     name: 'xzxz2',
     data() {
@@ -70,7 +72,12 @@ export default {
             visible: false,
             flag: false,
             bottomImg: require('../../../assets/cut1/icon88.png'),
-            colorInfo: []
+            colorInfo: [],
+            drawerList: [],
+            mianxuan: '1000000',
+            drawerboxxuan: '100000',
+            color_id: '',
+            zhuangid: ''
         };
     },
     created() {},
@@ -80,18 +87,57 @@ export default {
             this.colorInfo = res.data;
             this.$set(this.colorInfo);
         });
+        AllembroiderColor().then((res) => {
+            console.log(res, 'AllembroiderColor');
+            this.drawerList = res.data;
+            this.$set(this.drawerList);
+        });
     },
     methods: {
+        drawerxuan(index) {
+            this.color_id = this.drawerList[index].id;
+            updateContrastcolorcolor({
+                id: this.zhuangid,
+                color_id: this.color_id
+            }).then((res) => {
+                console.log(res);
+                if (res.code == 0) {
+                    this.$message({
+                        message: res.msg,
+                        type: 'success'
+                    });
+                }
+                this.visible = false;
+                AllContrastcolorInfo().then((res) => {
+                    console.log(res);
+                    this.colorInfo = res.data;
+                    this.$set(this.colorInfo);
+                });
+            });
+        },
+        mouseLeaveDrawer() {
+            this.drawerboxxuan = '3217428';
+        },
+        mouseOverDrawer(index) {
+            this.drawerboxxuan = index;
+        },
+        mouseLeave() {
+            this.mianxuan = '237427389';
+        },
+        mouseOver(index) {
+            this.mianxuan = index;
+        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');
             div.style.width = 0 + 'px';
         },
         afterVisibleChange(val) {
-            console.log('visible', val);
+            // console.log('visible', val);
         },
-        showDrawer() {
+        showDrawer(index) {
             this.visible = true;
+            this.zhuangid = this.colorInfo[index].id;
         },
         onClose() {
             this.visible = false;
@@ -141,6 +187,18 @@ export default {
     border: 1px solid #e3e3e3;
     margin-top: 7px;
 }
+.boxdrawer1 {
+    width: 157px;
+    height: 197px;
+    background: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #f9d805;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .boxdrawer {
     width: 157px;
     height: 197px;
@@ -180,6 +238,15 @@ export default {
     width: 100px;
     height: 152px;
     margin-top: 28px;
+}
+.box1 {
+    width: 202px;
+    height: 240px;
+    background: #ffffff;
+    border: 1px solid #f9d805;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .box {
     width: 202px;

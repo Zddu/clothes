@@ -86,3 +86,38 @@ export const getButtons = (data) => {
     });
 };
 
+// 模块导航栏菜单
+export const queryModule = (data) => {
+    return request({
+        url: 'logic/interface/query_module',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 查询所有快递
+export const queryAllCourier = (data) => {
+    return request({
+        url: 'logic/interface/query_allCourier',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 修改撞色的色值
+export const updateContrastcolorcolor = (data) => {
+    return request({
+        url: 'logic/interface/update_Contrastcolor_color',
+        method: 'POST',
+        params: data
+    });
+};
+
+//获取驳宽和珠边宽度
+export const getBokuan = (data) => {
+    return request({
+        url: '/fabricAndOther/getBokuan',
+        method: 'POST',
+        params: data
+    });
+};

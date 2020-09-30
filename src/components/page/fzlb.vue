@@ -25,8 +25,7 @@
                     <div class="button1" style="margin-top: 40px">驳宽</div>
                     <div class="paixu">
                         <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
-                            <a-select-option value="male">male</a-select-option>
-                            <a-select-option value="female">female</a-select-option>
+                            <a-select-option :value="item.id" v-for="(item,index) in bokuan" :key="index">{{item.categoryName}}</a-select-option>
                         </a-select>
                     </div>
 
@@ -173,7 +172,7 @@
                     <div class="button1" style="margin-top: 40px">珠边宽度</div>
                     <div class="paixu">
                          <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
-                            <a-select-option value="male">male</a-select-option>
+                            <a-select-option :value="item.id" v-for="(item,index) in zhukuan" :key="index">{{item.categoryName}}</a-select-option>
                             <a-select-option value="female">female</a-select-option>
                         </a-select>
                     </div>
@@ -249,6 +248,7 @@
 </template>
 
 <script>
+import {getBokuan} from "./../../api/ml"
 export default {
     name: 'fzlb123',
     data() {
@@ -274,12 +274,24 @@ export default {
                 type: ['type1'],
                 series: ['type1']
             },
-            bottomImg: require('../../assets/cut1/icon88.png')
+            bottomImg: require('../../assets/cut1/icon88.png'),
+            bokuan: [],
+            zhukuan: []
         };
     },
     created() {},
     mounted() {},
     methods: {
+        // 获取驳宽和珠边宽度
+        getdatakuan() {
+              getBokuan().then(res => {
+                  console.log(res)
+                  this.bokuan = res.data[0].categoryInfoList
+                  this.zhukuan = res.data[1].categoryInfoList
+                  this.$set(this.bokuan)
+                  this.$set(this.zhukuan)
+              })
+        },
         handleSelectChange(value) {
             console.log(this.shoplist[value]);
             this.shopname = this.shoplist[value].storeName;
