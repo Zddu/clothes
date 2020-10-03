@@ -12,7 +12,7 @@
                     text-color="#fff"
                     active-text-color="#f9d532"
                 >
-                    <el-menu-item :index="index + 1" v-for="(item,index) in titlelist" :key="index">{{item.titleicon}}</el-menu-item>
+                    <el-menu-item  v-for="(item,index) in titlelist" :key="index" :index="index + 1">{{item.titleicon}}</el-menu-item>
                     <!-- <el-menu-item index="2">消息中心</el-menu-item>
                     <el-menu-item index="3">订单管理</el-menu-item> -->
                 </el-menu>

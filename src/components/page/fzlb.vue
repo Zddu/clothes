@@ -173,7 +173,6 @@
                     <div class="paixu">
                          <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
                             <a-select-option :value="item.id" v-for="(item,index) in zhukuan" :key="index">{{item.categoryName}}</a-select-option>
-                            <a-select-option value="female">female</a-select-option>
                         </a-select>
                     </div>
 
@@ -280,14 +279,22 @@ export default {
         };
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.getdatakuan()
+    },
     methods: {
         // 获取驳宽和珠边宽度
         getdatakuan() {
-              getBokuan().then(res => {
+              getBokuan(
+                  {
+                      token: this.$store.getters.getToken ,
+                      mouldid: 3
+                  }
+              ).then(res => {
                   console.log(res)
                   this.bokuan = res.data[0].categoryInfoList
                   this.zhukuan = res.data[1].categoryInfoList
+                  console.log(this.bokuan,"bokuan")
                   this.$set(this.bokuan)
                   this.$set(this.zhukuan)
               })

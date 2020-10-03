@@ -4,40 +4,46 @@
             <a-form-item label="绣字类型">
                 <a-select
                     size="large"
-                    v-decorator="['gender', { rules: [{ required: true, message: '请选择门店编号' }] }]"
-                    placeholder="请选择门店编号"
+                    v-decorator="['gender', { rules: [{ required: true, message: '请选择绣字类型' }] }]"
+                    placeholder="请选择绣字类型"
                     style="width: 337px"
                     @change="handleSelectChange"
                 >
-                    <a-select-option value="male">male</a-select-option>
-                    <a-select-option value="female">female</a-select-option>
+                    <a-select-option value="文字">文字</a-select-option>
+                    <a-select-option value="图片">图片</a-select-option>
                 </a-select>
             </a-form-item>
 
             <a-form-item label="绣字位置">
                 <a-select
                     size="large"
-                    v-decorator="['gender', { rules: [{ required: true, message: '请选择门店编号' }] }]"
-                    placeholder="请选择门店编号"
+                    v-decorator="['gender1', { rules: [{ required: true, message: '请选择绣字位置' }] }]"
+                    placeholder="请选择绣字位置"
                     style="width: 337px"
-                    @change="handleSelectChange"
+                    @change="handleSelectChange1"
                 >
-                    <a-select-option value="male">male</a-select-option>
-                    <a-select-option value="female">female</a-select-option>
+                    <a-select-option :value="item.embroideredHeight" v-for="(item, index) in xiuziweizhi" :key="index">{{
+                        item.xiuziLocaltion
+                    }}</a-select-option>
                 </a-select>
             </a-form-item>
 
-            <a-form-item label="绣字第一行">
-                <a-input size="large" style="width: 337px" />
+            <a-form-item label="绣字第一行" v-show="!tuxingchuan">
+                <a-input size="large" style="width: 337px" v-model="size11" />
             </a-form-item>
 
-            <a-form-item label="绣字第二行">
-                <a-input size="large" style="width: 337px" />
+            <a-form-item label="绣字第二行" v-show="!tuxingchuan">
+                <a-input size="large" style="width: 337px" v-model="size22" />
             </a-form-item>
 
             <a-form-item label="字体选择">
                 <div class="lie">
-                    <div class="box" v-for="(item, index) in fontsizelist" :key="index">
+                    <div
+                        :class="{ box: index == zixuan, box1: index != zixuan }"
+                        v-for="(item, index) in fontsizelist"
+                        :key="index"
+                        @click="sizexuan(index)"
+                    >
                         <img :src="item.embroideredImage" alt class="imgs" />
                         <div class="kuang">{{ item.embroideredName }}</div>
                     </div>
@@ -51,7 +57,12 @@
 
             <a-form-item label="颜色选择">
                 <div class="lie">
-                    <div class="box1" v-for="(item, index) in colorlist" :key="index">
+                    <div
+                        :class="{ box: index == colorxuan, box1: index != colorxuan }"
+                        v-for="(item, index) in colorlist"
+                        :key="index"
+                        @click="colorxuan1(index)"
+                    >
                         <img :src="item.colorImg" alt class="imgs" />
                         <div class="kuang1">{{ item.colorName }}</div>
                     </div>
@@ -62,12 +73,37 @@
                     <div style="width: 156px"></div>
                 </div>
             </a-form-item>
+
+            <a-form-item label="绣字高度" v-show="tuxingchuan">
+                <a-select
+                    size="large"
+                    placeholder="请选择绣字位置"
+                    style="width: 337px"
+                    @change="handleSelectChange1"
+                >
+                    <a-select-option :value="item.embroideredHeight" v-for="(item, index) in xiuziaddress" :key="index">{{
+                        item.embroideredHeight
+                    }}</a-select-option>
+                </a-select>
+            </a-form-item>
+
+            <a-form-item label="自定义图形" v-show="tuxingchuan">
+                <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                >
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </a-form-item>
         </a-form>
     </div>
 </template>
 
 <script>
-import { AllembroiderFont, AllembroiderColor } from './../../../api/ml';
+import { AllembroiderFont, AllembroiderColor, getXiuziList ,queryLocaltion} from './../../../api/ml';
 export default {
     name: 'xzxz1',
     data() {
@@ -77,7 +113,15 @@ export default {
             form: this.$form.createForm(this, { name: 'coordinated' }),
             bottomImg: require('../../../assets/cut1/icon88.png'),
             fontsizelist: [],
-            colorlist: []
+            colorlist: [],
+            xiuziaddress: [],
+            size11: '',
+            size22: '',
+            zixuan: '100032',
+            colorxuan: '281484',
+            imageUrl: "",
+            tuxingchuan: false,
+            xiuziweizhi: ""
         };
     },
     created() {},
@@ -88,12 +132,28 @@ export default {
             this.$set(this.fontsizelist);
         });
         AllembroiderColor().then((res) => {
-            console.log(res,"123213123123");
+            console.log(res, '123213123123');
             this.colorlist = res.data;
             this.$set(this.colorlist);
         });
+        queryLocaltion({
+            category_ids: "54,56"
+        }).then((res) => {
+            console.log(res,">?>>>>");
+            this.xiuziweizhi = res.data
+            this.$set(this.xiuziweizhi)
+        });
     },
     methods: {
+        handleAvatarSuccess(res, file) {
+            this.imageUrl = URL.createObjectURL(file.raw);
+        },
+        colorxuan1(index) {
+            this.colorxuan = index;
+        },
+        sizexuan(index) {
+            this.zixuan = index;
+        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');
@@ -109,14 +169,50 @@ export default {
         },
         handleSelectChange(value) {
             console.log(value);
-            this.form.setFieldsValue({
-                note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`
+            if(value == "图片") {
+                this.tuxingchuan = true
+            } else {
+                this.tuxingchuan = false
+            }
+            getXiuziList({
+                xiuzitype: value
+            }).then((res) => {
+                console.log(res);
+                this.xiuziaddress = res.data;
+                this.$set(this.xiuziaddress);
             });
+        },
+        handleSelectChange1(value) {
+            console.log(value);
         }
     }
 };
 </script>
-
+<style>
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-color: #409eff;
+}
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}
+</style>
 <style scoped>
 .lie {
     display: flex;

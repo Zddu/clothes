@@ -8,6 +8,22 @@ export const loginLogin = (data) => {
     });
 };
 
+// 用户手机号登录接口
+export const phoneLogin = (data) => {
+    return request({
+        url: 'user/interface/phone_login',
+        method: 'POST',
+        params: data
+    });
+};
+// 用户发送验证码接口
+export const getCaptcha = (data) => {
+    return request({
+        url: 'user/interface/getCaptcha',
+        method: 'POST',
+        params: data
+    });
+};
 
 // 面料下单获取门店列表
 export const getStoreList = (data) => {
@@ -117,6 +133,32 @@ export const updateContrastcolorcolor = (data) => {
 export const getBokuan = (data) => {
     return request({
         url: '/fabricAndOther/getBokuan',
+        method: 'POST',
+        params: data
+    });
+};
+// 根据绣字类型查询绣字高度列表
+export const getXiuziList = (data) => {
+    return request({
+        url: '/fabricAndOther/getXiuziList',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 个订界面获取类别和工艺数据
+export const getTypeAndProcess = (data) => {
+    return request({
+        url: '/fabricAndOther/getTypeAndProcess',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 查询绣字位置
+export const queryLocaltion = (data) => {
+    return request({
+        url: 'logic/interface/query_localtion',
         method: 'POST',
         params: data
     });
