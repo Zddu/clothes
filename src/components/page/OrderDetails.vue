@@ -41,7 +41,7 @@
                         <div class="tou">订单状态</div>
                         <div class="size123">33643QXA0034</div>
                     </div>
-                    <div style="width: 300px;margin-top: 2px;"></div>
+                    <div style="width: 300px; margin-top: 2px"></div>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
                         <div class="tou">包装方式</div>
                         <div class="size123">33643QXA0034</div>
                     </div>
-                    <div style="width: 300px;margin-top: 2px;"></div>
+                    <div style="width: 300px; margin-top: 2px"></div>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
                         <div class="tou">服装版型</div>
                         <div class="size123">33643QXA0034</div>
                     </div>
-                    <div style="width: 300px;margin-top: 2px;"></div>
+                    <div style="width: 300px; margin-top: 2px"></div>
                     <div class="content12">
                         <div class="tou">服装品类</div>
                         <div class="size123">33643QXA0034</div>
@@ -114,7 +114,7 @@
                         <div class="tou">工艺类型</div>
                         <div class="size123">33643QXA0034</div>
                     </div>
-                    <div style="width: 300px;margin-top: 2px;"></div>
+                    <div style="width: 300px; margin-top: 2px"></div>
                 </div>
             </div>
 
@@ -158,8 +158,58 @@
                         <div class="tou">袖口款式</div>
                         <div class="size123">33643QXA0034</div>
                     </div>
+                    <div class="content12">
+                        <div class="tou">里布款式</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">门襟扣</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">手巾袋</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">褂面</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <!-- 空白线 -->
+                    <div style="height: 20px; width: 1000px"></div>
 
-                    <div style="width: 300px;margin-top: 2px;"></div>
+                    <div class="content12">
+                        <div class="tou">品类</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">脚绸</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">脚口</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">前褶</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">马王袋</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">腰里</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">腰里</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div class="content12">
+                        <div class="tou">腰里</div>
+                        <div class="size123">33643QXA0034</div>
+                    </div>
+                    <div style="width: 300px; margin-top: 2px"></div>
                 </div>
             </div>
         </div>

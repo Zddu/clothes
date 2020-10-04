@@ -45,7 +45,7 @@
                         @click="sizexuan(index)"
                     >
                         <img :src="item.embroideredImage" alt class="imgs" />
-                        <div class="kuang">{{ item.embroideredName }}</div>
+                        <div :class="{ kuang: index == zixuan, kuang1: index != zixuan }">{{ item.embroideredName }}</div>
                     </div>
                     <div style="width: 156px"></div>
                     <div style="width: 156px"></div>
@@ -64,7 +64,7 @@
                         @click="colorxuan1(index)"
                     >
                         <img :src="item.colorImg" alt class="imgs" />
-                        <div class="kuang1">{{ item.colorName }}</div>
+                        <div :class="{ kuang: index == colorxuan, kuang1: index != colorxuan }">{{ item.colorName }}</div>
                     </div>
                     <div style="width: 156px"></div>
                     <div style="width: 156px"></div>

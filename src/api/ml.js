@@ -163,3 +163,12 @@ export const queryLocaltion = (data) => {
         params: data
     });
 };
+
+// 我的产品列表
+export const queryTemplateInfoByuserId = (data) => {
+    return request({
+        url: 'logic/interface/query_templateInfoByuserId',
+        method: 'POST',
+        params: data
+    });
+};

@@ -13,7 +13,7 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-        <transition>
+        <!-- <transition>
             <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
                 <li>
                     产品列表
@@ -35,7 +35,7 @@
         </transition>
         <div @click="changeStyle" class="spot-style">
             <img :src="bottomImg" alt="" />
-        </div>
+        </div> -->
     </div>
 </template>
 

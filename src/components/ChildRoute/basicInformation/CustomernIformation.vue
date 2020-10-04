@@ -1,24 +1,18 @@
 <template>
     <div class="content">
-        <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
-            <a-form-item label="客户姓名">
-                <a-input
-                    size="large"
-                    v-decorator="['note5', { rules: [{ required: true, message: '请填写客户姓名' }] }]"
-                    style="width: 337px"
-                />
-            </a-form-item>
-
-            <a-form-item label="客户编号">
-                <a-input size="large" style="width: 337px" />
-            </a-form-item>
-            <a-form-item label="客户性别">
+        <el-form label-width="80px" :rules="rules">
+            <el-form-item label="客户姓名" prop="name" >
+                <el-input v-model="username" size="large" style="width: 337px"></el-input>
+            </el-form-item>
+            <el-form-item label="客户编号">
+                <el-input v-model="usercode" size="large" style="width: 337px"></el-input>
+            </el-form-item>
+            <el-form-item label="客户性别">
                 <a-space>
-                    <div class="box">男性</div>
-                    <div class="box1">女性</div>
+                    <div  :class="{box:index == usersex,box1:index != usersex}"  v-for="(item,index) in sex" :key="index">{{item.sex}}</div>
                 </a-space>
-            </a-form-item>
-        </a-form>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 
@@ -28,7 +22,17 @@ export default {
         return {
             form: this.$form.createForm(this, { name: 'coordinated' }),
             flag: false,
-            bottomImg: require('../../../assets/cut1/icon88.png')
+            bottomImg: require('../../../assets/cut1/icon88.png'),
+            username: '',
+            usercode: '',
+            rules: {
+                name: [{ required: true, message: '请输入客户姓名', trigger: 'blur' }]
+            },
+            sex: [
+                {sex: "男性"},
+                {sex: "女性"}
+            ],
+            usersex: "ddsfg"
         };
     },
     created() {},
@@ -159,5 +163,4 @@ export default {
     right: -34px;
     bottom: -30px;
 }
-
 </style>

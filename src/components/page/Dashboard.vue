@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import {queryTemplateInfoByuserId} from "./../../api/ml"
 export default {
     data() {
         return {
@@ -197,11 +198,24 @@ export default {
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1516 弄'
                 }
-            ]
+            ],
+            goodslist: []
         };
     },
-    mounted() {},
+    mounted() {
+        this.mychanpin()
+    },
     methods: {
+        mychanpin() {
+            queryTemplateInfoByuserId({
+                token: this.$store.getters.getToken,
+                pageNo: 1
+            }).then(res => {
+                console.log(res)
+                this.goodslist = res.records
+                this.$set(this.goodslist)
+            })
+        },
         handleEdit(index, row) {
             console.log(index, row);
         },

@@ -2,13 +2,13 @@
     <div class="main-container">
         <div class="content">
             <div class="type-main">
-                <a-card v-for="item in categoryinfoData" class="card-style">
+                <a-card v-for="(item,index) in categoryinfoData" :key="index" class="card-style">
                     <img :src="item.img" alt="" />
                     <p class="type-font-style">{{item.categoryName}}</p>
                 </a-card>
             </div>
         </div>
-        <transition>
+        <!-- <transition>
             <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
                 <li>
                     产品列表
@@ -27,12 +27,10 @@
                 <li>特殊要求</li>
                 <li>提交信息</li>
             </ul>
-            <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
-            <!--                </div>-->
         </transition>
         <div @click="changeStyle" class="spot-style">
             <img :src="bottomImg" alt="" />
-        </div>
+        </div> -->
     </div>
 </template>
 

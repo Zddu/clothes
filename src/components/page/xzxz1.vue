@@ -1,49 +1,33 @@
 <template>
-    
-        <div class="main-container">
-            <div>
-                <a-row>
-                    <a-col :span="4">
-                        <div class="line">
-                            <ul class="left-menu">
-                                <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">绣字选项</li>
-                                <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">撞色选项</li>
-                            </ul>
-                        </div>
-                    </a-col>
-                    <a-col :span="20">
-                        <div class="content">
-                            <EmbroideryOptions v-show="xuanze == 1"></EmbroideryOptions>
-                            <ColorOptions v-show="xuanze == 2"></ColorOptions>
-                        </div>
-                    </a-col>
-                </a-row>
-            </div>
-            <div style="height: 90px"></div>
-            <transition>
-                <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                    <li>
-                        产品列表
-                        <a-badge
-                            :number-style="{
-                                color: '#F9D532FF',
-                                position: 'absolute',
-                                right: '8px',
-                                bottom: '0px'
-                            }"
-                            count="3"
-                        />
-                    </li>
-                    <li>重建订单</li>
-                    <li>保存模版</li>
-                    <li>特殊要求</li>
-                    <li>提交信息</li>
-                </ul>
-            </transition>
-            <div @click="changeStyle" class="spot-style">
-                <img :src="bottomImg" alt="" />
-            </div>
+    <div class="main-container">
+        <div>
+            <a-row>
+                <a-col :span="4">
+                    <div class="line">
+                        <ul class="left-menu">
+                            <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">绣字选项</li>
+                            <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">撞色选项</li>
+                        </ul>
+                    </div>
+                </a-col>
+                <a-col :span="20">
+                    <div class="content">
+                        <EmbroideryOptions v-show="xuanze == 1"></EmbroideryOptions>
+                        <ColorOptions v-show="xuanze == 2"></ColorOptions>
+                    </div>
+                </a-col>
+            </a-row>
         </div>
+        <div style="height: 90px"></div>
+        <transition>
+            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
+                <li @click="childClick">产品列表</li>
+                <li>保存模版</li>
+                <li>重建订单</li>
+            </ul>
+        </transition>
+        <div @click="changeStyle" class="spot-style"><img :src="bottomImg" alt="" /></div>
+    </div>
 </template>
 
 <script>
@@ -77,6 +61,9 @@ export default {
         });
     },
     methods: {
+        childClick() {
+            this.$emit('childByValue', 'show');
+        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');
@@ -192,7 +179,7 @@ export default {
 
 .footer-choice {
     position: absolute;
-    width: 712px;
+    width: 420px;
     height: 86px;
     background: #e7e7e7;
     border-radius: 43px;

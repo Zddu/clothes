@@ -1,253 +1,239 @@
 <template>
-    
-        <div class="main-container">
-            <div class="box">
-                <div class="box1">
-                    <div class="button1">领口款式</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">平驳</div>
-                        </div>
-
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">平驳</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                    </div>
-                    <div class="button1" style="margin-top: 40px">驳宽</div>
-                    <div class="paixu">
-                        <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
-                            <a-select-option :value="item.id" v-for="(item,index) in bokuan" :key="index">{{item.categoryName}}</a-select-option>
-                        </a-select>
+    <div class="main-container">
+        <div class="box">
+            <div class="box1">
+                <div class="button1">领口款式</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">平驳</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">门襟扣</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">单排一粒扣</div>
-                        </div>
-
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">单排一粒扣</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">平驳</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">外大袋</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">平袋有袋盖</div>
-                        </div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
+                <div class="button1" style="margin-top: 40px">驳宽</div>
+                <div class="paixu">
+                    <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
+                        <a-select-option :value="item.id" v-for="(item, index) in bokuan" :key="index">{{
+                            item.categoryName
+                        }}</a-select-option>
+                    </a-select>
+                </div>
 
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">平袋有袋盖</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                <div class="button1" style="margin-top: 40px">门襟扣</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">单排一粒扣</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">背叉</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">无叉</div>
-                        </div>
-
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">无叉</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">单排一粒扣</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">袖口款式</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">假叉平订</div>
-                        </div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
 
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">假叉平订</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                <div class="button1" style="margin-top: 40px">外大袋</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">平袋有袋盖</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">手巾袋</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">常规</div>
-                        </div>
-
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">常规</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">平袋有袋盖</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">驳头眼</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">常规</div>
-                        </div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
 
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">常规</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                <div class="button1" style="margin-top: 40px">背叉</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">无叉</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">外珠边</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">常规</div>
-                        </div>
-
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">常规</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">无叉</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">珠边宽度</div>
-                    <div class="paixu">
-                         <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
-                            <a-select-option :value="item.id" v-for="(item,index) in zhukuan" :key="index">{{item.categoryName}}</a-select-option>
-                        </a-select>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
+
+                <div class="button1" style="margin-top: 40px">袖口款式</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">假叉平订</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">里布款式</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">常规</div>
-                        </div>
-
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">常规</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">假叉平订</div>
                     </div>
 
-                    <div class="button1" style="margin-top: 40px">里布款式</div>
-                    <div class="paixu">
-                        <div class="kuang1">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi">常规</div>
-                        </div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
 
-                        <div class="kuang2">
-                            <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                            <div class="yangshi1">常规</div>
-                        </div>
-
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
-                        <div style="width: 182px"></div>
+                <div class="button1" style="margin-top: 40px">手巾袋</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">常规</div>
                     </div>
+
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">常规</div>
+                    </div>
+
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
+
+                <div class="button1" style="margin-top: 40px">驳头眼</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">常规</div>
+                    </div>
+
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">常规</div>
+                    </div>
+
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
+
+                <div class="button1" style="margin-top: 40px">外珠边</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">常规</div>
+                    </div>
+
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">常规</div>
+                    </div>
+
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
+
+                <div class="button1" style="margin-top: 40px">珠边宽度</div>
+                <div class="paixu">
+                    <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
+                        <a-select-option :value="item.id" v-for="(item, index) in zhukuan" :key="index">{{
+                            item.categoryName
+                        }}</a-select-option>
+                    </a-select>
+                </div>
+
+                <div class="button1" style="margin-top: 40px">里布款式</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">常规</div>
+                    </div>
+
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">常规</div>
+                    </div>
+
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                </div>
+
+                <div class="button1" style="margin-top: 40px">里布款式</div>
+                <div class="paixu">
+                    <div class="kuang1">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi">常规</div>
+                    </div>
+
+                    <div class="kuang2">
+                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
+                        <div class="yangshi1">常规</div>
+                    </div>
+
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
+                    <div style="width: 182px"></div>
                 </div>
             </div>
-            <div style="height: 90px"></div>
-            <transition>
-                <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                    <li>
-                        产品列表
-                        <a-badge
-                            :number-style="{
-                                color: '#F9D532FF',
-                                position: 'absolute',
-                                right: '8px',
-                                bottom: '0px'
-                            }"
-                            count="3"
-                        />
-                    </li>
-                    <li>重建订单</li>
-                    <li>保存模版</li>
-                    <li>特殊要求</li>
-                    <li>提交信息</li>
-                </ul>
-                <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
-                <!--                </div>-->
-            </transition>
-            <div @click="changeStyle" class="spot-style">
-                <img :src="bottomImg" alt="" />
-            </div>
         </div>
+        <div style="height: 90px"></div>
+        <transition>
+            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
+                <li @click="childClick">产品列表</li>
+                <li>保存模版</li>
+                <li>重建订单</li>
+            </ul>
+        </transition>
+        <div @click="changeStyle" class="spot-style"><img :src="bottomImg" alt="" /></div>
+    </div>
 </template>
 
 <script>
-import {getBokuan} from "./../../api/ml"
+import { getBokuan } from './../../api/ml';
 export default {
     name: 'fzlb123',
     data() {
@@ -280,24 +266,25 @@ export default {
     },
     created() {},
     mounted() {
-        this.getdatakuan()
+        this.getdatakuan();
     },
     methods: {
+        childClick() {
+            this.$emit('childByValue', 'show');
+        },
         // 获取驳宽和珠边宽度
         getdatakuan() {
-              getBokuan(
-                  {
-                      token: this.$store.getters.getToken ,
-                      mouldid: 3
-                  }
-              ).then(res => {
-                  console.log(res)
-                  this.bokuan = res.data[0].categoryInfoList
-                  this.zhukuan = res.data[1].categoryInfoList
-                  console.log(this.bokuan,"bokuan")
-                  this.$set(this.bokuan)
-                  this.$set(this.zhukuan)
-              })
+            getBokuan({
+                token: this.$store.getters.getToken,
+                mouldid: 3
+            }).then((res) => {
+                console.log(res);
+                this.bokuan = res.data[0].categoryInfoList;
+                this.zhukuan = res.data[1].categoryInfoList;
+                console.log(this.bokuan, 'bokuan');
+                this.$set(this.bokuan);
+                this.$set(this.zhukuan);
+            });
         },
         handleSelectChange(value) {
             console.log(this.shoplist[value]);
@@ -478,7 +465,7 @@ export default {
 
 .footer-choice {
     position: absolute;
-    width: 712px;
+    width: 420px;
     height: 86px;
     background: #e7e7e7;
     border-radius: 43px;

@@ -36,6 +36,14 @@
                 </a-col>
             </a-row>
         </div>
+        <transition>
+            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
+                <li @click="childClick">产品列表</li>
+                <li>保存模版</li>
+                <li>重建订单</li>
+            </ul>
+        </transition>
+        <div @click="changeStyle" class="spot-style"><img :src="bottomImg" alt="" /></div>
     </div>
 </template>
 
@@ -79,6 +87,9 @@ export default {
         this.getMstemplateinfo();
     },
     methods: {
+        childClick() {
+            this.$emit('childByValue', "show");
+        },
         //请求module菜单
         getMstemplateinfo() {
             queryMstemplateinfo(this.module).then((res) => {
@@ -105,6 +116,36 @@ export default {
 </script>
 
 <style scoped>
+.v-enter,
+.v-leave-to {
+    /* 透明度为0 */
+    width: 712px;
+    /* 位移(x) */
+}
+
+/* v-enter-active [入场动画的时间段] */
+/* v-leave-active [离场动画的时间段] */
+.v-enter-active,
+.v-leave-active {
+    /* 渐变 */
+    transition: all 0.75s ease;
+}
+
+.bottom-menu li {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    align-items: flex-start;
+    margin-left: 30px;
+}
+
+.bottom-menu li {
+    font-size: 20px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #585858;
+    line-height: 28px;
+}
 .size {
     font-size: 13px;
     font-family: PingFangSC-Semibold, PingFang SC;
@@ -173,7 +214,7 @@ export default {
 
 .footer-choice {
     position: absolute;
-    width: 712px;
+    width: 420px;
     height: 86px;
     background: #e7e7e7;
     border-radius: 43px;
