@@ -6,11 +6,11 @@
                     <div class="line">
                         <ul class="left-menu">
                             <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">
-                                <a-tag style="color: #ffec70" color="#303030"> 男装</a-tag>
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType1?true:false"> {{leftType1}}</a-tag>
                                 服装类别
                             </li>
                             <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">
-                                <a-tag style="color: #ffec70" color="#303030"> 单衣</a-tag>
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType2?true:false"> {{leftType2}}</a-tag>
                                 服装品类
                             </li>
                             <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">
@@ -27,9 +27,9 @@
                 </a-col>
                 <a-col :span="20">
                     <div class="content">
-                        <ClothingType v-if="xuanze == 1" />
-                        <ClothingTypeOne v-if="xuanze == 2" />
-                        <ClothingStyle v-if="xuanze == 3" />
+                        <ClothingType @child-event="parentGetData" v-if="xuanze == 1" />
+                        <ClothingTypeOne @child-event2="parentGetData2"  v-if="xuanze == 2" />
+                        <ClothingStyle @child-event3="parentGetData3" v-if="xuanze == 3" />
                         <ClothingFormat v-if="xuanze == 4" />
                         <ProcessType v-if="xuanze == 5" />
                     </div>
@@ -51,6 +51,10 @@ export default {
     components: { ProcessType, ClothingFormat, ClothingStyle, ClothingTypeOne, ClothingType },
     data() {
         return {
+            leftType1:'',
+            leftType2:'',
+            leftType3:'',
+            leftType4:'',
             xuanze: 1,
             templateData: [],
             //侧边导航菜单数据
@@ -85,7 +89,17 @@ export default {
                 this.menuData = res.data;
             });
         },
-
+        parentGetData(data){
+            this.leftType1 = data
+        },
+        parentGetData2(data){
+            console.log(data);
+            this.leftType2 = data
+        },
+        parentGetData3(data){
+            console.log(data);
+            this.leftType2 = data
+        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');

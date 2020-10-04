@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <div class="content">
-            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(index)">
+            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(item,index)">
                 <img :src="item.img" alt="" class="imgs" />
                 <div :class="{ size: index == colorxuan, size1: index != colorxuan }">
                     <a style="color: #303030">{{ item.categoryName }}</a>
@@ -42,7 +42,7 @@
 <script>
 import { queryCategoryinfo } from '@/api/ml';
 export default {
-    name: 'ClothingType',
+    name: 'ClothingTypeOne',
     data() {
         return {
             template: {
@@ -71,9 +71,10 @@ export default {
         this.getCategoryinfo();
     },
     methods: {
-        xuanzhong(index) {
+        xuanzhong(item,index) {
             this.colorxuan = index
-            this.$store.commit('ClothingType', this.templateData[index].id);
+            this.$store.commit('ClothingCategory', this.templateData[index].id);
+            this.$emit('child-event2',item.categoryName)
         },
         getCategoryinfo() {
             queryCategoryinfo({
@@ -236,7 +237,7 @@ export default {
     color: #303030;
     width: 63px;
     height: 27px;
-    
+
 background: #EAEAEA;
     border-radius: 3px;
     text-align: center;
