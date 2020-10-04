@@ -163,3 +163,11 @@ export const queryLocaltion = (data) => {
         params: data
     });
 };
+// 个订面料与辅料界面获取面料信息
+export const querySingleFabricList = (data) => {
+    return request({
+        url: '/fabricAndOther/getSingleFabricList',
+        method: 'POST',
+        params: data
+    });
+};

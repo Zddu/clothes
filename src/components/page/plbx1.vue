@@ -14,11 +14,11 @@
                                 服装品类
                             </li>
                             <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">
-                                <a-tag style="color: #ffec70" color="#303030"> LIUH001</a-tag>
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType3?true:false"> {{leftType3}}</a-tag>
                                 服装款式
                             </li>
                             <li :class="{ active: xuanze == 4 }" @click="xuanze = 4">
-                                <a-tag style="color: #ffec70" color="#303030"> LIUH001</a-tag>
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType4?true:false"> {{leftType4}}</a-tag>
                                 服装版型
                             </li>
                             <li :class="{ active: xuanze == 5 }" @click="xuanze = 5">工艺类型</li>
@@ -30,7 +30,7 @@
                         <ClothingType @child-event="parentGetData" v-if="xuanze == 1" />
                         <ClothingTypeOne @child-event2="parentGetData2"  v-if="xuanze == 2" />
                         <ClothingStyle @child-event3="parentGetData3" v-if="xuanze == 3" />
-                        <ClothingFormat v-if="xuanze == 4" />
+                        <ClothingFormat @child-event4="parentGetData4" v-if="xuanze == 4" />
                         <ProcessType v-if="xuanze == 5" />
                     </div>
                 </a-col>
@@ -93,12 +93,14 @@ export default {
             this.leftType1 = data
         },
         parentGetData2(data){
-            console.log(data);
             this.leftType2 = data
         },
         parentGetData3(data){
+            this.leftType3 = data
+        },
+        parentGetData4(data){
             console.log(data);
-            this.leftType2 = data
+            this.leftType4 = data
         },
         changeStyle() {
             this.flag = !this.flag;

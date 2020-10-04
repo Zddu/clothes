@@ -1,5 +1,5 @@
 <template>
-    
+
         <div class="main-container">
             <div>
                 <a-row>
@@ -26,11 +26,11 @@
                     </a-col>
                     <a-col :span="20">
                         <div class="content">
-                            <FabricPage v-show="xuanze == 1"/>
-                            <SuitPage v-show="xuanze == 2"/>
-                            <VestPage v-show="xuanze == 3"/>
-                            <BottomCollarPage v-show="xuanze == 4"/>
-                            <ButtonPage v-show="xuanze == 5"/>
+                            <FabricPage v-if="xuanze == 1"/>
+                            <SuitPage v-if="xuanze == 2"/>
+                            <VestPage v-if="xuanze == 3"/>
+                            <BottomCollarPage v-if="xuanze == 4"/>
+                            <ButtonPage v-if="xuanze == 5"/>
                         </div>
                     </a-col>
                 </a-row>

@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <div class="content">
-            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(index)">
+            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(item,index)">
                 <img :src="item.img" alt="" class="imgs" />
                 <div :class="{ size: index == colorxuan, size1: index != colorxuan }">
                     <a style="color: #303030">{{ item.categoryName }}</a>
@@ -91,9 +91,10 @@
             this.getCategoryinfo()
         },
         methods: {
-            xuanzhong(index) {
+            xuanzhong(item,index) {
                 this.colorxuan = index
                 this.$store.commit('ClothingFormat', this.templateData[index].id);
+                this.$emit('child-event4',item.categoryName)
             },
             getCategoryinfo() {
                 console.log(this.$store.getters.getClothingStyle);
