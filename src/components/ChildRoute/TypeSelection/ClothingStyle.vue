@@ -13,31 +13,7 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-        <transition>
-            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                <li>
-                    产品列表
-                    <a-badge
-                            :number-style="{
-                                color: '#F9D532FF',
-                                position: 'absolute',
-                                right: '8px',
-                                bottom: '0px'
-                            }"
-                            count="3"
-                    />
-                </li>
-                <li>重建订单</li>
-                <li>保存模版</li>
-                <li>特殊要求</li>
-                <li>提交信息</li>
-            </ul>
-            <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
-            <!--                </div>-->
-        </transition>
-        <div @click="changeStyle" class="spot-style">
-            <img :src="bottomImg" alt=""/>
-        </div>
+
     </div>
 </template>
 
@@ -95,6 +71,7 @@
         methods: {
             xuanzhong(item,index) {
                 this.colorxuan = index
+                window.sessionStorage.setItem("colorxuan3",index)
                 this.$store.commit('ClothingStyle', this.templateData[index].id);
                 this.$emit('child-event3',item.categoryName)
             },
@@ -105,6 +82,16 @@
                 }).then((res) => {
                     console.log(res, 'ClothingStyle');
                     this.templateData = res.data;
+                    if (!window.sessionStorage.getItem("colorxuan3")) {
+                        this.colorxuan = 0
+                        this.$store.commit('ClothingStyle', this.templateData[0].id);
+                        this.$emit('child-event3',this.templateData[0].categoryName)
+                    }else {
+                        let index = Number.parseInt(window.sessionStorage.getItem('colorxuan3'))
+                        this.$store.commit('ClothingStyle', this.templateData[index].id);
+                        this.$emit('child-event3',this.templateData[index].categoryName)
+                        this.colorxuan = window.sessionStorage.getItem("colorxuan3")
+                    }
                     this.$set(this.templateData);
                 });
             },
@@ -267,7 +254,7 @@
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #303030;
-        width: 63px;
+        min-width: 63px;
         height: 27px;
         background: #ffec70;
         border-radius: 3px;
@@ -281,9 +268,8 @@
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #303030;
-        width: 63px;
+        min-width: 63px;
         height: 27px;
-
         background: #EAEAEA;
         border-radius: 3px;
         text-align: center;

@@ -21,7 +21,7 @@
                     </a-input>
 
                     <div v-show="!zhong">
-                        <el-input v-model="input" placeholder="请输入验证码" size="large" style="width: 242px"></el-input>
+                        <el-input v-model="input1" placeholder="请输入验证码" size="large" style="width: 242px"></el-input>
                     </div>
                     <div v-show="!zhong">
                         <el-button size="large" @click="sendmessage" :disabled="show">{{ codebutton }}</el-button>
@@ -58,7 +58,8 @@ export default {
             codebutton: '获取验证码',
             count: '',
             timer: null,
-            show: false
+            show: false,
+            input1: ''
         };
     },
     methods: {
@@ -90,15 +91,15 @@ export default {
             this.zhong = false;
             this.tishi = '请输入手机号';
             this.userName = '';
-            this.input = ""
+            this.input = '';
         },
         userlogin() {
             this.zhong = true;
             this.tishi = '请输入用户名';
             this.userName = '';
-            this.password = ""
+            this.password = '';
         },
-        login() { 
+        login() {
             if (this.zhong == true) {
                 loginLogin({
                     username: this.userName,
@@ -116,18 +117,22 @@ export default {
                     }
                 });
             } else {
-                phoneLogin({ phone: this.userName, code: this.input }).then((res) => {
-                    console.log(res);
-                    if (res.code == 0) {
-                        this.$message.success(res.msg);
-                        localStorage.setItem('ms_username', this.userName);
-                        this.$store.commit('addToken', res.data.token);
-                        console.log(this.$store.state.token);
-                        this.$router.push('/');
-                    } else {
-                        this.$message.error(res.msg);
-                    }
-                });
+                if (this.input1 == this.input) {
+                    phoneLogin({ phone: this.userName, code: this.input }).then((res) => {
+                        console.log(res);
+                        if (res.code == 0) {
+                            this.$message.success(res.msg);
+                            localStorage.setItem('ms_username', this.userName);
+                            this.$store.commit('addToken', res.data.token);
+                            console.log(this.$store.state.token);
+                            this.$router.push('/');
+                        } else {
+                            this.$message.error(res.msg);
+                        }
+                    });
+                } else {
+                    this.$message.error("验证码错误");
+                }
             }
         }
     }

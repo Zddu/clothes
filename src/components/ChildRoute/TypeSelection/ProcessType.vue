@@ -13,7 +13,7 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-        <transition>
+        <!-- <transition>
             <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
                 <li>
                     产品列表
@@ -32,12 +32,10 @@
                 <li>特殊要求</li>
                 <li>提交信息</li>
             </ul>
-            <!--                <div v-if="flag" id="footer_choice" class="footer-choice">-->
-            <!--                </div>-->
         </transition>
         <div @click="changeStyle" class="spot-style">
             <img :src="bottomImg" alt="" />
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -74,6 +72,7 @@
         methods: {
             xuanzhong(index) {
                 this.colorxuan = index
+                window.sessionStorage.setItem("colorxuan5",index)
                 this.$store.commit('ProcessType', this.templateData[index].id);
             },
             getCategoryinfo() {
@@ -83,6 +82,14 @@
                 }).then((res) => {
                     console.log(res, 'ProcessType');
                     this.templateData = res.data;
+                    if (!window.sessionStorage.getItem("colorxuan5")) {
+                        this.colorxuan = 0
+                        this.$store.commit('ProcessType', this.templateData[0].id);
+                    }else {
+                        let index = Number.parseInt(window.sessionStorage.getItem('colorxuan5'))
+                        this.$store.commit('ProcessType', this.templateData[index].id);
+                        this.colorxuan = this.colorxuan = window.sessionStorage.getItem("colorxuan5")
+                    }
                     this.$set(this.templateData);
                 });
             },

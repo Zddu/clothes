@@ -50,11 +50,11 @@
             </div>
             <div>
                 <a-space>
-                    <div class="biox" @click="chuanjian">
+                    <div class="biox" @click="chuanjian(1)">
                         <img src="./../../assets/cut1/add.png" alt class="imgicon" />
                         <div class="titleicon" style="width: 180px">创建空白订单</div>
                     </div>
-                    <div class="biox">
+                    <div class="biox" @click="chuanjian(2)">
                         <img src="./../../assets/cut1/copy.png" alt class="imgicon" />
                         <div class="titleicon" style="width: 120px">复制订单</div>
                     </div>
@@ -63,12 +63,12 @@
             <div style="margin-top: 20px">
                 <el-tabs v-model="activeName" @tab-click="handleClick">
                     <el-tab-pane label="编辑中订单" name="first">
-                        <el-table :data="tableData" border style="width: 100%">
+                        <el-table :data="goodslist" border style="width: 100%">
                             <el-table-column type="index" label="序号"> </el-table-column>
-                            <el-table-column prop="date" label="订单名称"> </el-table-column>
-                            <el-table-column prop="name" label="创建时间"> </el-table-column>
-                            <el-table-column prop="name" label="保存时间"> </el-table-column>
-                            <el-table-column prop="address" label="操作" width="200">
+                            <el-table-column prop="templateName" label="订单名称"> </el-table-column>
+                            <el-table-column prop="createTime" label="创建时间"> </el-table-column>
+                            <el-table-column prop="createTime" label="保存时间"> </el-table-column>
+                            <el-table-column label="操作" width="180">
                                 <template slot-scope="scope">
                                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">继续填写</el-button>
                                     <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
@@ -77,12 +77,12 @@
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="我的模板" name="second">
-                        <el-table :data="tableData" border style="width: 100%">
+                        <el-table :data="mymoldelist" border style="width: 100%">
                             <el-table-column type="index" label="序号"> </el-table-column>
-                            <el-table-column prop="date" label="订单名称"> </el-table-column>
-                            <el-table-column prop="name" label="创建时间"> </el-table-column>
-                            <el-table-column prop="name" label="保存时间"> </el-table-column>
-                            <el-table-column prop="address" label="操作" width="200">
+                            <el-table-column prop="templateName" label="订单名称"> </el-table-column>
+                            <el-table-column prop="createTime" label="创建时间"> </el-table-column>
+                            <el-table-column prop="createTime" label="保存时间"> </el-table-column>
+                            <el-table-column label="操作" width="180">
                                 <template slot-scope="scope">
                                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">使用模板</el-button>
                                     <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
@@ -91,12 +91,12 @@
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="铭朗云模版" name="third">
-                        <el-table :data="tableData" border style="width: 100%">
+                        <el-table :data="langlist" border style="width: 100%">
                             <el-table-column type="index" label="序号"> </el-table-column>
-                            <el-table-column prop="date" label="订单名称"> </el-table-column>
-                            <el-table-column prop="name" label="创建时间"> </el-table-column>
-                            <el-table-column prop="name" label="保存时间"> </el-table-column>
-                            <el-table-column prop="address" label="操作" width="200">
+                            <el-table-column prop="templateName" label="订单名称"> </el-table-column>
+                            <el-table-column prop="createTime" label="创建时间"> </el-table-column>
+                            <el-table-column prop="createTime" label="保存时间"> </el-table-column>
+                            <el-table-column label="操作" width="180">
                                 <template slot-scope="scope">
                                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">使用模板</el-button>
                                 </template>
@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import { queryOrderlistBytype } from './../../api/ml';
 export default {
     data() {
         return {
@@ -197,11 +198,50 @@ export default {
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1516 弄'
                 }
-            ]
+            ],
+            goodslist: [],
+            mymoldelist: [],
+            langlist: []
         };
     },
-    mounted() {},
+    mounted() {
+        this.mychanpin();
+    },
     methods: {
+        mychanpin() {
+            queryOrderlistBytype({
+                token: this.$store.getters.getToken,
+                pageNo: 1,
+                type: 1
+            }).then((res) => {
+                console.log(res);
+                this.goodslist = res.data.records;
+                this.$set(this.goodslist);
+                console.log(this.goodslist, '123');
+            });
+
+            queryOrderlistBytype({
+                token: this.$store.getters.getToken,
+                pageNo: 1,
+                type: 2
+            }).then((res) => {
+                console.log(res);
+                this.mymoldelist = res.data.records;
+                this.$set(this.mymoldelist);
+                console.log(this.mymoldelist, '123');
+            });
+
+            queryOrderlistBytype({
+                token: this.$store.getters.getToken,
+                pageNo: 1,
+                type: 3
+            }).then((res) => {
+                console.log(res);
+                this.langlist = res.data.records;
+                this.$set(this.langlist);
+                console.log(this.langlist, '123');
+            });
+        },
         handleEdit(index, row) {
             console.log(index, row);
         },
@@ -211,10 +251,16 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
-        chuanjian() {
-            this.$router.push({
-                path: '/IndividualOrder'
-            });
+        chuanjian(index) {
+            if (index == 1) {
+                this.$router.push({
+                    path: '/IndividualOrder'
+                });
+            } else if (index == 2) {
+                this.$router.push({
+                    path: '/copy'
+                });
+            }
         },
         afterVisibleChange(val) {
             console.log('visible', val);
@@ -227,15 +273,13 @@ export default {
         },
         routelink(index) {
             this.visible = true;
-            let a = index;
-            this.titleList.push(this.scricon[a]);
+            this.titleList.push(this.scricon[index]);
             this.$emit('getMessage', this.titleList);
         },
         onSearch(value) {
             console.log(value);
         },
         mouseOver(index) {
-            console.log(index);
             this.indexactive = index;
         },
         mouseLeave() {
