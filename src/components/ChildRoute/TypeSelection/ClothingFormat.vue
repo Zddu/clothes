@@ -1,24 +1,17 @@
 <template>
     <div class="main-container">
         <div class="content">
-            <div class="type-main">
-                <a-card v-for="(item,index) in categoryinfoData" :key="index" class="card-style">
-                    <img :src="item.img" alt="" />
-                    <p class="type-font-style">{{item.categoryName}}</p>
-                </a-card>
-<!--                <a-card class="card-style">-->
-<!--                    <img src="../../../assets/fwdp8.png" alt="" />-->
-<!--                    <p class="type-font-style">LV0034</p>-->
-<!--                </a-card>-->
-<!--                <a-card class="card-style" >-->
-<!--                    <img src="../../../assets/fwdp10.png" alt="" />-->
-<!--                    <p class="type-font-style">LV0034</p>-->
-<!--                </a-card>-->
-<!--                <a-card class="card-style" >-->
-<!--                    <img src="../../../assets/fwdp11.png" alt="" />-->
-<!--                    <p class="type-font-style">LV0034</p>-->
-<!--                </a-card>-->
+            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(item,index)">
+                <img :src="item.img" alt="" class="imgs" />
+                <div :class="{ size: index == colorxuan, size1: index != colorxuan }">
+                    <a style="color: #303030">{{ item.categoryName }}</a>
+                </div>
             </div>
+            <div style="width: 177px"></div>
+            <div style="width: 177px"></div>
+            <div style="width: 177px"></div>
+            <div style="width: 177px"></div>
+            <div style="width: 177px"></div>
         </div>
         
     </div>
@@ -30,11 +23,10 @@
         name: 'ClothingFormat',
         data() {
             return {
+                colorxuan:'',
                 //服装品类  数据
                 categoryinfoData: [],
-                categoryinfo: {
-                    template_id: '4'
-                },
+                templateData: [],
                 flag: true,
                 formModel: {
                     layout: 'horizontal',
@@ -75,9 +67,20 @@
             this.getCategoryinfo()
         },
         methods: {
+            xuanzhong(item,index) {
+                this.colorxuan = index
+                this.$store.commit('ClothingFormat', this.templateData[index].id);
+                this.$emit('child-event4',item.categoryName)
+            },
             getCategoryinfo() {
-                queryCategoryinfo(this.categoryinfo).then(res => {
-                    this.categoryinfoData = res.data;
+                console.log(this.$store.getters.getClothingStyle);
+                queryCategoryinfo({
+                    template_id: '4',
+                    category_ids: this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingType+","+this.$store.getters.getClothingStyle
+                }).then((res) => {
+                    console.log(res, 'ClothingFormat');
+                    this.templateData = res.data;
+                    this.$set(this.templateData);
                 });
             },
             steptitle(index) {
@@ -122,19 +125,13 @@
 </script>
 
 <style scoped>
-    .card-style{
-        width: 156px;
-        height: 210px;
-        background: #ffffff;
-        border-radius: 3px;
-        border: 1px solid #f9d805;
-        margin-right: 14px;
-        margin-bottom: 14px;
+    .v-enter {
+        width: 712px;
     }
-    .v-enter,
+
     .v-leave-to {
         /* 透明度为0 */
-        width: 712px;
+        opacity: 0;
         /* 位移(x) */
     }
 
@@ -143,7 +140,157 @@
     .v-enter-active,
     .v-leave-active {
         /* 渐变 */
-        transition: all 0.75s ease;
+        transition: all 1s ease;
+    }
+
+    .button123 {
+        margin-top: 20px;
+    }
+
+    .title234 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 168px;
+        margin-left: 20px;
+    }
+
+    .ping123 {
+        height: 22px;
+        font-size: 16px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #4e4e4e;
+        line-height: 22px;
+        margin-left: 20px;
+    }
+
+    .pinglei {
+        width: 108px;
+        height: 40px;
+        background: #fafafa;
+        text-align: left;
+        line-height: 40px;
+        font-size: 16px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #4e4e4e;
+    }
+
+    .imgs1 {
+        width: 104px;
+        height: 104px;
+    }
+
+    .img123 {
+        width: 140px;
+        height: 168px;
+        border-radius: 3px;
+        display: flex;
+        border: 1px solid #d8d8d8;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .size12 {
+        width: 74px;
+        height: 48px;
+        background: #d8d8d8;
+        border-radius: 3px;
+        line-height: 48px;
+        font-size: 16px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #898989;
+        text-align: center;
+    }
+
+    .size123 {
+        width: 74px;
+        height: 48px;
+        background: #303030;
+        border-radius: 3px;
+        font-size: 16px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #ffe56d;
+        line-height: 48px;
+        text-align: center;
+    }
+
+    .box123 {
+        width: 380px;
+        margin-top: 30px;
+    }
+
+    .title123 {
+        font-size: 18px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #424242;
+    }
+
+    .line123 {
+        width: 6px;
+        height: 32px;
+        background: #545454;
+    }
+
+    .size {
+        font-size: 13px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #303030;
+        width: 63px;
+        height: 27px;
+        background: #ffec70;
+        border-radius: 3px;
+        text-align: center;
+        line-height: 27px;
+        margin-top: 9px;
+    }
+
+    .size1 {
+        font-size: 13px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: #303030;
+        width: 63px;
+        height: 27px;
+
+        background: #EAEAEA;
+        border-radius: 3px;
+        text-align: center;
+        line-height: 27px;
+        margin-top: 9px;
+    }
+
+    .imgs {
+        width: 168px;
+        height: 168px;
+        margin-top: 6px;
+    }
+
+    .box1 {
+        width: 177px;
+        height: 224px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #e3e3e3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        width: 177px;
+        height: 224px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #f9d805;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .spot-style {
@@ -194,51 +341,10 @@
         align-items: center;
     }
 
-    .content .type-main {
+    .content {
         display: flex;
-        display: -webkit-flex;
-        /* justify-content: end; */
-        flex-direction: row;
+        justify-content: space-between;
         flex-wrap: wrap;
-        width: 100%;
-        height: 100%;
+        width: 950px;
     }
-
-    .content .type-main .type-font-style {
-        width: 110px;
-        background: #f9d532;
-        border-radius: 3px;
-        font-size: 14px;
-        font-family: PingFangSC-Light, PingFang SC;
-        font-weight: 300;
-        color: #303030;
-        text-align: center;
-    }
-
-    .content .type-main img {
-        width: 110px;
-    }
-
-    .left-menu li {
-        line-height: 59px;
-        padding: 0 20px 0px 0px;
-        cursor: pointer;
-    }
-
-    .left-menu li {
-        cursor: pointer;
-        font-size: 16px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #303030;
-    }
-
-    .left-menu li > button span {
-        font-size: 20px;
-        font-family: PingFangSC-Semibold, PingFang SC;
-        font-weight: 600;
-        color: #585858;
-        line-height: 28px;
-    }
-
 </style>

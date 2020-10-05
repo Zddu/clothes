@@ -17,10 +17,9 @@
             <a-form-item label="绣字位置">
                 <a-select
                     size="large"
-                    v-decorator="['gender1', { rules: [{ required: true, message: '请选择绣字位置' }] }]"
                     placeholder="请选择绣字位置"
                     style="width: 337px"
-                    @change="handleSelectChange1"
+                    @change="handleSelectChange2"
                 >
                     <a-select-option :value="item.embroideredHeight" v-for="(item, index) in xiuziweizhi" :key="index">{{
                         item.xiuziLocaltion
@@ -183,6 +182,9 @@ export default {
             });
         },
         handleSelectChange1(value) {
+            console.log(value);
+        },
+        handleSelectChange2(value) {
             console.log(value);
         }
     }

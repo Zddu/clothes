@@ -13,131 +13,17 @@
             <a-checkbox style="margin-left: 15px" @change="onChange"> 时尚</a-checkbox>
         </div>
         <div class="type-main">
-            <a-card
-                    style="
-                            width: 156px;
-                            height: 197px;
-                            background: #ffffff;
-                            border-radius: 3px;
-                            border: 1px solid #f9d805;
-                            margin-right: 14px;
-                            margin-bottom: 14px;
-                        "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
+            <a-card :class="styleNum===1?style1:style2" @click="choiceStyle(1)">
+                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
+                <p :class="styleNum===1?fontStyle:fontStyle1">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
+            <a-card :class="styleNum===2?style1:style2" @click="choiceStyle(2)">
+                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
+                <p :class="styleNum===2?fontStyle:fontStyle1">LV0034</p>
             </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
-            </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
-            </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
-            </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
-            </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
-            </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
-            </a-card>
-            <a-card
-                    style="
-                                        width: 156px;
-                                        height: 197px;
-                                        background: #ffffff;
-                                        border-radius: 3px;
-                                        border: 1px solid #f9d805;
-                                        margin-right: 14px;
-                                        margin-bottom: 14px;
-                                    "
-            >
-                <img :src="niukouImg" alt=""/>
-                <p class="type-font-style">LV003</p>
+            <a-card :class="styleNum===3?style1:style2" @click="choiceStyle(3)">
+                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
+                <p :class="styleNum===3?fontStyle:fontStyle1">LV0034</p>
             </a-card>
         </div>
     </div>
@@ -147,6 +33,12 @@
         name: 'VestPage',
         data() {
             return {
+                fontStyle:'type-font-style',
+                fontStyle1:'type-font-style1',
+                styleNum:'',
+                imgStyle:'imgStyle',
+                style1:'card-style',
+                style2:'card-style1',
                 flag: true,
                 niukouImg: require('../../../assets/img/dl.jpg'),
             };
@@ -154,6 +46,9 @@
         created() {},
         mounted() {},
         methods: {
+            choiceStyle(val){
+                this.styleNum = val
+            },
             changeStyle() {
                 this.flag = !this.flag;
                 let div = document.getElementById('footer_choice');
@@ -166,6 +61,26 @@
 </script>
 
 <style scoped>
+
+    .card-style {
+        width: 156px;
+        height: 197px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #f9d805;
+        margin-right: 14px;
+        margin-bottom: 14px;
+    }
+    .card-style1 {
+        width: 156px;
+        height: 197px;
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #6f6a70;
+        margin-right: 14px;
+        margin-bottom: 14px;
+    }
+
     .v-enter,
     .v-leave-to {
         /* 透明度为0 */
@@ -208,7 +123,7 @@
         height: 100%;
     }
 
-   .type-main .type-font-style {
+    .type-font-style {
         width: 110px;
         background: #f9d532;
         border-radius: 3px;
@@ -217,6 +132,18 @@
         font-weight: 300;
         color: #303030;
         text-align: center;
+        margin-top: 15px;
+    }
+    .type-font-style1{
+        width: 110px;
+        background: white;
+        border-radius: 3px;
+        font-size: 14px;
+        font-family: PingFangSC-Light, PingFang SC;
+        font-weight: 300;
+        color: #303030;
+        text-align: center;
+        margin-top: 15px;
     }
 
     .content .type-main img {

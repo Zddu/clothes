@@ -3,30 +3,11 @@
         <div>
             <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
                 <a-form-item label="绣字类型">
-                    <div style="display: flex">
+                    <!-- <div style="display: flex">
                         <div class="touicon">尺寸</div>
                         <a-input size="large" placeholder="请填写尺寸" class="inputkuang" />
-                    </div>
-                    <div style="margin-top: 20px">
-                        <a-space>
-                            <div style="display: flex">
-                                <div class="touicon">身高</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
-                            </div>
-
-                            <div style="display: flex">
-                                <div class="touicon">体重</div>
-                                <a-input size="large" suffix="kg" class="inputkuang" />
-                            </div>
-
-                            <div style="display: flex">
-                                <div class="touicon">年龄</div>
-                                <a-input size="large" placeholder="请填写客户年龄" class="inputkuang" />
-                            </div>
-                        </a-space>
-                    </div>
-
-                    <div style="margin-top: 20px">
+                    </div> -->
+                    <div>
                         <a-space>
                             <div style="display: flex">
                                 <div class="touicon">前长</div>
@@ -37,34 +18,73 @@
                                 <div class="touicon">后长</div>
                                 <a-input size="large" suffix="cm" class="inputkuang" />
                             </div>
+
                             <div style="display: flex">
                                 <div class="touicon">胸围</div>
                                 <a-input size="large" suffix="cm" class="inputkuang" />
                             </div>
+
                             <div style="display: flex">
                                 <div class="touicon">腰围</div>
                                 <a-input size="large" suffix="cm" class="inputkuang" />
                             </div>
                         </a-space>
-                    </div>
+                        <div style="margin-top: 20px">
+                            <a-space>
+                                <div style="display: flex">
+                                    <div class="touicon">下摆</div>
+                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                </div>
 
-                    <div style="margin-top: 20px">
+                                <div style="display: flex">
+                                    <div class="touicon">肩宽</div>
+                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                </div>
+
+                                <div style="display: flex">
+                                    <div class="touicon">左袖长</div>
+                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                </div>
+
+                                <div style="display: flex">
+                                    <div class="touicon">右袖长</div>
+                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                </div>
+                            </a-space>
+                        </div>
+                        <div style="margin-top: 20px">
+                            <a-space>
+                                <div style="display: flex">
+                                    <div class="touicon">袖肥</div>
+                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                </div>
+
+                                <div style="display: flex">
+                                    <div class="touicon">袖扣</div>
+                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                </div>
+                            </a-space>
+                        </div>
+                    </div>
+                </a-form-item>
+                <a-form-item label="净体尺寸">
+                    <div>
                         <a-space>
                             <div style="display: flex">
-                                <div class="touicon">下摆</div>
+                                <div class="touicon">身高</div>
                                 <a-input size="large" suffix="cm" class="inputkuang" />
                             </div>
 
                             <div style="display: flex">
-                                <div class="touicon">肩宽</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <div class="touicon">体重</div>
+                                <a-input size="large" suffix="kg" class="inputkuang" />
                             </div>
                             <div style="display: flex">
-                                <div class="touicon">左袖长</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <div class="touicon">年龄</div>
+                                <a-input size="large" placeholder="请填写客户年龄" class="inputkuang" />
                             </div>
                             <div style="display: flex">
-                                <div class="touicon">右袖长</div>
+                                <div class="touicon">胸宽</div>
                                 <a-input size="large" suffix="cm" class="inputkuang" />
                             </div>
                         </a-space>
@@ -73,20 +93,7 @@
                     <div style="margin-top: 20px">
                         <a-space>
                             <div style="display: flex">
-                                <div class="touicon">袖肥</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
-                            </div>
-
-                            <div style="display: flex">
-                                <div class="touicon">袖扣</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
-                            </div>
-                            <div style="display: flex">
                                 <div class="touicon">背宽</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
-                            </div>
-                            <div style="display: flex">
-                                <div class="touicon">胸宽</div>
                                 <a-input size="large" suffix="cm" class="inputkuang" />
                             </div>
                         </a-space>
@@ -199,6 +206,20 @@
                         </div>
                     </div>
                 </a-form-item>
+                <a-form-item label="备注">
+                    <textarea rows="5" cols="76"></textarea>
+                </a-form-item>
+                    <div style="margin-left:102px">
+                        <el-upload
+                            class="avatar-uploader"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                        >
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </div>
             </a-form>
         </div>
         <div style="height: 90px"></div>
@@ -223,14 +244,19 @@ export default {
             flag: false,
             formLayout: 'horizontal',
             form: this.$form.createForm(this, { name: 'coordinated' }),
-            visible: false
+            visible: false,
+            textarea: '',
+            imageUrl: ''
         };
     },
     created() {},
     mounted() {},
     methods: {
+        handleAvatarSuccess(res, file) {
+            this.imageUrl = URL.createObjectURL(file.raw);
+        },
         childClick() {
-            this.$emit('childByValue', "show");
+            this.$emit('childByValue', 'show');
         },
         changeStyle() {
             this.flag = !this.flag;
@@ -290,7 +316,31 @@ export default {
     }
 };
 </script>
-
+<style>
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-color: #409eff;
+}
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}
+</style>
 <style scoped>
 .tixingdata {
     display: flex;

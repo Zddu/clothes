@@ -1,37 +1,42 @@
 <template>
-    <div class="main-container">
-        <div>
-            <a-row>
-                <a-col :span="4">
-                    <div class="line">
-                        <ul class="left-menu">
-                            <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">面料</li>
-                            <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">西服里</li>
-                            <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">马甲里</li>
-                            <li :class="{ active: xuanze == 4 }" @click="xuanze = 4">底领</li>
-                            <li :class="{ active: xuanze == 5 }" @click="xuanze = 5">纽扣</li>
-                        </ul>
-                    </div>
-                </a-col>
-                <a-col :span="20">
-                    <div class="content">
-                        <FabricPage v-show="xuanze == 1" />
-                        <SuitPage v-show="xuanze == 2" />
-                        <VestPage v-show="xuanze == 3" />
-                        <BottomCollarPage v-show="xuanze == 4" />
-                        <ButtonPage v-show="xuanze == 5" />
-                    </div>
-                </a-col>
-            </a-row>
+    <div>
+        <div class="main-container">
+            <div>
+                <a-row>
+                    <a-col :span="4">
+                        <div class="line">
+                            <ul class="left-menu">
+                                <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">面料</li>
+                                <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">西服里</li>
+                                <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">马甲里</li>
+                                <li :class="{ active: xuanze == 4 }" @click="xuanze = 4">底领</li>
+                                <li :class="{ active: xuanze == 5 }" @click="xuanze = 5">纽扣</li>
+                            </ul>
+                        </div>
+                    </a-col>
+                    <a-col :span="20">
+                        <div class="content">
+                            <FabricPage v-if="xuanze == 1" />
+                            <SuitPage v-if="xuanze == 2" />
+                            <VestPage v-if="xuanze == 3" />
+                            <BottomCollarPage v-if="xuanze == 4" />
+                            <ButtonPage v-if="xuanze == 5" />
+                        </div>
+                    </a-col>
+                </a-row>
+            </div>
+            <transition>
+                <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
+                    <li @click="childClick">产品列表</li>
+                    <li>保存模版</li>
+                    <li>重建订单</li>
+                </ul>
+            </transition>
+            <div @click="changeStyle" class="spot-style">
+                <img :src="bottomImg" alt="" />
+            </div>
         </div>
-        <transition>
-            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                <li @click="childClick">产品列表</li>
-                <li>保存模版</li>
-                <li>重建订单</li>
-            </ul>
-        </transition>
-        <div @click="changeStyle" class="spot-style"><img :src="bottomImg" alt="" /></div>
+        
     </div>
 </template>
 

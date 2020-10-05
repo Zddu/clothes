@@ -172,3 +172,38 @@ export const queryTemplateInfoByuserId = (data) => {
         params: data
     });
 };
+// 个订面料与辅料界面获取面料信息
+export const querySingleFabricList = (data) => {
+    return request({
+        url: '/fabricAndOther/getSingleFabricList',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 删除我的产品
+export const deleteProduct = (data) => {
+    return request({
+        url: 'logic/interface/delete_product',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 根据用户id和type查询编辑中的订单或者模板
+export const queryOrderlistBytype = (data) => {
+    return request({
+        url: 'logic/interface/query_orderlistBytype',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 复制订单列表
+export const queryMyorderlist = (data) => {
+    return request({
+        url: 'logic/interface/query_myorderlist',
+        method: 'POST',
+        params: data
+    });
+};

@@ -56,10 +56,10 @@
             <div>
                 <a-space>
                     <div class="lian"></div>
-                    <div class="zhuangse">撞色选择</div>
+                    <div class="zhuangse">已保存产品列表</div>
                 </a-space>
             </div>
-            <div v-for="(item, index) in queryList" :key="index">
+            <div v-for="(item, index) in queryList" :key="index" style="margin-top: 20px">
                 <a-space>
                     <div class="kuang">
                         <img :src="item.templateImg" alt="" width="104px" height="104px" />
@@ -75,7 +75,7 @@
                         </a-space>
                         <a-space>
                             <div class="kuang2" style="margin: 3px 0">折前价格</div>
-                            <div class="contne1">{{ item.zheQianPrice }} </div>
+                            <div class="contne1">{{ item.zheQianPrice }}</div>
                         </a-space>
                         <a-space>
                             <div class="kuang2">折后价格</div>
@@ -83,6 +83,13 @@
                         </a-space>
                     </div>
                 </a-space>
+                <div>
+                    <a-space>
+                        <div class="edit">编辑</div>
+                        <!-- <el-button size="medium" class="edit">编辑</el-button> -->
+                        <div class="delete1" @click="deleteshan(index)">删除</div>
+                    </a-space>
+                </div>
             </div>
         </a-drawer>
     </div>
@@ -95,7 +102,7 @@ import order7 from './order7';
 import fzlb from './fzlb';
 import xzxz1 from './xzxz1';
 import ltxx from './ltxx';
-import { queryModule, queryTemplateInfoByuserId } from './../../api/ml';
+import { queryModule, queryTemplateInfoByuserId, deleteProduct } from './../../api/ml';
 export default {
     data() {
         return {
@@ -121,6 +128,23 @@ export default {
         this.queerList();
     },
     methods: {
+        deleteshan(index) {
+            deleteProduct({
+                token: this.$store.getters.getToken,
+                order_sn: this.queryList[index].orderSn
+            }).then((res) => {
+                console.log(res);
+                if (res.code == '0') {
+                    this.$message({
+                        message: res.msg,
+                        type: 'success'
+                    });
+                    this.queerList()
+                } else {
+                    this.$message.error(res.msg);
+                }
+            });
+        },
         queerList() {
             queryTemplateInfoByuserId({
                 token: this.$store.getters.getToken,
@@ -129,7 +153,7 @@ export default {
                 console.log(res, '123');
                 this.queryList = res.data.records;
                 this.$set(this.queryList);
-                console.log(this.queryList)
+                console.log(this.queryList);
             });
         },
         showMsg() {
@@ -161,6 +185,30 @@ export default {
 </script>
 
 <style scoped>
+.delete1 {
+    width: 74px;
+    height: 48px;
+    background: #dddddd;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: gray;
+    text-align: center;
+    line-height: 48px;
+}
+.edit {
+    width: 74px;
+    height: 48px;
+    background: #303030;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: #ffe56d;
+    text-align: center;
+    line-height: 48px;
+}
 .contne1 {
     font-size: 16px;
     font-family: PingFangSC-Medium, PingFang SC;

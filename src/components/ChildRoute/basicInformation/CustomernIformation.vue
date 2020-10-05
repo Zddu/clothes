@@ -1,15 +1,22 @@
 <template>
     <div class="content">
-        <el-form label-width="80px" :rules="rules">
-            <el-form-item label="客户姓名" prop="name" >
-                <el-input v-model="username" size="large" style="width: 337px"></el-input>
+        <el-form label-width="80px" :model="ruleForm" :rules="rules" ref="ruleForm">
+            <el-form-item label="客户姓名" prop="username">
+                <el-input v-model="ruleForm.username" size="large" style="width: 337px"></el-input>
             </el-form-item>
             <el-form-item label="客户编号">
                 <el-input v-model="usercode" size="large" style="width: 337px"></el-input>
             </el-form-item>
             <el-form-item label="客户性别">
                 <a-space>
-                    <div  :class="{box:index == usersex,box1:index != usersex}"  v-for="(item,index) in sex" :key="index">{{item.sex}}</div>
+                    <div
+                        :class="{ box: index == usersex, box1: index != usersex }"
+                        v-for="(item, index) in sex"
+                        :key="index"
+                        @click="xuanzhong(index)"
+                    >
+                        {{ item.sex }}
+                    </div>
                 </a-space>
             </el-form-item>
         </el-form>
@@ -20,24 +27,29 @@
 export default {
     data() {
         return {
+            ruleForm: {
+                username: ""
+            },
             form: this.$form.createForm(this, { name: 'coordinated' }),
             flag: false,
             bottomImg: require('../../../assets/cut1/icon88.png'),
-            username: '',
             usercode: '',
             rules: {
-                name: [{ required: true, message: '请输入客户姓名', trigger: 'blur' }]
+                username: [{ required: true, message: '请输入客户姓名', trigger: 'blur' }]
             },
-            sex: [
-                {sex: "男性"},
-                {sex: "女性"}
-            ],
-            usersex: "ddsfg"
+            sex: [{ sex: '男性' }, { sex: '女性' }],
+            usersex: 'ddsfg'
         };
     },
     created() {},
     mounted() {},
     methods: {
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
+        xuanzhong(index) {
+            this.usersex = index;
+        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');
