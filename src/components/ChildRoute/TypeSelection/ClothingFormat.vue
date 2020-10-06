@@ -13,7 +13,7 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-
+        
     </div>
 </template>
 

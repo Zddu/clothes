@@ -34,7 +34,6 @@
                 <img :src="bottomImg" alt="" />
             </div>
         </div>
-
     </div>
 </template>
 

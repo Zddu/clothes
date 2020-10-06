@@ -38,7 +38,7 @@
                 <div>
                     <a-space>
                         <div class="lian"></div>
-                        <div class="zhuangse">撞色选择</div>
+                        <div class="zhuangse">已保存产品列表</div>
                     </a-space>
                 </div>
 

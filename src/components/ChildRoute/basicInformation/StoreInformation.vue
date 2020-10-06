@@ -118,10 +118,9 @@ export default {
             rules: {
                 name2: [{ required: true, message: '', trigger: 'blur' }],
                 name: [
-                    { required: true, message: '请输入活动名称', trigger: 'blur' },
-                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                    { required: true, message: '请输入活动名称', trigger: 'blur' }
                 ],
-                name3: [{ required: true, message: '请填写收货地址', trigger: 'blur' }]
+                name3: [{ required: false, message: '请填写收货地址', trigger: 'blur' }]
             }
         };
     },
@@ -141,7 +140,7 @@ export default {
                 this.kuaixuan = index;
             } else if (val == 5) {
                 this.dizhixuan = index;
-                if (index == 2) {
+                if (index == 1) {
                     this.shouhuodizhi = '';
                 }
             }

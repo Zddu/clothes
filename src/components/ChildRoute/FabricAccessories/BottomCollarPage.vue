@@ -11,7 +11,7 @@
             </el-form>
 
             <div class="type-main">
-                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2"
+                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2"  :key="index"
                         @click="choiceStyle(index)">
                     <img :class="item.fabricImg?'':imgStyle" :src="item.fabricImg" alt=""/>
                     <p :class="styleNum===index?fontStyle:fontStyle1">{{item.fabricCode}}</p>
@@ -226,19 +226,19 @@
         height: 140px;
     }
 
-    .left-menu li {
-        line-height: 59px;
-        padding: 0 20px 0px 0px;
-        cursor: pointer;
-    }
+.left-menu li {
+    line-height: 59px;
+    padding: 0 20px 0px 0px;
+    cursor: pointer;
+}
 
-    .left-menu li {
-        cursor: pointer;
-        font-size: 16px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #303030;
-    }
+.left-menu li {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #303030;
+}
 
     .left-menu li > button span {
         font-size: 20px;

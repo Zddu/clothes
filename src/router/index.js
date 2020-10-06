@@ -26,6 +26,10 @@ export default new Router({
                 {
                     path: "/OrderDetails",
                     component: () => import('./../components/page/OrderDetails.vue')
+                },
+                {
+                    path: "/copy",
+                    component: () => import('./../components/page/copy.vue')
                 }
             ]
         },

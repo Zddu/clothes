@@ -17,10 +17,9 @@
             <a-form-item label="绣字位置">
                 <a-select
                     size="large"
-                    v-decorator="['gender1', { rules: [{ required: true, message: '请选择绣字位置' }] }]"
                     placeholder="请选择绣字位置"
                     style="width: 337px"
-                    @change="handleSelectChange1"
+                    @change="handleSelectChange2"
                 >
                     <a-select-option :value="item.embroideredHeight" v-for="(item, index) in xiuziweizhi" :key="index">{{
                         item.xiuziLocaltion
@@ -45,7 +44,7 @@
                         @click="sizexuan(index)"
                     >
                         <img :src="item.embroideredImage" alt class="imgs" />
-                        <div class="kuang">{{ item.embroideredName }}</div>
+                        <div :class="{ kuang: index == zixuan, kuang1: index != zixuan }">{{ item.embroideredName }}</div>
                     </div>
                     <div style="width: 156px"></div>
                     <div style="width: 156px"></div>
@@ -64,7 +63,7 @@
                         @click="colorxuan1(index)"
                     >
                         <img :src="item.colorImg" alt class="imgs" />
-                        <div class="kuang1">{{ item.colorName }}</div>
+                        <div :class="{ kuang: index == colorxuan, kuang1: index != colorxuan }">{{ item.colorName }}</div>
                     </div>
                     <div style="width: 156px"></div>
                     <div style="width: 156px"></div>
@@ -183,6 +182,9 @@ export default {
             });
         },
         handleSelectChange1(value) {
+            console.log(value);
+        },
+        handleSelectChange2(value) {
             console.log(value);
         }
     }
