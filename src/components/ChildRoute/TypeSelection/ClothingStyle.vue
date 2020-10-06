@@ -72,6 +72,7 @@
             xuanzhong(item,index) {
                 this.colorxuan = index
                 window.sessionStorage.setItem("colorxuan3",index)
+                window.sessionStorage.setItem("leftType3",item.categoryName)
                 this.$store.commit('ClothingStyle', this.templateData[index].id);
                 this.$emit('child-event3',item.categoryName)
             },
@@ -85,6 +86,7 @@
                     if (!window.sessionStorage.getItem("colorxuan3")) {
                         this.colorxuan = 0
                         this.$store.commit('ClothingStyle', this.templateData[0].id);
+                        window.sessionStorage.setItem("leftType3",this.templateData[0].categoryName)
                         this.$emit('child-event3',this.templateData[0].categoryName)
                     }else {
                         let index = Number.parseInt(window.sessionStorage.getItem('colorxuan3'))
