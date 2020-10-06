@@ -7,8 +7,7 @@
                         <div class="line">
                             <ul class="left-menu">
                                 <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">面料</li>
-                                <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">西服里</li>
-                                <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">马甲里</li>
+                                <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">里布</li>
                                 <li :class="{ active: xuanze == 4 }" @click="xuanze = 4">底领</li>
                                 <li :class="{ active: xuanze == 5 }" @click="xuanze = 5">纽扣</li>
                             </ul>
@@ -18,7 +17,6 @@
                         <div class="content">
                             <FabricPage v-if="xuanze == 1" />
                             <SuitPage v-if="xuanze == 2" />
-                            <VestPage v-if="xuanze == 3" />
                             <BottomCollarPage v-if="xuanze == 4" />
                             <ButtonPage v-if="xuanze == 5" />
                         </div>
@@ -36,7 +34,6 @@
                 <img :src="bottomImg" alt="" />
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -106,33 +103,6 @@ export default {
                 this.moduleData = res.data;
             });
         },
-        steptitle(index) {
-            if (index == 1) {
-                this.$router.push({
-                    path: '/jbxx1'
-                });
-            } else if (index == 2) {
-                this.$router.push({
-                    path: '/plbx1'
-                });
-            } else if (index == 3) {
-                this.$router.push({
-                    path: '/order7'
-                });
-            } else if (index == 4) {
-                this.$router.push({
-                    path: '/fzlb'
-                });
-            } else if (index == 5) {
-                this.$router.push({
-                    path: '/xzxz1'
-                });
-            } else if (index == 6) {
-                this.$router.push({
-                    path: '/ltxx'
-                });
-            }
-        },
         changeStyle() {
             this.flag = !this.flag;
             let div = document.getElementById('footer_choice');
@@ -141,7 +111,6 @@ export default {
         searchCode() {
             alert(1);
         },
-
         onChange() {}
     }
 };
@@ -281,7 +250,7 @@ export default {
 .main-container {
     margin-top: 20px;
     width: 1257px;
-    min-height: 900px;
+    min-height: 500px;
     background: #ffffff;
     position: relative;
 }

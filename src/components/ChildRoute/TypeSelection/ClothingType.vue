@@ -13,6 +13,7 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
+<<<<<<< HEAD
         <!-- <transition>
             <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
                 <li>
@@ -36,6 +37,8 @@
         <div @click="changeStyle" class="spot-style">
             <img :src="bottomImg" alt="" />
         </div> -->
+=======
+>>>>>>> 33917608320a106b85ac7ea4598b56f756a3e92e
     </div>
 </template>
 
@@ -48,7 +51,7 @@ export default {
             template: {
                 template_id: '1'
             },
-            colorxuan: '12312312',
+            colorxuan: undefined,
             //每个目录数据
             templateData: [],
             flag: true,
@@ -73,7 +76,7 @@ export default {
     methods: {
         xuanzhong(item,index) {
             this.colorxuan = index
-            console.log(this.templateData[index])
+            window.sessionStorage.setItem("colorxuan1",index)
             this.$store.commit('ClothingType', this.templateData[index].id);
             this.$emit('child-event',item.categoryName)
         },
@@ -84,6 +87,17 @@ export default {
             }).then((res) => {
                 console.log(res, '123123');
                 this.templateData = res.data;
+                if (!window.sessionStorage.getItem("colorxuan1")) {
+                    this.colorxuan = 0
+                    this.$store.commit('ClothingType', this.templateData[0].id);
+                    this.$emit('child-event',this.templateData[0].categoryName)
+                }else {
+                    console.log(window.sessionStorage.getItem('colorxuan1'));
+                    let index = Number.parseInt(window.sessionStorage.getItem('colorxuan1'))
+                    this.$store.commit('ClothingType', this.templateData[index].id);
+                    this.$emit('child-event',this.templateData[index].categoryName)
+                    this.colorxuan = window.sessionStorage.getItem("colorxuan1")
+                }
                 this.$set(this.templateData);
             });
         },
@@ -222,7 +236,7 @@ export default {
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #303030;
-        width: 63px;
+        min-width: 63px;
         height: 27px;
         background: #ffec70;
         border-radius: 3px;
@@ -236,9 +250,8 @@ export default {
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #303030;
-        width: 63px;
+        min-width: 63px;
         height: 27px;
-
         background: #EAEAEA;
         border-radius: 3px;
         text-align: center;

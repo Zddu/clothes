@@ -69,6 +69,7 @@
         methods: {
             xuanzhong(item,index) {
                 this.colorxuan = index
+                window.sessionStorage.setItem("colorxuan4",index)
                 this.$store.commit('ClothingFormat', this.templateData[index].id);
                 this.$emit('child-event4',item.categoryName)
             },
@@ -80,6 +81,16 @@
                 }).then((res) => {
                     console.log(res, 'ClothingFormat');
                     this.templateData = res.data;
+                    if (!window.sessionStorage.getItem("colorxuan4")){
+                        this.colorxuan = 0
+                        this.$store.commit('ClothingFormat', this.templateData[0].id);
+                        this.$emit('child-event4',this.templateData[0].categoryName)
+                    } else {
+                        let index = Number.parseInt(window.sessionStorage.getItem('colorxuan4'))
+                        this.$store.commit('ClothingFormat', this.templateData[index].id);
+                        this.$emit('child-event4',this.templateData[index].categoryName)
+                        this.colorxuan = window.sessionStorage.getItem("colorxuan4")
+                    }
                     this.$set(this.templateData);
                 });
             },
@@ -241,7 +252,7 @@
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #303030;
-        width: 63px;
+        min-width: 63px;
         height: 27px;
         background: #ffec70;
         border-radius: 3px;
@@ -255,9 +266,8 @@
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         color: #303030;
-        width: 63px;
+        min-width: 63px;
         height: 27px;
-
         background: #EAEAEA;
         border-radius: 3px;
         text-align: center;

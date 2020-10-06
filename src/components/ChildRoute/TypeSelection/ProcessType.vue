@@ -72,6 +72,7 @@
         methods: {
             xuanzhong(index) {
                 this.colorxuan = index
+                window.sessionStorage.setItem("colorxuan5",index)
                 this.$store.commit('ProcessType', this.templateData[index].id);
             },
             getCategoryinfo() {
@@ -81,6 +82,14 @@
                 }).then((res) => {
                     console.log(res, 'ProcessType');
                     this.templateData = res.data;
+                    if (!window.sessionStorage.getItem("colorxuan5")) {
+                        this.colorxuan = 0
+                        this.$store.commit('ProcessType', this.templateData[0].id);
+                    }else {
+                        let index = Number.parseInt(window.sessionStorage.getItem('colorxuan5'))
+                        this.$store.commit('ProcessType', this.templateData[index].id);
+                        this.colorxuan = this.colorxuan = window.sessionStorage.getItem("colorxuan5")
+                    }
                     this.$set(this.templateData);
                 });
             },

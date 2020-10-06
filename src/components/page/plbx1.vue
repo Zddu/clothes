@@ -167,7 +167,6 @@ export default {
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #303030;
-    width: 63px;
     height: 27px;
     background: #ffec70;
     border-radius: 3px;
@@ -275,7 +274,7 @@ export default {
 
 .left-menu li {
     line-height: 59px;
-    padding: 0 20px 0px 0px;
+    padding: 0 14px 0px 0px;
 }
 
 .bottom-menu li > button span {

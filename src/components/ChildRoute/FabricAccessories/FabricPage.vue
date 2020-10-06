@@ -1,153 +1,107 @@
 <template>
     <div>
         <div class="content">
-            <a-form-model :layout="formModel.layout" :model="formModel" v-bind="formItemLayout">
-                <a-form-model-item label="面料号查询">
-                    <a-input @keyup.enter="searchCode" v-model="formModel.orderId" placeholder="请输入面料号"/>
-                </a-form-model-item>
-            </a-form-model>
-            <a-form-model :layout="formModelType.layout" :model="formModelType" v-bind="formItemLayoutType">
-                <a-form-model-item label="面料类型">
-                    <a-checkbox-group v-model="formModelType.type">
-                        <a-checkbox value="1" name="type1"> 全部类型</a-checkbox>
-                        <a-checkbox value="2" name="type2"> 素色</a-checkbox>
-                        <a-checkbox value="3" name="type3"> 格子</a-checkbox>
-                        <a-checkbox value="4" name="type4"> 条纹</a-checkbox>
-                    </a-checkbox-group>
-                </a-form-model-item>
-                <a-form-model-item label="面料系列">
-                    <a-checkbox-group v-model="formModelType.series">
-                        <a-checkbox style="margin: 0" value="1" name="type1"> 全部类型</a-checkbox>
-                        <a-checkbox style="margin: 0" value="2" name="type2"> 黑色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="3" name="type3"> 蓝色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="4" name="type4"> 蓝色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="5" name="type5"> 蓝色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="6" name="type6"> 蓝色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="7" name="type7"> 蓝色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="8" name="type8"> 蓝色系列</a-checkbox>
-                        <a-checkbox style="margin: 0" value="9" name="type9"> 蓝色系列</a-checkbox>
-                    </a-checkbox-group>
-                </a-form-model-item>
-            </a-form-model>
+            <el-form ref="form" label-width="90px">
+                <el-form-item label="面料号查找">
+                    <el-input suffix-icon="el-icon-search"
+                              @keyup.enter.native="searchCode"
+                              placeholder="请输入面料号"
+                              style="width: 40%" v-model="mlCode"></el-input>
+                </el-form-item>
+            </el-form>
+
             <div class="type-main">
-                <a-card :class="styleNum===1?style1:style2" @click="choiceStyle(1)">
-                    <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                    <p :class="styleNum===1?fontStyle:fontStyle1">LV0034</p>
-                </a-card>
-                <a-card :class="styleNum===2?style1:style2" @click="choiceStyle(2)">
-                    <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                    <p :class="styleNum===2?fontStyle:fontStyle1">LV0034</p>
-                </a-card>
-                <a-card :class="styleNum===3?style1:style2" @click="choiceStyle(3)">
-                    <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                    <p :class="styleNum===3?fontStyle:fontStyle1">LV0034</p>
+                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2"
+                        @click="choiceStyle(index)">
+                    <img :class="item.fabricImg?'':imgStyle" :src="item.fabricImg" alt=""/>
+                    <p :class="styleNum===index?fontStyle:fontStyle1">{{item.fabricCode}}</p>
+                    <p style="font-size: 13px;text-align: center">当前库存：{{item.inventory}}</p>
                 </a-card>
             </div>
         </div>
+
+        <el-dialog
+                title="面料购买"
+                :visible.sync="dialogVisible"
+                width="35%"
+                >
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="面料编号" prop="fabricCode">
+                    <el-input disabled  v-model="ruleForm.fabricCode"></el-input>
+                </el-form-item>
+                <el-form-item label="当前库存" prop="inventory">
+                    <el-input disabled  v-model="ruleForm.inventory"></el-input>
+                </el-form-item>
+                <el-form-item label="购买米数" prop="fabricUnit">
+                    <el-input placeholder="请填写购买米数" v-model="ruleForm.fabricUnit"></el-input>
+                </el-form-item>
+            </el-form>
+            <div style="width: 100%;margin-left: 100px;font-size: 13px;margin-bottom: 15px;">
+                <span>详情参照表</span> <span style="color: #e6a23c;cursor: pointer">《单耗对照表》</span>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button style="color:#000;background: #fff" @click="dialogVisible = false">取 消</el-button>
+                <el-button style="color:#fff;background: #68666b" type="primary" @click="handleSave">保 存</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
 <script>
-    import {querySingleFabricList} from '@/api/ml'
+    import { querySingleFabricList } from '@/api/ml';
+
     export default {
         name: 'FabricPage',
         data() {
             return {
-                fontStyle:'type-font-style',
-                fontStyle1:'type-font-style1',
-                styleNum:'',
-                imgStyle:'imgStyle',
-                style1:'card-style',
-                style2:'card-style1',
+                ruleForm:{},
 
+                dialogVisible:false,
+                fontStyle: 'type-font-style',
+                fontStyle1: 'type-font-style1',
+                styleNum: '',
+                imgStyle: 'imgStyle',
+                style1: 'card-style',
+                style2: 'card-style1',
+
+                //面料号
+                mlCode: '',
                 //面料数据
-                singleFabricList:[],
+                singleFabricList: [],
                 xuanze: 1,
                 flag: false,
                 flagV: true,
-                formModel: {
-                    layout: 'horizontal',
-                    orderId: ''
-                },
-                formModelType: {
-                    layout: 'horizontal',
-                    orderId: undefined,
-                    type: ['type1'],
-                    series: ['type1']
-                },
                 niukouImg: require('../../../assets/img/ml.jpg'),
-                token: this.$store.getters.getToken
+                token: this.$store.getters.getToken,
+                rules: {
+                    fabricUnit: [
+                        { required: true, message: '请填写购买米数', trigger: 'blur' },
+                    ],
+                }
             };
-        },
-        computed: {
-            formItemLayout() {
-                const { layout } = this.formModel;
-                return layout === 'horizontal'
-                    ? {
-                        labelCol: { span: 2 },
-                        wrapperCol: { span: 12 }
-                    }
-                    : {};
-            },
-            formItemLayoutType() {
-                const { layout } = this.formModelType;
-                return layout === 'horizontal'
-                    ? {
-                        labelCol: { span: 2 },
-                        wrapperCol: { span: 22 }
-                    }
-                    : {};
-            }
         },
         created() {
         },
         mounted() {
-            this.getSingleFabricList()
+            this.getSingleFabricList();
         },
         methods: {
-            choiceStyle(val){
-                this.styleNum = val
+            handleSave(){
+              this.dialogVisible = false;
+            },
+            choiceStyle(val) {
+                this.styleNum = val;
+                this.dialogVisible = true
+                this.ruleForm = this.singleFabricList[val]
             },
 
-            getSingleFabricList(){
+            getSingleFabricList() {
                 querySingleFabricList(
-                    {token: this.token, typeId:0}
-                ).then(res=>{
+                    { token: this.token, typeId: 0 }
+                ).then(res => {
                     console.log(res);
-                    this.singleFabricList = res.data
-                })
-            },
-            steptitle(index) {
-                if (index == 1) {
-                    this.$router.push({
-                        path: '/jbxx1/1'
-                    });
-                } else if (index == 2) {
-                    this.$router.push({
-                        path: '/plbx1/2'
-                    });
-                } else if (index == 3) {
-                    this.$router.push({
-                        path: '/order7/3'
-                    });
-                } else if (index == 4) {
-                    this.$router.push({
-                        path: '/fzlb/4'
-                    });
-                } else if (index == 5) {
-                    this.$router.push({
-                        path: '/xzxz1/5'
-                    });
-                } else if (index == 6) {
-                    this.$router.push({
-                        path: '/ltxx/6'
-                    });
-                }
-            },
-            changeStyle() {
-                this.flag = !this.flag;
-                let div = document.getElementById('footer_choice');
-                div.style.width = 0 + 'px';
+                    this.singleFabricList = res.data;
+                });
             },
             searchCode() {
                 alert(1);
@@ -170,19 +124,22 @@
         margin-right: 14px;
         margin-bottom: 14px;
     }
+
     .card-style1 {
         width: 156px;
         height: 197px;
         background: #ffffff;
         border-radius: 3px;
-        border: 1px solid #6f6a70;
+        border: 1px solid #b9b4ba;
         margin-right: 14px;
         margin-bottom: 14px;
     }
+
     .imgStyle {
-        height: 128px;
+        height: 124px;
         margin-bottom: 10px;
     }
+
     .haha {
         width: 156px;
         height: 197px;
@@ -253,30 +210,34 @@
     }
 
     .type-font-style {
-        width: 110px;
         background: #f9d532;
+        position: absolute;
         border-radius: 3px;
         font-size: 14px;
         font-family: PingFangSC-Light, PingFang SC;
         font-weight: 300;
         color: #303030;
         text-align: center;
-        margin-top: 15px;
+        top: 0;
+        right: 0;
     }
-    .type-font-style1{
-        width: 110px;
-        background: white;
+
+    .type-font-style1 {
+        background: #ded9d9;
+        position: absolute;
         border-radius: 3px;
         font-size: 14px;
         font-family: PingFangSC-Light, PingFang SC;
         font-weight: 300;
         color: #303030;
         text-align: center;
-        margin-top: 15px;
+        top: 0;
+        right: 0;
     }
 
     .content .type-main img {
         width: 110px;
+        height: 140px;
     }
 
     .left-menu li {

@@ -1,37 +1,14 @@
 <template>
     <div>
         <div class="head-type">
-            <span class="type-font">纽扣类型</span>
-            <a-checkbox style="margin-left: 15px" @change="onChange"> 牛角扣</a-checkbox>
-            <a-checkbox style="margin-left: 15px" @change="onChange"> 真贝扣</a-checkbox>
-            <a-checkbox style="margin-left: 15px" @change="onChange"> 金属扣</a-checkbox>
+            <span style="margin-right: 15px;">纽扣类型</span>
+            <el-radio :key="item.id" v-for="(item,index) in buttonList" @change="onChange(item.id)" v-model="choiced" :label="item.id">{{item.categoryName}}</el-radio>
         </div>
         <div class="type-main">
-            <a-card :class="styleNum===1?style1:style2" @click="choiceStyle(1)">
-                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                <p :class="styleNum===1?fontStyle:fontStyle1">LV0034</p>
+            <a-card :key="index" v-for="(item,index) in buttonDataList" :class="styleNum===item.id?style1:style2" @click="choiceStyle(item.id)">
+                <img :class="imgStyle" :src="selectImg?item.img:item.img2" alt=""/>
+                <p :class="styleNum===item.id?fontStyle:fontStyle1">{{item.categoryName}}</p>
             </a-card>
-            <a-card :class="styleNum===2?style1:style2" @click="choiceStyle(2)">
-                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                <p :class="styleNum===2?fontStyle:fontStyle1">LV0034</p>
-            </a-card>
-            <a-card :class="styleNum===3?style1:style2" @click="choiceStyle(3)">
-                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                <p :class="styleNum===3?fontStyle:fontStyle1">LV0034</p>
-            </a-card>
-            <a-card :class="styleNum===4?style1:style2" @click="choiceStyle(4)">
-                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                <p :class="styleNum===4?fontStyle:fontStyle1">LV0034</p>
-            </a-card>
-            <a-card :class="styleNum===5?style1:style2" @click="choiceStyle(5)">
-                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                <p :class="styleNum===5?fontStyle:fontStyle1">LV0034</p>
-            </a-card>
-            <a-card :class="styleNum===6?style1:style2" @click="choiceStyle(6)">
-                <img :class="niukouImg?'':imgStyle" :src="niukouImg" alt=""/>
-                <p :class="styleNum===6?fontStyle:fontStyle1">LV0034</p>
-            </a-card>
-
         </div>
     </div>
 </template>
@@ -42,6 +19,11 @@
         name: 'ButtonPage',
         data() {
             return {
+                selectImg:false,
+                choiced:'',
+                buttonList:[],
+                buttonDataList:[],
+
                 fontStyle:'type-font-style',
                 fontStyle1:'type-font-style1',
                 styleNum:'',
@@ -56,33 +38,29 @@
         },
         mounted() {
             this.getbutton();
-            this.getButtonList();
         },
         methods: {
             getbutton() {
                 getButtonSelect({
-                    moudleId: '5'
+                    moudleId: '16'
                 }).then(res => {
-                    console.log(res);
+                    this.buttonList = res.data;
+                    this.choiced = this.buttonList[0].id;
+                    this.onChange(this.choiced);
                 });
             },
-            getButtonList(){
-                getButtons(
-                    {moudleId:'5',buttonTypeId:'2'}
-                ).then(res=>{
-                    console.log(res);
-                })
-            },
             choiceStyle(val){
+                this.selectImg = true
                 this.styleNum = val
             },
-            changeStyle() {
-                this.flag = !this.flag;
-                let div = document.getElementById('footer_choice');
-                console.log(div);
-                div.style.width = 0 + 'px';
-            },
-            onChange() {
+            onChange(val) {
+                console.log("select:"+val);
+                getButtons(
+                    {moudleId:'16',buttonTypeId:val}
+                    ).then(res=>{
+                    this.buttonDataList = res.data
+                    console.log(this.buttonDataList);
+                })
             }
         }
     };
@@ -108,7 +86,7 @@
         height: 197px;
         background: #ffffff;
         border-radius: 3px;
-        border: 1px solid #6f6a70;
+        border: 1px solid #e4e1e4;
         margin-right: 14px;
         margin-bottom: 14px;
     }
@@ -154,7 +132,7 @@
     }
 
     .type-main .type-font-style {
-        width: 110px;
+        min-width: 110px;
         background: #f9d532;
         border-radius: 3px;
         font-size: 14px;
@@ -164,8 +142,8 @@
         text-align: center;
     }
     .type-font-style1{
-        width: 110px;
-        background: white;
+        min-width: 110px;
+        background: #dedede;
         border-radius: 3px;
         font-size: 14px;
         font-family: PingFangSC-Light, PingFang SC;
@@ -175,6 +153,7 @@
     }
     .type-main img {
         width: 110px;
+        min-height: 128px;
     }
 
     .left-menu li {
