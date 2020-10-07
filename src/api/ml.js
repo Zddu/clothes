@@ -30,7 +30,7 @@ export const getStoreList = (data) => {
     return request({
         url: '/logic/interface/query_allstore_companyId',
         method: 'POST',
-        params: data
+        data: data
     });
 };
 
@@ -39,7 +39,7 @@ export const queryDataBytype = (data) => {
     return request({
         url: '/logic/interface/query_dataBytype',
         method: 'POST',
-        params: data
+        data: data
     });
 };
 
@@ -160,7 +160,7 @@ export const queryLocaltion = (data) => {
     return request({
         url: 'logic/interface/query_localtion',
         method: 'POST',
-        params: data
+        data: data
     });
 };
 
@@ -203,6 +203,15 @@ export const queryOrderlistBytype = (data) => {
 export const queryMyorderlist = (data) => {
     return request({
         url: 'logic/interface/query_myorderlist',
+        method: 'POST',
+        params: data
+    });
+};
+
+// 根据查询模块id和类别id查询身体部位数据
+export const querySizeinfo = (data) => {
+    return request({
+        url: 'logic/interface/query_sizeinfo',
         method: 'POST',
         params: data
     });

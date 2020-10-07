@@ -21,8 +21,8 @@
                 </div>
                 <div class="button1" style="margin-top: 40px">驳宽</div>
                 <div class="paixu">
-                    <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
-                        <a-select-option :value="item.id" v-for="(item, index) in bokuan" :key="index">{{
+                    <a-select size="large" placeholder="请选择" v-model="bokuanni" style="width: 337px" @change="handleSelectChange">
+                        <a-select-option :value="item.categoryName" v-for="(item, index) in bokuan" :key="index">{{
                             item.categoryName
                         }}</a-select-option>
                     </a-select>
@@ -170,8 +170,8 @@
 
                 <div class="button1" style="margin-top: 40px">珠边宽度</div>
                 <div class="paixu">
-                    <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange">
-                        <a-select-option :value="item.id" v-for="(item, index) in zhukuan" :key="index">{{
+                    <a-select size="large" placeholder="请选择" style="width: 337px" @change="handleSelectChange1">
+                        <a-select-option :value="item.id" v-model="zhubianxiao" v-for="(item, index) in zhukuan" :key="index">{{
                             item.categoryName
                         }}</a-select-option>
                     </a-select>
@@ -183,11 +183,6 @@
                         <img :src="item.img" alt="" class="imgs" />
                         <div :class="{ yangshi: index == xuan9, yangshi1: index !=  xuan9}">{{item.categoryName}}</div>
                     </div>
-
-                    <!-- <div class="kuang2">
-                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                        <div class="yangshi1">常规</div>
-                    </div> -->
 
                     <div style="width: 182px"></div>
                     <div style="width: 182px"></div>
@@ -236,6 +231,8 @@ export default {
     name: 'fzlb123',
     data() {
         return {
+            bokuanni: "",
+            zhubianxiao: "",
             flag: false,
             options: [
                 {
@@ -285,6 +282,8 @@ export default {
     created() {},
     mounted() {
         this.getdatakuan();
+        this.bokuanni = this.$store.getters.getksBokuan;
+        this.zhubianxiao = this.$store.getters.getksZhubianWidth;
     },
     methods: {
         dianji(val,index) {
@@ -322,7 +321,7 @@ export default {
                 console.log(res);
                 this.bokuan = res.data[0].categoryInfoList;
                 this.zhukuan = res.data[1].categoryInfoList;
-                console.log(this.bokuan, 'bokuan');
+                console.log(this.zhukuan, 'zhukuan');
                 this.$set(this.bokuan);
                 this.$set(this.zhukuan);
             });
@@ -370,8 +369,12 @@ export default {
             })
         },
         handleSelectChange(value) {
-            console.log(this.shoplist[value]);
-            this.shopname = this.shoplist[value].storeName;
+            console.log(value)
+            this.$store.commit('ksBokuan', value);
+        },
+        handleSelectChange1(value) {
+            console.log(value)
+            this.$store.commit('ksZhubianWidth', value);
         },
         changeStyle() {
             this.flag = !this.flag;

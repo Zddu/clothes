@@ -75,30 +75,35 @@
         },
         methods: {
             xuanzhong(item, index) {
-                console.log(item, index);
                 this.colorxuan = index;
                 window.sessionStorage.setItem('colorxuan2', index);
-                this.$store.commit('ClothingCategory', this.templateData[index].id);
+                window.sessionStorage.setItem("leftType2",item.categoryName)
+                this.$store.commit('ClothingCategory', item.id);
                 this.$emit('child-event2', item.categoryName);
             },
             getCategoryinfo() {
+                console.log("typeone",this.$store.getters.getClothingType);
                 queryCategoryinfo({
                     template_id: '2',
                     category_ids: this.$store.getters.getClothingType
                 }).then((res) => {
-                    this.templateData = res.data;
-                    if (!window.sessionStorage.getItem('colorxuan2')) {
-                        console.log(this.$store.getters.getClothingCategory);
-                        this.colorxuan = 0;
-                        this.$store.commit('ClothingCategory', this.templateData[0].id);
-                        this.$emit('child-event2', this.templateData[0].categoryName);
-                    } else {
-                        let index = Number.parseInt(window.sessionStorage.getItem('colorxuan2'));
-                        this.$store.commit('ClothingCategory', this.templateData[index].id);
-                        this.$emit('child-event2', this.templateData[index].categoryName);
-                        this.colorxuan = window.sessionStorage.getItem('colorxuan2');
-                    }
-                    this.$set(this.templateData);
+                    if (res) {
+                        this.templateData = res.data;
+                        console.log(res.data);
+                        if (!window.sessionStorage.getItem('colorxuan2')) {
+                            this.colorxuan = 0;
+                            this.$store.commit('ClothingCategory', this.templateData[0].id);
+                            window.sessionStorage.setItem("leftType2",this.templateData[0].categoryName)
+                            this.$emit('child-event2', this.templateData[0].categoryName);
+                        } else {
+                            let index = Number.parseInt(window.sessionStorage.getItem('colorxuan2'));
+                            this.colorxuan = index;
+                            console.log(this.templateData[index]);
+                            this.$store.commit('ClothingCategory', this.templateData[index].id);
+                            this.$emit('child-event2', this.templateData[index].categoryName);
+                        }
+                        this.$set(this.templateData);
+                    };
                 });
             },
             changeStyle() {

@@ -4,8 +4,8 @@
             <a-form-item label="绣字类型">
                 <a-select
                     size="large"
-                    v-decorator="['gender', { rules: [{ required: true, message: '请选择绣字类型' }] }]"
                     placeholder="请选择绣字类型"
+                    v-model="xiuzaileixing"
                     style="width: 337px"
                     @change="handleSelectChange"
                 >
@@ -18,10 +18,11 @@
                 <a-select
                     size="large"
                     placeholder="请选择绣字位置"
+                    v-model="xiuziweizhixiao"
                     style="width: 337px"
                     @change="handleSelectChange2"
                 >
-                    <a-select-option :value="item.embroideredHeight" v-for="(item, index) in xiuziweizhi" :key="index">{{
+                    <a-select-option :value="item.xiuziLocaltion" v-for="(item, index) in xiuziweizhi" :key="index">{{
                         item.xiuziLocaltion
                     }}</a-select-option>
                 </a-select>
@@ -74,12 +75,7 @@
             </a-form-item>
 
             <a-form-item label="绣字高度" v-show="tuxingchuan">
-                <a-select
-                    size="large"
-                    placeholder="请选择绣字位置"
-                    style="width: 337px"
-                    @change="handleSelectChange1"
-                >
+                <a-select size="large" placeholder="请选择绣字位置" v-model="xiuzigaodu" style="width: 337px" @change="handleSelectChange1">
                     <a-select-option :value="item.embroideredHeight" v-for="(item, index) in xiuziaddress" :key="index">{{
                         item.embroideredHeight
                     }}</a-select-option>
@@ -102,7 +98,7 @@
 </template>
 
 <script>
-import { AllembroiderFont, AllembroiderColor, getXiuziList ,queryLocaltion} from './../../../api/ml';
+import { AllembroiderFont, AllembroiderColor, getXiuziList, queryLocaltion } from './../../../api/ml';
 export default {
     name: 'xzxz1',
     data() {
@@ -118,29 +114,60 @@ export default {
             size22: '',
             zixuan: '100032',
             colorxuan: '281484',
-            imageUrl: "",
+            imageUrl: '',
             tuxingchuan: false,
-            xiuziweizhi: ""
+            xiuziweizhi: '',
+            xiuziweizhixiao: '',
+            xiuzaileixing: '',
+            xiuzigaodu: ''
         };
+    },
+    watch: {
+        size11(newVal, oldVal) {
+            this.$store.commit('xiuziOneNeirong', newVal);
+        },
+        size22(newVal, oldVal) {
+            this.$store.commit('xiuziTwoNeirong', newVal);
+        }
     },
     created() {},
     mounted() {
+        this.xiuzigaodu = this.$store.getters.getxiuziHeight;
+        this.size22 = this.$store.getters.getxiuziTwoNeirong;
+        this.size11 = this.$store.getters.getxiuziOneNeirong;
+        this.xiuzaileixing = this.$store.getters.getxiuziType;
+        if (this.xiuzaileixing == '图片') {
+            this.tuxingchuan = true;
+        } else {
+            this.tuxingchuan = false;
+        }
+        this.xiuziweizhixiao = this.$store.getters.getxiuziWeizhi;
         AllembroiderFont().then((res) => {
             console.log(res);
             this.fontsizelist = res.data;
             this.$set(this.fontsizelist);
+            for(let i= 0;i<=res.data.length;i++) {
+                if(this.$store.getters.getxiuziZiti == res.data[i].id) {
+                    this.zixuan = i
+                }
+            }
         });
         AllembroiderColor().then((res) => {
             console.log(res, '123213123123');
             this.colorlist = res.data;
             this.$set(this.colorlist);
+            for(let i= 0;i<=res.data.length;i++) {
+                if(this.$store.getters.getxiuziColor == res.data[i].id) {
+                    this.colorxuan = i
+                }
+            }
         });
         queryLocaltion({
-            category_ids: "54,56"
+            category_ids: '54,56'
         }).then((res) => {
-            console.log(res,">?>>>>");
-            this.xiuziweizhi = res.data
-            this.$set(this.xiuziweizhi)
+            console.log(res, '>?>>>>');
+            this.xiuziweizhi = res.data;
+            this.$set(this.xiuziweizhi);
         });
     },
     methods: {
@@ -149,9 +176,13 @@ export default {
         },
         colorxuan1(index) {
             this.colorxuan = index;
+            console.log(this.colorlist)
+            this.$store.commit('xiuziColor', this.colorlist[index].id);
         },
         sizexuan(index) {
             this.zixuan = index;
+            console.log(this.fontsizelist)
+            this.$store.commit('xiuziZiti', this.fontsizelist[index].id);
         },
         changeStyle() {
             this.flag = !this.flag;
@@ -168,10 +199,12 @@ export default {
         },
         handleSelectChange(value) {
             console.log(value);
-            if(value == "图片") {
-                this.tuxingchuan = true
+            this.$store.commit('xiuziType', value);
+            this.xiuzaileixing = value;
+            if (value == '图片') {
+                this.tuxingchuan = true;
             } else {
-                this.tuxingchuan = false
+                this.tuxingchuan = false;
             }
             getXiuziList({
                 xiuzitype: value
@@ -183,9 +216,15 @@ export default {
         },
         handleSelectChange1(value) {
             console.log(value);
+            this.$store.commit('xiuziHeight', value);
+            this.xiuzigaodu = value;
+            console.log(this.xiuziaddress)
+            this.$store.commit('xiuziPriceId', this.xiuziaddress[value].id);
         },
         handleSelectChange2(value) {
             console.log(value);
+            this.$store.commit('xiuziWeizhi', value);
+            this.xiuziweizhixiao = value;
         }
     }
 };

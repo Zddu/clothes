@@ -72,7 +72,7 @@
                 flag: false,
                 flagV: true,
                 niukouImg: require('../../../assets/img/ml.jpg'),
-                token: this.$store.getters.getToken,
+                token: window.sessionStorage.getItem("Token"),
                 rules: {
                     fabricCode: [
                         { required: true, message: '请输入面料编号', trigger: 'blur' },

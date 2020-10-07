@@ -110,7 +110,7 @@ export default {
                         this.$message.success(res.msg);
                         localStorage.setItem('ms_username', this.userName);
                         this.$store.commit('addToken', res.data.token);
-                        console.log(this.$store.state.token);
+                        window.sessionStorage.setItem("Token",res.data.token)
                         this.$router.push('/');
                     } else {
                         this.$message.error(res.msg);

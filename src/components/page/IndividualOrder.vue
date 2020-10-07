@@ -179,6 +179,7 @@ export default {
         },
         steptitle(index) {
             this.active = index;
+            console.log(this.$store.getters.getToken)
         }
     }
 };

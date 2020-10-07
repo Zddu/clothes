@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <div class="content">
-            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(index)">
+            <div :class="{ box: index == colorxuan, box1: index != colorxuan }" v-for="(item, index) in templateData" :key="index" @click="xuanzhong(item,index)">
                 <img :src="item.img" alt="" class="imgs" />
                 <div :class="{ size: index == colorxuan, size1: index != colorxuan }">
                     <a style="color: #303030">{{ item.categoryName }}</a>
@@ -13,29 +13,6 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-        <!-- <transition>
-            <ul v-if="flag" id="footer_choice" class="footer-choice bottom-menu">
-                <li>
-                    产品列表
-                    <a-badge
-                            :number-style="{
-                                color: '#F9D532FF',
-                                position: 'absolute',
-                                right: '8px',
-                                bottom: '0px'
-                            }"
-                            count="3"
-                    />
-                </li>
-                <li>重建订单</li>
-                <li>保存模版</li>
-                <li>特殊要求</li>
-                <li>提交信息</li>
-            </ul>
-        </transition>
-        <div @click="changeStyle" class="spot-style">
-            <img :src="bottomImg" alt="" />
-        </div> -->
     </div>
 </template>
 
@@ -70,10 +47,12 @@
             this.getCategoryinfo()
         },
         methods: {
-            xuanzhong(index) {
-                this.colorxuan = index
-                window.sessionStorage.setItem("colorxuan5",index)
+            xuanzhong(item,index) {
+                this.colorxuan = index;
+                window.sessionStorage.setItem("colorxuan5",index);
+                window.sessionStorage.setItem("leftType5",item.categoryName);
                 this.$store.commit('ProcessType', this.templateData[index].id);
+                this.$emit('child-event5',item.categoryName)
             },
             getCategoryinfo() {
                 queryCategoryinfo({
@@ -83,42 +62,18 @@
                     console.log(res, 'ProcessType');
                     this.templateData = res.data;
                     if (!window.sessionStorage.getItem("colorxuan5")) {
-                        this.colorxuan = 0
+                        this.colorxuan = 0;
                         this.$store.commit('ProcessType', this.templateData[0].id);
+                        window.sessionStorage.setItem("leftType5",this.templateData[0].categoryName);
+                        this.$emit('child-event5',this.templateData[0].categoryName)
                     }else {
                         let index = Number.parseInt(window.sessionStorage.getItem('colorxuan5'))
                         this.$store.commit('ProcessType', this.templateData[index].id);
-                        this.colorxuan = this.colorxuan = window.sessionStorage.getItem("colorxuan5")
+                        this.$emit('child-event5',this.templateData[index].categoryName)
+                        this.colorxuan = window.sessionStorage.getItem("colorxuan5")
                     }
                     this.$set(this.templateData);
                 });
-            },
-            steptitle(index) {
-                if (index == 1) {
-                    this.$router.push({
-                        path: '/jbxx1'
-                    });
-                } else if (index == 2) {
-                    this.$router.push({
-                        path: '/plbx1'
-                    });
-                } else if (index == 3) {
-                    this.$router.push({
-                        path: '/order7'
-                    });
-                } else if (index == 4) {
-                    this.$router.push({
-                        path: '/fzlb'
-                    });
-                } else if (index == 5) {
-                    this.$router.push({
-                        path: '/xzxz1'
-                    });
-                } else if (index == 6) {
-                    this.$router.push({
-                        path: '/ltxx'
-                    });
-                }
             },
             changeStyle() {
                 this.flag = !this.flag;
