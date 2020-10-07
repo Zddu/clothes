@@ -74,7 +74,7 @@ export const queryMstemplateinfo = (data) => {
     return request({
         url: 'logic/interface/query_mstemplateinfo',
         method: 'POST',
-        params: data
+        data: data
     });
 };
 // 根据服装类别id查询里面的内容
@@ -82,7 +82,7 @@ export const queryCategoryinfo = (data) => {
     return request({
         url: 'logic/interface/query_categoryinfo',
         method: 'POST',
-        params: data
+        data: data
     });
 };
 // 获取纽扣类别

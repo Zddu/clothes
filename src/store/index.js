@@ -68,6 +68,9 @@ export default new Vuex.Store({
         getProcessType(state) {
             return state.ProcessType
         },
+        getcategoryIds(state) {
+            return state.categoryIds
+        },
     },
     mutations: {
         addToken(state,data) {
@@ -90,8 +93,13 @@ export default new Vuex.Store({
         },
         ProcessType(state,data) {
             state.ProcessType = data
+        },
+        categoryIds(state,data) {
+            state.categoryIds = data
         }
     },
-    actions: {},
+    actions: {
+
+    },
     modules: {}
 })

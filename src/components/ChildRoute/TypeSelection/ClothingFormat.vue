@@ -13,7 +13,7 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-        
+
     </div>
 </template>
 
@@ -72,6 +72,7 @@
                 window.sessionStorage.setItem("colorxuan4",index)
                 window.sessionStorage.setItem("leftType4",item.categoryName)
                 this.$store.commit('ClothingFormat', this.templateData[index].id);
+                this.$store.commit('categoryIds', this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingType+","+this.$store.getters.getClothingStyle+","+item.id);
                 this.$emit('child-event4',item.categoryName)
             },
             getCategoryinfo() {

@@ -6,31 +6,31 @@
                     <div class="line">
                         <ul class="left-menu">
                             <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">
-                                <a-tag style="color: #ffec70" color="#303030" v-show="leftType1?true:false">
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType1?true:false">
                                     {{leftType1}}
                                 </a-tag>
                                 服装类别
                             </li>
                             <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">
-                                <a-tag style="color: #ffec70" color="#303030" v-show="leftType2?true:false">
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType2?true:false">
                                     {{leftType2}}
                                 </a-tag>
                                 服装品类
                             </li>
                             <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">
-                                <a-tag style="color: #ffec70" color="#303030" v-show="leftType3?true:false">
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType3?true:false">
                                     {{leftType3}}
                                 </a-tag>
                                 服装款式
                             </li>
                             <li :class="{ active: xuanze == 4 }" @click="xuanze = 4">
-                                <a-tag style="color: #ffec70" color="#303030" v-show="leftType4?true:false">
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType4?true:false">
                                     {{leftType4}}
                                 </a-tag>
                                 服装版型
                             </li>
                             <li :class="{ active: xuanze == 5 }" @click="xuanze = 5">
-                                <a-tag style="color: #ffec70" color="#303030" v-show="leftType5?true:false">
+                                <a-tag style="color: #ffec70" color="#303030" v-if="leftType5?true:false">
                                     {{leftType5}}
                                 </a-tag>
                                 工艺类型
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import { queryMstemplateinfo } from '@/api/ml';
+    import { queryMstemplateinfo,queryCategoryinfo } from '@/api/ml';
     import ClothingType from '../ChildRoute/TypeSelection/ClothingType';
     import ClothingTypeOne from '../ChildRoute/TypeSelection/ClothingTypeOne';
     import ClothingStyle from '../ChildRoute/TypeSelection/ClothingStyle';
@@ -107,7 +107,40 @@
                 });
             },
             parentGetData(data) {
-                this.leftType1 = data;
+                this.leftType1 = data.categoryName;
+                queryCategoryinfo(
+                    {template_id: '2', category_ids: data.id}
+                ).then(res=>{
+                    console.log(res.data[0],'第二块');
+                    this.$store.commit('ClothingCategory',  res.data[0].id?res.data[0].id:'');
+                    this.leftType2 = res.data[0].categoryName
+                    //第三块
+                    queryCategoryinfo(
+                        {template_id: '3', category_ids: data.id+","+res.data[0].id}
+                    ).then(res1=>{
+                        this.$store.commit('ClothingStyle',  res1.data[0].id?res1.data[0].id:'');
+                        this.leftType3 = res1.data[0].categoryName
+                        //第四块
+                        queryCategoryinfo(
+                            {template_id: '4', category_ids: data.id+","+res.data[0].id+","+res1.data[0].id}
+                        ).then(res2=>{
+                            this.$store.commit('ClothingFormat',  res2.data[0].id?res2.data[0].id:'');
+                            this.leftType4 = res2.data[0].categoryName
+                            console.log(res2.data);
+                            //第五块
+                            queryCategoryinfo(
+                                {template_id: '5', category_ids: data.id+","+res.data[0].id+","+res1.data[0].id+","+res2.data[0].id}
+                            ).then(res3=>{
+                                console.log(res3.data[0]);
+                                this.$store.commit('ProcessType', res3.data[0].id?res3.data[0].id:'');
+                                this.leftType5 = res3.data[0].categoryName
+                            })
+                        })
+
+                    })
+
+                })
+
             },
             parentGetData2(data) {
                 this.leftType2 = data;
@@ -116,11 +149,9 @@
                 this.leftType3 = data;
             },
             parentGetData4(data) {
-                console.log(data);
                 this.leftType4 = data;
             },
             parentGetData5(data) {
-                console.log(data);
                 this.leftType5 = data;
             },
             changeStyle() {

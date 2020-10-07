@@ -13,11 +13,6 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> 33917608320a106b85ac7ea4598b56f756a3e92e
     </div>
 </template>
 
@@ -78,6 +73,7 @@
                 window.sessionStorage.setItem("colorxuan3",index)
                 window.sessionStorage.setItem("leftType3",item.categoryName)
                 this.$store.commit('ClothingStyle', this.templateData[index].id);
+                this.$store.commit('categoryIds', this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingType+","+item.id);
                 this.$emit('child-event3',item.categoryName)
             },
             getCategoryinfo() {

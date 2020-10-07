@@ -52,6 +52,7 @@
                 window.sessionStorage.setItem("colorxuan5",index);
                 window.sessionStorage.setItem("leftType5",item.categoryName);
                 this.$store.commit('ProcessType', this.templateData[index].id);
+                this.$store.commit('categoryIds', this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingType+","+this.$store.getters.getClothingStyle+","+this.$store.getters.getClothingFormat+","+item.id);
                 this.$emit('child-event5',item.categoryName)
             },
             getCategoryinfo() {
