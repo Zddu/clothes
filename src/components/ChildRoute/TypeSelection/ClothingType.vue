@@ -66,7 +66,7 @@ export default {
                 if (!window.sessionStorage.getItem("colorxuan1")) {
                     this.colorxuan = 0
                     this.$store.commit('ClothingType', this.templateData[0].id);
-                    this.$emit('child-event',this.templateData[0])
+                    //this.$emit('child-event',this.templateData[0])
                     window.sessionStorage.setItem("leftType1",this.templateData[0].categoryName)
                 }else {
                     console.log(window.sessionStorage.getItem('colorxuan1'));
