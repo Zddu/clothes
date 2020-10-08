@@ -2,7 +2,7 @@
     <div class="main-container">
         <div>
             <a-row>
-                <a-col :span="4">
+                <a-col :span="5">
                     <div class="line">
                         <ul class="left-menu">
                             <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">
@@ -38,7 +38,7 @@
                         </ul>
                     </div>
                 </a-col>
-                <a-col :span="20">
+                <a-col :span="19">
                     <div class="content">
                         <ClothingType @child-event="parentGetData" v-if="xuanze == 1"/>
                         <ClothingTypeOne @child-event2="parentGetData2" v-if="xuanze == 2"/>
@@ -254,12 +254,13 @@
                     ).then(res1=>{
                         data  = res1.data[0]
                         this.leftType1 = res1.data[0].categoryName ;
-
+                        window.sessionStorage.setItem("leftType1",res1.data[0].categoryName);
                         queryCategoryinfo(
                             {template_id: '2', category_ids: data.id}
                         ).then(res=>{
                             console.log(res.data[0],'第二块');
                             this.$store.commit('ClothingCategory',  res.data[0].id?res.data[0].id:'');
+                            window.sessionStorage.setItem("leftType2",res.data[0].categoryName);
                             this.leftType2 = res.data[0].categoryName
                             //第三块
                             queryCategoryinfo(
@@ -267,13 +268,14 @@
                             ).then(res1=>{
                                 this.$store.commit('ClothingStyle',  res1.data[0].id?res1.data[0].id:'');
                                 this.leftType3 = res1.data[0].categoryName
+                                window.sessionStorage.setItem("leftType3",res1.data[0].categoryName);
                                 //第四块
                                 queryCategoryinfo(
                                     {template_id: '4', category_ids: data.id+","+res.data[0].id+","+res1.data[0].id}
                                 ).then(res2=>{
                                     this.$store.commit('ClothingFormat',  res2.data[0].id?res2.data[0].id:'');
                                     this.leftType4 = res2.data[0].categoryName
-                                    console.log(res2.data);
+                                    window.sessionStorage.setItem("leftType4",res2.data[0].categoryName);
                                     //第五块
                                     queryCategoryinfo(
                                         {template_id: '5', category_ids: data.id+","+res.data[0].id+","+res1.data[0].id+","+res2.data[0].id}
@@ -281,6 +283,7 @@
                                         console.log(res3.data[0]);
                                         this.$store.commit('ProcessType', res3.data[0].id?res3.data[0].id:'');
                                         this.leftType5 = res3.data[0].categoryName;
+                                        window.sessionStorage.setItem("leftType5",res3.data[0].categoryName);
                                         this.$store.commit('categoryIds', data.id+","+res.data[0].id+","+res1.data[0].id+","+res2.data[0].id+","+res3.data[0].id);
                                     })
                                 })
@@ -295,7 +298,7 @@
                         this.$store.commit('ClothingCategory',res.msg!=='暂无数据'?res.data[0].id:'');
                         this.leftType2 = res.msg!=='暂无数据'?res.data[0].categoryName:''  ;
                         this.id2 = '';
-                        this.id2 = res.data[0].id;
+                        this.id2 = res.msg!=='暂无数据'?res.data[0].id:'';
                     })
                 }else if (!window.sessionStorage.getItem('leftType3')){
                     queryCategoryinfo(
@@ -496,7 +499,7 @@
     }
 
     .line {
-        width: 175px;
+        width: 200px;
         height: 100%;
         padding: 18px 0px 0px 0px;
         border-right: 1px solid #eeeeee;
