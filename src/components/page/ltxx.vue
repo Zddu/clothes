@@ -105,103 +105,103 @@
                         <div>
                             <div class="size">胸部</div>
                             <div class="bigbox">
-                                <div class="box">
+                                <div :class="{ box1: index == xuan1, box: index !=  xuan1}" v-for="(item,index) in xiongbu" :key="index" @click="xuanzhong(1,index)"> 
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan1, canshu: index !=  xuan1}">{{item.size1}}</div>
+                                </div>
+                                <!-- <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
                                 </div>
                                 <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div>
-                            <div class="size">胸部</div>
+                            <div class="size">臀部</div>
                             <div class="bigbox">
-                                <div class="box">
+                               <div :class="{ box1: index == xuan2, box: index !=  xuan2}" v-for="(item,index) in tunbu" :key="index" @click="xuanzhong(2,index)">
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan2, canshu: index !=  xuan2}">{{item.size1}}</div>
+                                </div>
+                                <!-- <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
                                 </div>
                                 <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div>
-                            <div class="size">胸部</div>
+                            <div class="size">背部</div>
                             <div class="bigbox">
-                                <div class="box">
+                                <div :class="{ box1: index == xuan3, box: index !=  xuan3}" v-for="(item,index) in beibu" :key="index" @click="xuanzhong(3,index)">
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan3, canshu: index !=  xuan3}">{{item.size1}}</div>
+                                </div>
+                                <!-- <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
                                 </div>
                                 <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div>
-                            <div class="size">胸部</div>
+                            <div class="size">肩部</div>
                             <div class="bigbox">
-                                <div class="box">
+                                <div :class="{ box1: index == xuan4, box: index !=  xuan4}" v-for="(item,index) in jianbu" :key="index" @click="xuanzhong(4,index)">
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan4, canshu: index !=  xuan4}">{{item.size1}}</div>
+                                </div>
+                                <!-- <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
                                 </div>
                                 <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div>
-                            <div class="size">胸部</div>
+                            <div class="size">站姿</div>
                             <div class="bigbox">
-                                <div class="box">
+                                <div :class="{ box1: index == xuan5, box: index !=  xuan5}" v-for="(item,index) in zhanzi" :key="index" @click="xuanzhong(5,index)">
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan5, canshu: index !=  xuan5}">{{item.size1}}</div>
+                                </div>
+                                <!-- <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
                                 </div>
                                 <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div>
-                            <div class="size">胸部</div>
+                            <div class="size">腹部</div>
                             <div class="bigbox">
-                                <div class="box">
+                                <div :class="{ box1: index == xuan6, box: index !=  xuan6}" v-for="(item,index) in fubu" :key="index" @click="xuanzhong(6,index)">
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan6, canshu: index !=  xuan6}">{{item.size1}}</div>
+                                </div>
+                                <!-- <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
                                 </div>
                                 <div class="box">
                                     <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
                                     <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -236,6 +236,7 @@
 </template>
 
 <script>
+import {querySizeinfo} from "./../../api/ml"
 export default {
     name: 'ltxx',
     data() {
@@ -246,12 +247,70 @@ export default {
             form: this.$form.createForm(this, { name: 'coordinated' }),
             visible: false,
             textarea: '',
-            imageUrl: ''
+            imageUrl: '',
+            xiongbu: [],
+            tunbu: [],
+            beibu: [],
+            jianbu: [],
+            zhanzi: [],
+            fubu: [],
+            xuan1: "sajdhkasjdh",
+            xuan2: "sajdhkasjdh",
+            xuan3: "sajdhkasjdh",
+            xuan4: "sajdhkasjdh",
+            xuan5: "sajdhkasjdh",
+            xuan6: "sajdhkasjdh",
         };
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.getlist()
+    },
     methods: {
+        xuanzhong(val,index) {
+            if(val == 1) {
+                this.xuan1 = index
+            } else if(val == 2) {
+                this.xuan2 = index
+            } else if(val == 3) {
+                this.xuan3 = index
+            } else if(val == 4) {
+                this.xuan4 = index
+            } else if(val == 5) {
+                this.xuan5 = index
+            } else if(val == 6) {
+                this.xuan6 = index
+            } 
+        },
+        getlist() {
+            querySizeinfo({
+                template_id: "5",
+                category_ids: "54,55,56,57,58,59,53,51,52"
+            }).then(res => {
+                console.log(res,"12341234")
+                for(let i = 0;i<=res.data.length;i++) {
+                    if(res.data[i].sizeName == "胸部") {
+                        this.xiongbu = res.data[i].smallSizeInfo
+                        this.$set(this.xiongbu)
+                    } else if(res.data[i].sizeName == "背部") {
+                        this.beibu = res.data[i].smallSizeInfo
+                        this.$set(this.beibu)
+                    } else if(res.data[i].sizeName == "肩部") {
+                        this.jianbu = res.data[i].smallSizeInfo
+                        this.$set(this.jianbu)
+                    } else if(res.data[i].sizeName == "站姿") {
+                        this.zhanzi = res.data[i].smallSizeInfo
+                        this.$set(this.zhanzi)
+                    } else if(res.data[i].sizeName == "腹部") {
+                        this.fubu = res.data[i].smallSizeInfo
+                        this.$set(this.fubu)
+                    } else if(res.data[i].sizeName == "臀部") {
+                        this.tunbu = res.data[i].smallSizeInfo
+                        this.$set(this.tunbu)
+                    } 
+                }
+            })
+        },
         handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
         },
@@ -353,6 +412,19 @@ export default {
     width: 320px;
     justify-content: space-between;
 }
+.canshu1 {
+    width: 50px;
+    height: 20px;
+    background: #f9d532;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #636363;
+    text-align: center;
+    line-height: 20px;
+    margin-top: 3px;
+}
 .canshu {
     width: 50px;
     height: 20px;
@@ -370,6 +442,16 @@ export default {
     width: 97px;
     height: 97px;
     margin-top: 7px;
+}
+.box1 {
+    width: 103px;
+    height: 135px;
+    background: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #f9d805;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .box {
     width: 103px;

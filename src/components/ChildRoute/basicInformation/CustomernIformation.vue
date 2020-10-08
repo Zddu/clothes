@@ -28,7 +28,7 @@ export default {
     data() {
         return {
             ruleForm: {
-                username: ""
+                username: ''
             },
             form: this.$form.createForm(this, { name: 'coordinated' }),
             flag: false,
@@ -42,13 +42,35 @@ export default {
         };
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.ruleForm.username = this.$store.getters.getcustomerName;
+        this.usercode = this.$store.getters.getcustomerCode;
+        for (let i = 0; i <= this.sex.length; i++) {
+            if (this.$store.getters.getcustomerSex == this.sex[i].sex) {
+                this.usersex = i;
+            }
+        }
+    },
+    watch: {
+        usercode(newVal, oldVal) {
+            this.$store.commit('customerCode', newVal);
+        },
+        ruleForm: {
+            deep:true,
+            handler: function (newVal) {
+                console.log(newVal.username)
+                // console.log("b.c: "+val.c, oldVal.c);
+                this.$store.commit('customerName', newVal.username);
+            }
+        }
+    },
     methods: {
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
         xuanzhong(index) {
             this.usersex = index;
+            this.$store.commit('customerSex', this.sex[index].sex);
         },
         changeStyle() {
             this.flag = !this.flag;

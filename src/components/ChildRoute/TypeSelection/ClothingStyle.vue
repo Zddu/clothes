@@ -13,6 +13,14 @@
             <div style="width: 177px"></div>
             <div style="width: 177px"></div>
         </div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        
+=======
+
+>>>>>>> 33917608320a106b85ac7ea4598b56f756a3e92e
+=======
+>>>>>>> b3c8dc1636575edae880a7f0f5c33eeb87f47153
     </div>
 </template>
 
