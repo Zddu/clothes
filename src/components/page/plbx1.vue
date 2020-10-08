@@ -5,31 +5,31 @@
                 <a-col :span="5">
                     <div class="line">
                         <ul class="left-menu">
-                            <li :class="{ active: xuanze == 1 }" @click="xuanze = 1">
+                            <li :class="{ active: xuanze == 1 }" @click="skipRouter(1)">
                                 <a-tag style="color: #ffec70" color="#303030" v-if="leftType1?true:false">
                                     {{leftType1}}
                                 </a-tag>
                                 服装类别
                             </li>
-                            <li :class="{ active: xuanze == 2 }" @click="xuanze = 2">
+                            <li :class="{ active: xuanze == 2 }" @click="skipRouter(2)">
                                 <a-tag style="color: #ffec70" color="#303030" v-if="leftType2?true:false">
                                     {{leftType2}}
                                 </a-tag>
                                 服装品类
                             </li>
-                            <li :class="{ active: xuanze == 3 }" @click="xuanze = 3">
+                            <li :class="{ active: xuanze == 3 }" @click="skipRouter(3)">
                                 <a-tag style="color: #ffec70" color="#303030" v-if="leftType3?true:false">
                                     {{leftType3}}
                                 </a-tag>
                                 服装款式
                             </li>
-                            <li :class="{ active: xuanze == 4 }" @click="xuanze = 4">
+                            <li :class="{ active: xuanze == 4 }" @click="skipRouter(4)">
                                 <a-tag style="color: #ffec70" color="#303030" v-if="leftType4?true:false">
                                     {{leftType4}}
                                 </a-tag>
                                 服装版型
                             </li>
-                            <li :class="{ active: xuanze == 5 }" @click="xuanze = 5">
+                            <li :class="{ active: xuanze == 5 }" @click="skipRouter(5)">
                                 <a-tag style="color: #ffec70" color="#303030" v-if="leftType5?true:false">
                                     {{leftType5}}
                                 </a-tag>
@@ -99,8 +99,13 @@
         },
         mounted() {
             this.getMstemplateinfo();
+            this.xuanze = window.sessionStorage.getItem("xuanze")?window.sessionStorage.getItem("xuanze"):1
         },
         methods: {
+            skipRouter(val){
+                this.xuanze = val;
+                window.sessionStorage.setItem("xuanze",val)
+            },
             childClick() {
                 this.$emit('childByValue', 'show');
             },
