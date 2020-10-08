@@ -77,6 +77,10 @@
         },
         methods: {
             xuanzhong(item,index) {
+                window.sessionStorage.removeItem("leftType4")
+                window.sessionStorage.removeItem("colorxuan4")
+                window.sessionStorage.removeItem("leftType5")
+                window.sessionStorage.removeItem("colorxuan5")
                 this.colorxuan = index
                 window.sessionStorage.setItem("colorxuan3",index)
                 window.sessionStorage.setItem("leftType3",item.categoryName)

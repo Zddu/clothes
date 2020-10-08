@@ -68,6 +68,8 @@
         },
         methods: {
             xuanzhong(item,index) {
+                window.sessionStorage.removeItem("leftType5")
+                window.sessionStorage.removeItem("colorxuan5")
                 this.colorxuan = index
                 window.sessionStorage.setItem("colorxuan4",index)
                 window.sessionStorage.setItem("leftType4",item.categoryName)
@@ -85,7 +87,7 @@
                     this.templateData = res.data;
                     if (!window.sessionStorage.getItem("colorxuan4")){
                         this.colorxuan = 0
-                        this.$store.commit('ClothingFormat', this.templateData[0].id);
+                        this.$store.commit('ClothingFormat', res.msg!=='暂无数据'?this.templateData[0].id:'');
                         window.sessionStorage.setItem("leftType4",this.templateData[0].categoryName)
                         this.$emit('child-event4',this.templateData[0].categoryName)
                     } else {

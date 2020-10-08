@@ -75,6 +75,14 @@ export default {
     },
     methods: {
         xuanzhong(item,index) {
+            window.sessionStorage.removeItem("leftType2")
+            window.sessionStorage.removeItem("colorxuan2")
+            window.sessionStorage.removeItem("leftType3")
+            window.sessionStorage.removeItem("colorxuan3")
+            window.sessionStorage.removeItem("leftType4")
+            window.sessionStorage.removeItem("colorxuan4")
+            window.sessionStorage.removeItem("leftType5")
+            window.sessionStorage.removeItem("colorxuan5")
             this.colorxuan = index
             window.sessionStorage.setItem("colorxuan1",index)
             window.sessionStorage.setItem("leftType1",item.categoryName)
@@ -92,7 +100,7 @@ export default {
                 if (!window.sessionStorage.getItem("colorxuan1")) {
                     this.colorxuan = 0
                     this.$store.commit('ClothingType', this.templateData[0].id);
-                    this.$emit('child-event',this.templateData[0])
+                    //this.$emit('child-event',this.templateData[0])
                     window.sessionStorage.setItem("leftType1",this.templateData[0].categoryName)
                 }else {
                     console.log(window.sessionStorage.getItem('colorxuan1'));
