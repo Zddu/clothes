@@ -49,6 +49,14 @@ export default {
     },
     methods: {
         xuanzhong(item,index) {
+            window.sessionStorage.removeItem("leftType2")
+            window.sessionStorage.removeItem("colorxuan2")
+            window.sessionStorage.removeItem("leftType3")
+            window.sessionStorage.removeItem("colorxuan3")
+            window.sessionStorage.removeItem("leftType4")
+            window.sessionStorage.removeItem("colorxuan4")
+            window.sessionStorage.removeItem("leftType5")
+            window.sessionStorage.removeItem("colorxuan5")
             this.colorxuan = index
             window.sessionStorage.setItem("colorxuan1",index)
             window.sessionStorage.setItem("leftType1",item.categoryName)

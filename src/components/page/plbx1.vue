@@ -104,6 +104,144 @@
             childClick() {
                 this.$emit('childByValue', 'show');
             },
+            getDefault(){
+                let data = '';
+                if(!window.sessionStorage.getItem('leftType1')){
+                    queryCategoryinfo(
+                        {template_id: '1', category_ids: ''}
+                    ).then(res1=>{
+                        data  = res1.data[0]
+                        this.leftType1 = res1.data[0].categoryName ;
+                        queryCategoryinfo(
+                            {template_id: '2', category_ids: data.id}
+                        ).then(res=>{
+                            console.log(res.data[0],'第二块');
+                            this.$store.commit('ClothingCategory',  res.msg!=='暂无数据'?res.data[0].id:'');
+                            this.leftType2 = res.data[0].categoryName
+                            //第三块
+                            queryCategoryinfo(
+                                {template_id: '3', category_ids: data.id+","+res.data[0].id}
+                            ).then(res1=>{
+                                this.$store.commit('ClothingStyle',  res1.msg!=='暂无数据'?res1.data[0].id:'');
+                                this.leftType3 = res1.data[0].categoryName
+                                //第四块
+                                queryCategoryinfo(
+                                    {template_id: '4', category_ids: data.id+","+res.data[0].id+","+res1.data[0].id}
+                                ).then(res2=>{
+                                    this.$store.commit('ClothingFormat',  res2.msg!=='暂无数据'?res2.data[0].id:'');
+                                    this.leftType4 = res2.data[0].categoryName
+                                    console.log(res2.data);
+                                    //第五块
+                                    queryCategoryinfo(
+                                        {template_id: '5', category_ids: data.id+","+res.data[0].id+","+res1.data[0].id+","+res2.data[0].id}
+                                    ).then(res3=>{
+                                        console.log(res3.data[0]);
+                                        this.$store.commit('ProcessType', res3.msg!=='暂无数据'?res3.data[0].id:'');
+                                        this.leftType5 = res3.data[0].categoryName;
+                                        this.$store.commit('categoryIds', data.id+","+res.data[0].id+","+res1.data[0].id+","+res2.data[0].id+","+res3.data[0].id);
+                                    })
+                                })
+                            })
+                        })
+                    })
+                }else if(!window.sessionStorage.getItem('leftType2')){
+                    queryCategoryinfo(
+                        {template_id: '2', category_ids: this.$store.getters.getClothingType?this.$store.getters.getClothingType:'-1'}
+                    ).then(res=>{
+                        this.$store.commit('ClothingCategory',  res.msg!=='暂无数据'?res.data[0].id:'');
+                        this.leftType2 = res.msg!=='暂无数据'?res.data[0].categoryName:'' ;
+                        this.id2 = '';
+                        this.id2 = res.data[0].id;
+                        queryCategoryinfo(
+                            {template_id: '3', category_ids: this.$store.getters.getClothingType+","+this.id2}
+                        ).then(res1=>{
+                            console.log("ClothingStyle",res1);
+                            this.$store.commit('ClothingStyle',  res1.msg!=='暂无数据'?res1.data[0].id:'');
+                            this.leftType3 = res1.msg!=='暂无数据'?res1.data[0].categoryName:'';
+                            this.id3 = '';
+                            this.id3 = res1.msg!=='暂无数据'?res1.data[0].id:'';
+                            queryCategoryinfo(
+                                {template_id: '4', category_ids: this.$store.getters.getClothingType+","+this.id2+","+this.id3}
+                            ).then(res2=>{
+                                this.$store.commit('ClothingFormat',  res2.msg!=='暂无数据'?res2.data[0].id:'');
+                                this.leftType4 = res2.msg!=='暂无数据'? res2.data[0].categoryName:'';
+                                this.id4 = '';
+                                this.id4 = res2.msg!=='暂无数据'? res2.data[0].id:'';
+                                //第五块
+                                queryCategoryinfo(
+                                    {template_id: '5', category_ids: this.$store.getters.getClothingType+","+this.id2+","+this.id3+","+this.id4}
+                                ).then(res3=>{
+                                    console.log(res3.data[0]);
+                                    this.$store.commit('ProcessType', res3.msg!=='暂无数据'?res3.data[0].id:'');
+                                    this.leftType5 = res3.msg!=='暂无数据'?res3.data[0].categoryName:'';
+                                    this.id5 = '';
+                                    this.id5 = res3.data[0].id;
+                                    this.$store.commit('categoryIds', this.$store.getters.getClothingType+","+this.id2+","+this.id3+","+this.id4+","+this.id5);
+                                })
+                            })
+                        })
+                    })
+                }else if (!window.sessionStorage.getItem('leftType3')){
+                    queryCategoryinfo(
+                        {template_id: '3', category_ids: this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory}
+                    ).then(res1=>{
+                        this.$store.commit('ClothingStyle',  res1.msg!=='暂无数据'?res1.data[0].id:'');
+                        this.leftType3 = res1.data[0].categoryName?res1.data[0].categoryName:'';
+                        this.id3 = '';
+                        this.id3 = res1.data[0].id;
+                        queryCategoryinfo(
+                            {template_id: '4', category_ids: this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory+","+this.id3}
+                        ).then(res2=> {
+                            this.$store.commit('ClothingFormat', res2.msg!=='暂无数据'? res2.data[0].id : '');
+                            this.leftType4 = res2.msg!=='暂无数据'?res2.data[0].categoryName:'';
+                            this.id4 = '';
+                            this.id4 = res2.data[0].id;
+                            //第五块
+                            queryCategoryinfo(
+                                {
+                                    template_id: '5',
+                                    category_ids: this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory + "," + this.id3 + "," + this.id4
+                                }
+                            ).then(res3 => {
+                                console.log(res3.data[0]);
+                                this.$store.commit('ProcessType', res3.msg!=='暂无数据'? res3.data[0].id : '');
+                                this.leftType5 = res3.msg!=='暂无数据'?res3.data[0].categoryName:'';
+                                this.id5 = '';
+                                this.id5 = res3.data[0].id;
+                                this.$store.commit('categoryIds',this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory + "," + this.id3 + "," + this.id4 + "," + this.id5);
+                            })
+                        })
+                    })
+                }else if (!window.sessionStorage.getItem('leftType4')){
+                    queryCategoryinfo(
+                        {template_id: '4', category_ids: this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingStyle}
+                    ).then(res2=>{
+                        this.$store.commit('ClothingFormat',  res2.msg!=='暂无数据'?res2.data[0].id:'');
+                        this.leftType4 = res2.msg!=='暂无数据'?res2.data[0].categoryName:'';
+                        this.id4 = '';
+                        this.id4 = res2.data[0].id;
+                        queryCategoryinfo(
+                            {template_id: '5', category_ids: this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingStyle+","+this.id4}
+                        ).then(res3=>{
+                            this.$store.commit('ProcessType', res3.msg!=='暂无数据'?res3.data[0].id:'');
+                            this.leftType5 = res3.msg!=='暂无数据'?res3.data[0].categoryName:'';
+                            this.id5 = '';
+                            this.id5 = res3.data[0].id;
+                            this.$store.commit('categoryIds', this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingStyle+","+this.id4+","+this.id5);
+                        })
+                    })
+                }else if(!window.sessionStorage.getItem('leftType5')){
+                    queryCategoryinfo(
+                        {template_id: '5', category_ids: this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingStyle+","+this.$store.getters.getClothingFormat}
+                    ).then(res3=>{
+                        this.id5 = '';
+                        this.id5 = res3.data[0].id;
+                        this.$store.commit('ProcessType', this.id5);
+                        this.leftType5 = res3.msg!=='暂无数据'?res3.data[0].categoryName:'';
+                        this.$store.commit('categoryIds',this.$store.getters.getClothingType+","+this.$store.getters.getClothingCategory+","+this.$store.getters.getClothingStyle+","+this.$store.getters.getClothingFormat+","+this.id5)
+                    })
+                }
+            },
             //请求module菜单
             getMstemplateinfo() {
                 queryMstemplateinfo(this.module).then((res) => {
@@ -153,8 +291,9 @@
                     queryCategoryinfo(
                         {template_id: '2', category_ids: data.id?data.id:''}
                     ).then(res=>{
-                        this.$store.commit('ClothingCategory',  res.data[0].id?res.data[0].id:'');
-                        this.leftType2 = res.data[0].categoryName ;
+                        console.log('ClothingCategory',res);
+                        this.$store.commit('ClothingCategory',res.msg!=='暂无数据'?res.data[0].id:'');
+                        this.leftType2 = res.msg!=='暂无数据'?res.data[0].categoryName:''  ;
                         this.id2 = '';
                         this.id2 = res.data[0].id;
                     })
@@ -162,8 +301,8 @@
                     queryCategoryinfo(
                         {template_id: '3', category_ids: data.id+","+this.id2}
                     ).then(res1=>{
-                        this.$store.commit('ClothingStyle',  res1.data[0].id?res1.data[0].id:'');
-                        this.leftType3 = res1.data[0].categoryName;
+                        this.$store.commit('ClothingStyle',  res1.msg!=='暂无数据'?res1.data[0].id:'');
+                        this.leftType3 = res1.msg!=='暂无数据'?res1.data[0].categoryName:'';
                         this.id3 = '';
                         this.id3 = res1.data[0].id;
                     })
@@ -171,8 +310,8 @@
                     queryCategoryinfo(
                         {template_id: '4', category_ids: data.id+","+this.id2+","+this.id3}
                     ).then(res2=>{
-                        this.$store.commit('ClothingFormat',  res2.data[0].id?res2.data[0].id:'');
-                        this.leftType4 = res2.data[0].categoryName
+                        this.$store.commit('ClothingFormat',  res2.msg!=='暂无数据'?res2.data[0].id:'');
+                        this.leftType4 = res2.msg!=='暂无数据'?res2.data[0].categoryName:''
                         console.log(res2.data);
                         this.id4 = '';
                         this.id4 = res2.data[0].id;
@@ -182,28 +321,31 @@
                         {template_id: '5', category_ids: data.id+","+this.id2+","+this.id3+","+this.id4}
                     ).then(res3=>{
                         console.log(res3.data[0]);
-                        this.$store.commit('ProcessType', res3.data[0].id?res3.data[0].id:'');
-                        this.leftType5 = res3.data[0].categoryName
+                        this.$store.commit('ProcessType', res3.msg!=='暂无数据'?res3.data[0].id:'');
+                        this.leftType5 = res3.msg!=='暂无数据'?res3.data[0].categoryName:''
                     })
                 }
 
             },
 
             parentGetData(data) {
-                console.log('首先');
-
+                this.getDefault()
                 this.leftType1 = data.categoryName;
             },
             parentGetData2(data) {
+                this.getDefault()
                 this.leftType2 = data;
             },
             parentGetData3(data) {
+                this.getDefault()
                 this.leftType3 = data;
             },
             parentGetData4(data) {
+                this.getDefault()
                 this.leftType4 = data;
             },
             parentGetData5(data) {
+                this.getDefault()
                 this.leftType5 = data;
             },
             changeStyle() {
