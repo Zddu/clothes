@@ -79,6 +79,7 @@
                 window.sessionStorage.setItem('colorxuan2', index);
                 window.sessionStorage.setItem("leftType2",item.categoryName)
                 this.$store.commit('ClothingCategory', item.id);
+                this.$store.commit('categoryIds', this.$store.getters.getClothingType+","+this.templateData[index].id);
                 this.$emit('child-event2', item.categoryName);
             },
             getCategoryinfo() {

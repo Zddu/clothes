@@ -238,6 +238,8 @@ export default new Vuex.Store({
             state.xiuziZiti = data
         }
     },
-    actions: {},
+    actions: {
+
+    },
     modules: {}
 })

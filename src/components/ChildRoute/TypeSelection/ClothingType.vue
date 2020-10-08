@@ -79,7 +79,8 @@ export default {
             window.sessionStorage.setItem("colorxuan1",index)
             window.sessionStorage.setItem("leftType1",item.categoryName)
             this.$store.commit('ClothingType', this.templateData[index].id);
-            this.$emit('child-event',item.categoryName)
+            this.$store.commit('categoryIds', this.templateData[index].id);
+            this.$emit('child-event',item)
         },
         getCategoryinfo() {
             queryCategoryinfo({
@@ -91,13 +92,13 @@ export default {
                 if (!window.sessionStorage.getItem("colorxuan1")) {
                     this.colorxuan = 0
                     this.$store.commit('ClothingType', this.templateData[0].id);
-                    this.$emit('child-event',this.templateData[0].categoryName)
+                    this.$emit('child-event',this.templateData[0])
                     window.sessionStorage.setItem("leftType1",this.templateData[0].categoryName)
                 }else {
                     console.log(window.sessionStorage.getItem('colorxuan1'));
                     let index = Number.parseInt(window.sessionStorage.getItem('colorxuan1'))
                     this.$store.commit('ClothingType', this.templateData[index].id);
-                    this.$emit('child-event',this.templateData[index].categoryName)
+                    this.$emit('child-event',this.templateData[index])
                     this.colorxuan = window.sessionStorage.getItem("colorxuan1")
                 }
                 this.$set(this.templateData);
