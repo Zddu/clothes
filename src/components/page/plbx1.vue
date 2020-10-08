@@ -492,7 +492,7 @@
     }
 
     .active {
-        border-right: 2px solid #000c17;
+        border-right: 1px solid #000c17;
     }
 
     .line {
