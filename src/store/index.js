@@ -52,7 +52,7 @@ export default new Vuex.Store({
 
         // `````````````华丽的分割线········································
 
-        storeCode: "",//
+        //storeCode: "",//
         shopname: "", //门店名称
     },
     //   getters 可以实时监听state值的变化(最新状态)
@@ -144,6 +144,10 @@ export default new Vuex.Store({
         },
         getxiuziZiti(state) {
             return state.xiuziZiti
+        },
+
+        getcategoryIds(state) {
+            return state.categoryIds
         }
     },
     mutations: {
@@ -236,6 +240,9 @@ export default new Vuex.Store({
         },
         xiuziZiti(state,data) {
             state.xiuziZiti = data
+        },
+        categoryIds(state,data) {
+            state.categoryIds = data
         }
     },
     actions: {
