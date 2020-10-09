@@ -11,7 +11,7 @@
             </el-form>
 
             <div class="type-main">
-                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2"
+                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2" :key="index"
                         @click="choiceStyle(index)">
                     <img :class="item.fabricImg?'':imgStyle" :src="item.fabricImg" alt=""/>
                     <p :class="styleNum===index?fontStyle:fontStyle1">{{item.fabricCode}}</p>

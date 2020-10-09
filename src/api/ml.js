@@ -125,7 +125,7 @@ export const updateContrastcolorcolor = (data) => {
     return request({
         url: 'logic/interface/update_Contrastcolor_color',
         method: 'POST',
-        params: data
+        data: data
     });
 };
 
@@ -151,7 +151,7 @@ export const getTypeAndProcess = (data) => {
     return request({
         url: '/fabricAndOther/getTypeAndProcess',
         method: 'POST',
-        params: data
+        params: data,
     });
 };
 

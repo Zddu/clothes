@@ -82,15 +82,22 @@
                 </a-select>
             </a-form-item>
 
+            <!-- <a-form-item label="自定义图形" v-show="tuxingchuan">
+                
+            </a-form-item> -->
             <a-form-item label="自定义图形" v-show="tuxingchuan">
                 <el-upload
-                    class="avatar-uploader"
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    :show-file-list="false"
+                    action="http://clound_clothing.wenkangkeji.com/mlcc/user/interface/uploadImage"
+                    list-type="picture-card"
+                    :limit= "1"
                     :on-success="handleAvatarSuccess"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove"
                 >
-                    <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    <el-dialog :visible.sync="dialogVisible">
+                        <img width="100%" :src="dialogImageUrl" alt="" />
+                    </el-dialog>
+                    <i class="el-icon-plus"></i>
                 </el-upload>
             </a-form-item>
         </a-form>
@@ -103,6 +110,8 @@ export default {
     name: 'xzxz1',
     data() {
         return {
+            dialogImageUrl: '',
+            dialogVisible: false,
             flag: false,
             formLayout: 'horizontal',
             form: this.$form.createForm(this, { name: 'coordinated' }),
@@ -146,9 +155,9 @@ export default {
             console.log(res);
             this.fontsizelist = res.data;
             this.$set(this.fontsizelist);
-            for(let i= 0;i<=res.data.length;i++) {
-                if(this.$store.getters.getxiuziZiti == res.data[i].id) {
-                    this.zixuan = i
+            for (let i = 0; i <= res.data.length; i++) {
+                if (this.$store.getters.getxiuziZiti == res.data[i].id) {
+                    this.zixuan = i;
                 }
             }
         });
@@ -156,14 +165,14 @@ export default {
             console.log(res, '123213123123');
             this.colorlist = res.data;
             this.$set(this.colorlist);
-            for(let i= 0;i<=res.data.length;i++) {
-                if(this.$store.getters.getxiuziColor == res.data[i].id) {
-                    this.colorxuan = i
+            for (let i = 0; i <= res.data.length; i++) {
+                if (this.$store.getters.getxiuziColor == res.data[i].id) {
+                    this.colorxuan = i;
                 }
             }
         });
         queryLocaltion({
-            category_ids: '54,56'
+            category_ids: this.$store.getters.getcategoryIds
         }).then((res) => {
             console.log(res, '>?>>>>');
             this.xiuziweizhi = res.data;
@@ -171,17 +180,27 @@ export default {
         });
     },
     methods: {
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePictureCardPreview(file) {
+            console.log(file);
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
         handleAvatarSuccess(res, file) {
+            console.log(res)
             this.imageUrl = URL.createObjectURL(file.raw);
+            this.$store.commit('zidingyiImg', res.data);
         },
         colorxuan1(index) {
             this.colorxuan = index;
-            console.log(this.colorlist)
+            console.log(this.colorlist);
             this.$store.commit('xiuziColor', this.colorlist[index].id);
         },
         sizexuan(index) {
             this.zixuan = index;
-            console.log(this.fontsizelist)
+            console.log(this.fontsizelist);
             this.$store.commit('xiuziZiti', this.fontsizelist[index].id);
         },
         changeStyle() {
@@ -218,7 +237,7 @@ export default {
             console.log(value);
             this.$store.commit('xiuziHeight', value);
             this.xiuzigaodu = value;
-            console.log(this.xiuziaddress)
+            console.log(this.xiuziaddress);
             this.$store.commit('xiuziPriceId', this.xiuziaddress[value].id);
         },
         handleSelectChange2(value) {
@@ -230,28 +249,8 @@ export default {
 };
 </script>
 <style>
-.avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-    border-color: #409eff;
-}
-.avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-}
-.avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+.el-upload__input {
+    display: none !important;
 }
 </style>
 <style scoped>
