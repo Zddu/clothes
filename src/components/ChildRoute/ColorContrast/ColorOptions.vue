@@ -4,11 +4,12 @@
             <a-form-item label>
                 <div class="lie">
                     <div
-                        :class="{ box: index != mianxuan, box1: index == mianxuan }"
+                        :class="{ box: index != item.categoryId, box1: index == item.categoryId }"
                         v-for="(item, index) in colorInfo"
                         :key="index"
                         @mouseover="mouseOver(index)"
                         @mouseleave="mouseLeave"
+                        @click="dianji(index)"
                     >
                         <img :src="item.contrastColorImg" alt class="imgs" />
                         <div class="kuang" @click="showDrawer(index)">
@@ -17,7 +18,7 @@
                                 <a-icon type="down" />
                             </a>
                         </div>
-                    </div>
+                    </div>  
                     <div style="width: 202px"></div>
                     <div style="width: 202px"></div>
                     <div style="width: 202px"></div>
@@ -83,9 +84,10 @@ export default {
     created() {},
     mounted() {
         AllContrastcolorInfo().then((res) => {
-            console.log(res);
-            this.colorInfo = res.data;
-            this.$set(this.colorInfo);
+            console.log(res.data,"shuju");
+            this.colorInfo = res.data
+            this.$set(this.colorInfo,"qinni");
+            console.log(this.colorInfo)
         });
         AllembroiderColor().then((res) => {
             console.log(res, 'AllembroiderColor');
@@ -94,6 +96,11 @@ export default {
         });
     },
     methods: {
+        dianji(index) {
+            this.colorInfo[index].categoryId = index
+            this.$set(this.colorInfo)
+            this.$store.commit('zhuangseId', this.colorInfo[index].id + "," + this.$store.getters.getzhuangseId);
+        },
         drawerxuan(index) {
             this.color_id = this.drawerList[index].id;
             updateContrastcolorcolor({
@@ -138,6 +145,7 @@ export default {
         showDrawer(index) {
             this.visible = true;
             this.zhuangid = this.colorInfo[index].id;
+            console.log(this.zhuangid)
         },
         onClose() {
             this.visible = false;

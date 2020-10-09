@@ -29,7 +29,7 @@ export default new Vuex.Store({
         addressType: "",//地址类型           √
         address: "",//	收货地址            √
         thirdSn: "",//第三方运单号          √
-        categoryIds: "",//类别ids,多个以逗号隔开
+        categoryIds: "",//类别ids,多个以逗号隔开         √
         ksZhubianWidth: "",//	珠边宽度        √
         ksBokuan: "",//驳款                     √
         xiuziPriceId: "",//绣字高度id            √
@@ -42,13 +42,13 @@ export default new Vuex.Store({
         xiuziZiti: "",//	绣字字体id              √
         xiuziOneNeirong: "",//	绣字第一行内容      √
         xiuziTwoNeirong: "",//绣字第二行内容         √
-        zhuangseId: "",//撞色id，多个以逗号隔开
-        bodySizeIds: "",//身体尺寸ids:1/56,2/36以这种形式：1代表尺寸id,56代表尺寸1输入的值
-        sizeIds: "",//体型Ids: 1/强健:1代表体型Id,强健表示选中的值
+        zhuangseId: "",//撞色id，多个以逗号隔开        √
+        bodySizeIds: "",//身体尺寸ids:1/56,2/36以这种形式：1代表尺寸id,56代表尺寸1输入的值      √
+        sizeIds: "",//体型Ids: 1/强健:1代表体型Id,强健表示选中的值               √
         fabricIds: "",//面料ids:1/10,2/5跟以上相同：1表示面料id,10表示输入的米数
         jingtiSize: "",//净体尺寸
-        liangtiRemark: "",//	体型备注
-        liangtiImgs: "",//量体图片，多个以逗号隔开
+        liangtiRemark: "",//	体型备注            √
+        liangtiImgs: "",//量体图片，多个以逗号隔开      √
 
         // `````````````华丽的分割线········································
 
@@ -144,6 +144,27 @@ export default new Vuex.Store({
         },
         getxiuziZiti(state) {
             return state.xiuziZiti
+        },
+        getcategoryIds(state) {
+            return state.categoryIds
+        },
+        getbodySizeIds(state) {
+            return state.bodySizeIds
+        },
+        getliangtiRemark(state) {
+            return state.liangtiRemark
+        },
+        getsizeIds(state) {
+            return state.sizeIds
+        },
+        getzhuangseId(state) {
+            return state.zhuangseId
+        },
+        getzidingyiImg(state) {
+            return state.zidingyiImg
+        },
+        getliangtiImgs(state) {
+            return state.liangtiImgs
         }
     },
     mutations: {
@@ -236,6 +257,27 @@ export default new Vuex.Store({
         },
         xiuziZiti(state,data) {
             state.xiuziZiti = data
+        },
+        categoryIds(state,data) {
+            state.categoryIds = data
+        },
+        bodySizeIds(state,data) {
+            state.bodySizeIds = data
+        },
+        liangtiRemark(state,data) {
+            state.liangtiRemark = data
+        },
+        sizeIds(state,data) {
+            state.sizeIds = data
+        },
+        zhuangseId(state,data) {
+            state.zhuangseId = data
+        },
+        zidingyiImg(state,data) {
+            state.zidingyiImg = data
+        },
+        liangtiImgs(state,data) {
+            state.liangtiImgs = data
         }
     },
     actions: {

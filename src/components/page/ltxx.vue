@@ -3,52 +3,48 @@
         <div>
             <a-form :form="form" :label-col="{ span: 2 }" :wrapper-col="{ span: 8 }" @submit="handleSubmit">
                 <a-form-item label="绣字类型">
-                    <!-- <div style="display: flex">
-                        <div class="touicon">尺寸</div>
-                        <a-input size="large" placeholder="请填写尺寸" class="inputkuang" />
-                    </div> -->
                     <div>
                         <a-space>
                             <div style="display: flex">
                                 <div class="touicon">前长</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="qianchang" suffix="cm" class="inputkuang" />
                             </div>
 
                             <div style="display: flex">
                                 <div class="touicon">后长</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="houchang" suffix="cm" class="inputkuang" />
                             </div>
 
                             <div style="display: flex">
                                 <div class="touicon">胸围</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="xiongwei" suffix="cm" class="inputkuang" />
                             </div>
 
                             <div style="display: flex">
                                 <div class="touicon">腰围</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="yaowei" suffix="cm" class="inputkuang" />
                             </div>
                         </a-space>
                         <div style="margin-top: 20px">
                             <a-space>
                                 <div style="display: flex">
                                     <div class="touicon">下摆</div>
-                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                    <a-input size="large" v-model="xiabai" suffix="cm" class="inputkuang" />
                                 </div>
 
                                 <div style="display: flex">
                                     <div class="touicon">肩宽</div>
-                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                    <a-input size="large" v-model="jiankuan" suffix="cm" class="inputkuang" />
                                 </div>
 
                                 <div style="display: flex">
                                     <div class="touicon">左袖长</div>
-                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                    <a-input size="large" v-model="zuoxiuchang" suffix="cm" class="inputkuang" />
                                 </div>
 
                                 <div style="display: flex">
                                     <div class="touicon">右袖长</div>
-                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                    <a-input size="large" v-model="youxiuchang" suffix="cm" class="inputkuang" />
                                 </div>
                             </a-space>
                         </div>
@@ -56,12 +52,12 @@
                             <a-space>
                                 <div style="display: flex">
                                     <div class="touicon">袖肥</div>
-                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                    <a-input size="large" v-model="xiufei" suffix="cm" class="inputkuang" />
                                 </div>
 
                                 <div style="display: flex">
                                     <div class="touicon">袖扣</div>
-                                    <a-input size="large" suffix="cm" class="inputkuang" />
+                                    <a-input size="large" v-model="xiukou" suffix="cm" class="inputkuang" />
                                 </div>
                             </a-space>
                         </div>
@@ -72,20 +68,20 @@
                         <a-space>
                             <div style="display: flex">
                                 <div class="touicon">身高</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="shengao" suffix="cm" class="inputkuang" />
                             </div>
 
                             <div style="display: flex">
                                 <div class="touicon">体重</div>
-                                <a-input size="large" suffix="kg" class="inputkuang" />
+                                <a-input size="large" v-model="tizhong" suffix="kg" class="inputkuang" />
                             </div>
                             <div style="display: flex">
                                 <div class="touicon">年龄</div>
-                                <a-input size="large" placeholder="请填写客户年龄" class="inputkuang" />
+                                <a-input size="large" v-model="nianji" placeholder="请填写客户年龄" class="inputkuang" />
                             </div>
                             <div style="display: flex">
                                 <div class="touicon">胸宽</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="xiongkuan" suffix="cm" class="inputkuang" />
                             </div>
                         </a-space>
                     </div>
@@ -94,7 +90,7 @@
                         <a-space>
                             <div style="display: flex">
                                 <div class="touicon">背宽</div>
-                                <a-input size="large" suffix="cm" class="inputkuang" />
+                                <a-input size="large" v-model="beikuan" suffix="cm" class="inputkuang" />
                             </div>
                         </a-space>
                     </div>
@@ -102,124 +98,111 @@
 
                 <a-form-item label="体型数据">
                     <div class="tixingdata">
-                        <div>
+                        <div v-show="show1">
                             <div class="size">胸部</div>
                             <div class="bigbox">
-                                <div :class="{ box1: index == xuan1, box: index !=  xuan1}" v-for="(item,index) in xiongbu" :key="index" @click="xuanzhong(1,index)"> 
+                                <div
+                                    :class="{ box1: index == xuan1, box: index != xuan1 }"
+                                    v-for="(item, index) in xiongbu"
+                                    :key="index"
+                                    @click="xuanzhong(1, index)"
+                                >
                                     <img :src="item.sizeImg1" alt="" class="imgs" />
-                                    <div :class="{ canshu1: index == xuan1, canshu: index !=  xuan1}">{{item.size1}}</div>
+                                    <div :class="{ canshu1: index == xuan1, canshu: index != xuan1 }">{{ item.size1 }}</div>
                                 </div>
-                                <!-- <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div> -->
                             </div>
                         </div>
-                        <div>
-                            <div class="size">臀部</div>
-                            <div class="bigbox">
-                               <div :class="{ box1: index == xuan2, box: index !=  xuan2}" v-for="(item,index) in tunbu" :key="index" @click="xuanzhong(2,index)">
-                                    <img :src="item.sizeImg1" alt="" class="imgs" />
-                                    <div :class="{ canshu1: index == xuan2, canshu: index !=  xuan2}">{{item.size1}}</div>
-                                </div>
-                                <!-- <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div>
+                        <div v-show="show1">
                             <div class="size">背部</div>
                             <div class="bigbox">
-                                <div :class="{ box1: index == xuan3, box: index !=  xuan3}" v-for="(item,index) in beibu" :key="index" @click="xuanzhong(3,index)">
+                                <div
+                                    :class="{ box1: index == xuan3, box: index != xuan3 }"
+                                    v-for="(item, index) in beibu"
+                                    :key="index"
+                                    @click="xuanzhong(3, index)"
+                                >
                                     <img :src="item.sizeImg1" alt="" class="imgs" />
-                                    <div :class="{ canshu1: index == xuan3, canshu: index !=  xuan3}">{{item.size1}}</div>
+                                    <div :class="{ canshu1: index == xuan3, canshu: index != xuan3 }">{{ item.size1 }}</div>
                                 </div>
-                                <!-- <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div> -->
                             </div>
                         </div>
-                        <div>
+                        <div v-show="show1">
                             <div class="size">肩部</div>
                             <div class="bigbox">
-                                <div :class="{ box1: index == xuan4, box: index !=  xuan4}" v-for="(item,index) in jianbu" :key="index" @click="xuanzhong(4,index)">
+                                <div
+                                    :class="{ box1: index == xuan4, box: index != xuan4 }"
+                                    v-for="(item, index) in jianbu"
+                                    :key="index"
+                                    @click="xuanzhong(4, index)"
+                                >
                                     <img :src="item.sizeImg1" alt="" class="imgs" />
-                                    <div :class="{ canshu1: index == xuan4, canshu: index !=  xuan4}">{{item.size1}}</div>
+                                    <div :class="{ canshu1: index == xuan4, canshu: index != xuan4 }">{{ item.size1 }}</div>
                                 </div>
-                                <!-- <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div> -->
                             </div>
                         </div>
-                        <div>
+                        <div v-show="show1">
                             <div class="size">站姿</div>
                             <div class="bigbox">
-                                <div :class="{ box1: index == xuan5, box: index !=  xuan5}" v-for="(item,index) in zhanzi" :key="index" @click="xuanzhong(5,index)">
+                                <div
+                                    :class="{ box1: index == xuan5, box: index != xuan5 }"
+                                    v-for="(item, index) in zhanzi"
+                                    :key="index"
+                                    @click="xuanzhong(5, index)"
+                                >
                                     <img :src="item.sizeImg1" alt="" class="imgs" />
-                                    <div :class="{ canshu1: index == xuan5, canshu: index !=  xuan5}">{{item.size1}}</div>
+                                    <div :class="{ canshu1: index == xuan5, canshu: index != xuan5 }">{{ item.size1 }}</div>
                                 </div>
-                                <!-- <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div> -->
                             </div>
                         </div>
-                        <div>
+                        <div v-show="show1">
                             <div class="size">腹部</div>
                             <div class="bigbox">
-                                <div :class="{ box1: index == xuan6, box: index !=  xuan6}" v-for="(item,index) in fubu" :key="index" @click="xuanzhong(6,index)">
+                                <div
+                                    :class="{ box1: index == xuan6, box: index != xuan6 }"
+                                    v-for="(item, index) in fubu"
+                                    :key="index"
+                                    @click="xuanzhong(6, index)"
+                                >
                                     <img :src="item.sizeImg1" alt="" class="imgs" />
-                                    <div :class="{ canshu1: index == xuan6, canshu: index !=  xuan6}">{{item.size1}}</div>
+                                    <div :class="{ canshu1: index == xuan6, canshu: index != xuan6 }">{{ item.size1 }}</div>
                                 </div>
-                                <!-- <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div>
-                                <div class="box">
-                                    <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                                    <div class="canshu">参数</div>
-                                </div> -->
                             </div>
                         </div>
+                        <div v-show="show6">
+                            <div class="size">臀部</div>
+                            <div class="bigbox">
+                                <div
+                                    :class="{ box1: index == xuan2, box: index != xuan2 }"
+                                    v-for="(item, index) in tunbu"
+                                    :key="index"
+                                    @click="xuanzhong(2, index)"
+                                >
+                                    <img :src="item.sizeImg1" alt="" class="imgs" />
+                                    <div :class="{ canshu1: index == xuan2, canshu: index != xuan2 }">{{ item.size1 }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 320px"></div>
+                        <div style="width: 320px"></div>
                     </div>
                 </a-form-item>
                 <a-form-item label="备注">
-                    <textarea rows="5" cols="76"></textarea>
+                    <textarea rows="5" cols="76" v-model="beizhu"></textarea>
                 </a-form-item>
-                    <div style="margin-left:102px">
-                        <el-upload
-                            class="avatar-uploader"
-                            action="https://jsonplaceholder.typicode.com/posts/"
-                            :show-file-list="false"
-                            :on-success="handleAvatarSuccess"
-                        >
-                            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                        </el-upload>
-                    </div>
+                <a-form-item label="自定义图形" >
+                    <el-upload
+                        action="http://clound_clothing.wenkangkeji.com/mlcc/user/interface/uploadImage"
+                        list-type="picture-card"
+                        :on-success="handleAvatarSuccess"
+                        :on-preview="handlePictureCardPreview"
+                        :on-remove="handleRemove"
+                    >
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="" />
+                        </el-dialog>
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                </a-form-item>
             </a-form>
         </div>
         <div style="height: 90px"></div>
@@ -236,11 +219,13 @@
 </template>
 
 <script>
-import {querySizeinfo} from "./../../api/ml"
+import { querySizeinfo } from './../../api/ml';
 export default {
     name: 'ltxx',
     data() {
         return {
+            dialogImageUrl: '',
+            dialogVisible: false,
             bottomImg: require('../../assets/cut1/icon88.png'),
             flag: false,
             formLayout: 'horizontal',
@@ -254,65 +239,1023 @@ export default {
             jianbu: [],
             zhanzi: [],
             fubu: [],
-            xuan1: "sajdhkasjdh",
-            xuan2: "sajdhkasjdh",
-            xuan3: "sajdhkasjdh",
-            xuan4: "sajdhkasjdh",
-            xuan5: "sajdhkasjdh",
-            xuan6: "sajdhkasjdh",
+            xuan1: '0',
+            xuan2: '0',
+            xuan3: '0',
+            xuan4: '0',
+            xuan5: '0',
+            xuan6: '0',
+            qianchang: '',
+            houchang: '',
+            xiongwei: '',
+            yaowei: '',
+            xiabai: '',
+            jiankuan: '',
+            zuoxiuchang: '',
+            youxiuchang: '',
+            xiufei: '',
+            xiukou: '',
+            shengao: '',
+            tizhong: '',
+            nianji: '',
+            xiongkuan: '',
+            beikuan: '',
+            show1: true,
+            show2: true,
+            show3: true,
+            show4: true,
+            show5: true,
+            show6: true,
+            beizhu: '',
+            xiongbuid: '',
+            beibuid: '',
+            jianbuid: '',
+            zhanziid: '',
+            fubuid: '',
+            tunbuid: ''
         };
     },
     created() {},
+    watch: {
+        xuan2(newVal, oldVal) {
+            this.$store.commit('sizeIds', this.tunbuid + '/' + this.tunbu[this.xuan2].size1);
+            console.log(this.$store.getters.getsizeIds);
+        },
+        xuan1(newVal, oldVal) {
+            console.log(this.beibu);
+            this.$store.commit(
+                'sizeIds',
+                this.xiongbuid +
+                    '/' +
+                    this.xiongbu[this.xuan1].size1 +
+                    ',' +
+                    this.beibuid +
+                    '/' +
+                    this.beibu[this.xuan3].size1 +
+                    ',' +
+                    this.jianbuid +
+                    '/' +
+                    this.beibu[this.xuan4].size1 +
+                    ',' +
+                    this.zhanziid +
+                    '/' +
+                    this.zhanzi[this.xuan5].size1 +
+                    ',' +
+                    this.fubuid +
+                    '/' +
+                    this.fubu[this.xuan6].size1
+            );
+            console.log(this.$store.getters.getsizeIds);
+        },
+        xuan3(newVal, oldVal) {
+            this.$store.commit(
+                'sizeIds',
+                this.xiongbuid +
+                    '/' +
+                    this.xiongbu[this.xuan1].size1 +
+                    ',' +
+                    this.beibuid +
+                    '/' +
+                    this.beibu[this.xuan3].size1 +
+                    ',' +
+                    this.jianbuid +
+                    '/' +
+                    this.beibu[this.xuan4].size1 +
+                    ',' +
+                    this.zhanziid +
+                    '/' +
+                    this.zhanzi[this.xuan5].size1 +
+                    ',' +
+                    this.fubuid +
+                    '/' +
+                    this.fubu[this.xuan6].size1
+            );
+            console.log(this.$store.getters.getsizeIds);
+        },
+        xuan4(newVal, oldVal) {
+            this.$store.commit(
+                'sizeIds',
+                this.xiongbuid +
+                    '/' +
+                    this.xiongbu[this.xuan1].size1 +
+                    ',' +
+                    this.beibuid +
+                    '/' +
+                    this.beibu[this.xuan3].size1 +
+                    ',' +
+                    this.jianbuid +
+                    '/' +
+                    this.beibu[this.xuan4].size1 +
+                    ',' +
+                    this.zhanziid +
+                    '/' +
+                    this.zhanzi[this.xuan5].size1 +
+                    ',' +
+                    this.fubuid +
+                    '/' +
+                    this.fubu[this.xuan6].size1
+            );
+        },
+        xuan5(newVal, oldVal) {
+            this.$store.commit(
+                'sizeIds',
+                this.xiongbuid +
+                    '/' +
+                    this.xiongbu[this.xuan1].size1 +
+                    ',' +
+                    this.beibuid +
+                    '/' +
+                    this.beibu[this.xuan3].size1 +
+                    ',' +
+                    this.jianbuid +
+                    '/' +
+                    this.beibu[this.xuan4].size1 +
+                    ',' +
+                    this.zhanziid +
+                    '/' +
+                    this.zhanzi[this.xuan5].size1 +
+                    ',' +
+                    this.fubuid +
+                    '/' +
+                    this.fubu[this.xuan6].size1
+            );
+        },
+        xuan6(newVal, oldVal) {
+            this.$store.commit(
+                'sizeIds',
+                this.xiongbuid +
+                    '/' +
+                    this.xiongbu[this.xuan1].size1 +
+                    ',' +
+                    this.beibuid +
+                    '/' +
+                    this.beibu[this.xuan3].size1 +
+                    ',' +
+                    this.jianbuid +
+                    '/' +
+                    this.beibu[this.xuan4].size1 +
+                    ',' +
+                    this.zhanziid +
+                    '/' +
+                    this.zhanzi[this.xuan5].size1 +
+                    ',' +
+                    this.fubuid +
+                    '/' +
+                    this.fubu[this.xuan6].size1
+            );
+        },
+        beizhu(newVal, oldVal) {
+            this.$store.commit('liangtiRemark', newVal);
+        },
+        qianchang(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    newVal +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        houchang(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    newVal +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        xiongwei(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    newVal +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        yaowei(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    newVal +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        xiabai(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    newVal +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        jiankuan(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    newVal +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        zuoxiuchang(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    newVal +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        youxiuchang(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    newVal +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        xiufei(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    newVal +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        xiukou(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    newVal +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        shengao(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    newVal +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        tizhong(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    newVal +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        nianji(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    newVal +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        xiongkuan(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    newVal +
+                    ',' +
+                    '15/' +
+                    this.beikuan
+            );
+        },
+        beikuan(newVal, oldVal) {
+            this.$store.commit(
+                'bodySizeIds',
+                '1/' +
+                    this.qianchang +
+                    ',' +
+                    '2/' +
+                    this.houchang +
+                    ',' +
+                    '3/' +
+                    this.xiongwei +
+                    ',' +
+                    '4/' +
+                    this.yaowei +
+                    ',' +
+                    '5/' +
+                    this.xiabai +
+                    ',' +
+                    '6/' +
+                    this.jiankuan +
+                    ',' +
+                    '7/' +
+                    this.zuoxiuchang +
+                    ',' +
+                    '8/' +
+                    this.youxiuchang +
+                    ',' +
+                    '9/' +
+                    this.xiufei +
+                    ',' +
+                    '10/' +
+                    this.xiukou +
+                    ',' +
+                    '11/' +
+                    this.shengao +
+                    ',' +
+                    '12/' +
+                    this.tizhong +
+                    ',' +
+                    '13/' +
+                    this.nianji +
+                    ',' +
+                    '14/' +
+                    this.xiongkuan +
+                    ',' +
+                    '15/' +
+                    newVal
+            );
+            console.log(this.$store.getters.getbodySizeIds);
+        }
+    },
     mounted() {
-        this.getlist()
+        this.getlist();
+        this.beizhu = this.$store.getters.getliangtiRemark;
+        console.log(this.$store.getters.getbodySizeIds);
+        console.log(this.$store.getters.getbodySizeIds.split(','));
+        if (this.$store.getters.getbodySizeIds !== '') {
+            for (let i = 0; i <= this.$store.getters.getbodySizeIds.split(',').length; i++) {
+                console.log(this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1]);
+                if (i == 0) {
+                    this.qianchang = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 1) {
+                    this.houchang = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 2) {
+                    this.xiongwei = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 3) {
+                    this.yaowei = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 4) {
+                    this.xiabai = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 5) {
+                    this.jiankuan = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 6) {
+                    this.zuoxiuchang = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 7) {
+                    this.youxiuchang = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 8) {
+                    this.xiufei = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 9) {
+                    this.xiukou = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 10) {
+                    this.shengao = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 11) {
+                    this.tizhong = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 12) {
+                    this.nianji = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 13) {
+                    this.xiongkuan = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                } else if (i == 14) {
+                    this.beikuan = this.$store.getters.getbodySizeIds.split(',')[i].split('/')[1];
+                }
+            }
+        }
     },
     methods: {
-        xuanzhong(val,index) {
-            if(val == 1) {
-                this.xuan1 = index
-            } else if(val == 2) {
-                this.xuan2 = index
-            } else if(val == 3) {
-                this.xuan3 = index
-            } else if(val == 4) {
-                this.xuan4 = index
-            } else if(val == 5) {
-                this.xuan5 = index
-            } else if(val == 6) {
-                this.xuan6 = index
-            } 
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
         },
-        getlist() {
-            querySizeinfo({
-                template_id: "5",
-                category_ids: "54,55,56,57,58,59,53,51,52"
-            }).then(res => {
-                console.log(res,"12341234")
-                for(let i = 0;i<=res.data.length;i++) {
-                    if(res.data[i].sizeName == "胸部") {
-                        this.xiongbu = res.data[i].smallSizeInfo
-                        this.$set(this.xiongbu)
-                    } else if(res.data[i].sizeName == "背部") {
-                        this.beibu = res.data[i].smallSizeInfo
-                        this.$set(this.beibu)
-                    } else if(res.data[i].sizeName == "肩部") {
-                        this.jianbu = res.data[i].smallSizeInfo
-                        this.$set(this.jianbu)
-                    } else if(res.data[i].sizeName == "站姿") {
-                        this.zhanzi = res.data[i].smallSizeInfo
-                        this.$set(this.zhanzi)
-                    } else if(res.data[i].sizeName == "腹部") {
-                        this.fubu = res.data[i].smallSizeInfo
-                        this.$set(this.fubu)
-                    } else if(res.data[i].sizeName == "臀部") {
-                        this.tunbu = res.data[i].smallSizeInfo
-                        this.$set(this.tunbu)
-                    } 
-                }
-            })
+        handlePictureCardPreview(file) {
+            console.log(file);
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
         },
         handleAvatarSuccess(res, file) {
+            console.log(res)
             this.imageUrl = URL.createObjectURL(file.raw);
+            this.$store.commit('liangtiImgs',  this.$store.getters.getliangtiImgs +","+ res.data);
+            console.log(this.$store.getters.getliangtiImgs)
+        },
+        xuanzhong(val, index) {
+            if (val == 1) {
+                this.xuan1 = index;
+            } else if (val == 2) {
+                this.xuan2 = index;
+            } else if (val == 3) {
+                this.xuan3 = index;
+            } else if (val == 4) {
+                this.xuan4 = index;
+            } else if (val == 5) {
+                this.xuan5 = index;
+            } else if (val == 6) {
+                this.xuan6 = index;
+            }
+        },
+        getlist() {
+            console.log(this.$store.getters.getcategoryIds, '>>>>>>>>>>>>>>>>>>');
+            querySizeinfo({
+                template_id: '5',
+                category_ids: this.$store.getters.getcategoryIds
+            }).then((res) => {
+                console.log(res.data, '12341234');
+                for (let i = 0; i <= res.data.length; i++) {
+                    if (res.data[i].sizeName == '胸部') {
+                        this.xiongbu = res.data[i].smallSizeInfo;
+                        this.xiongbuid = res.data[i].id;
+                        this.$set(this.xiongbu);
+                    } else if (res.data[i].sizeName == '背部') {
+                        this.beibu = res.data[i].smallSizeInfo;
+                        this.beibuid = res.data[i].id;
+                        this.$set(this.beibu);
+                    } else if (res.data[i].sizeName == '肩部') {
+                        this.jianbu = res.data[i].smallSizeInfo;
+                        this.jianbuid = res.data[i].id;
+                        this.$set(this.jianbu);
+                    } else if (res.data[i].sizeName == '站姿') {
+                        this.zhanzi = res.data[i].smallSizeInfo;
+                        this.zhanziid = res.data[i].id;
+                        this.$set(this.zhanzi);
+                    } else if (res.data[i].sizeName == '腹部') {
+                        this.fubu = res.data[i].smallSizeInfo;
+                        this.fubuid = res.data[i].id;
+                        this.$set(this.fubu);
+                    } else if (res.data[i].sizeName == '臀部') {
+                        this.tunbu = res.data[i].smallSizeInfo;
+                        this.tunbuid = res.data[i].id;
+                        this.$set(this.tunbu);
+                    }
+                    if (this.tunbu.length == 0) {
+                        this.show6 = false;
+                    } else {
+                        this.show1 = false;
+                    }
+                }
+            });
         },
         childClick() {
             this.$emit('childByValue', 'show');

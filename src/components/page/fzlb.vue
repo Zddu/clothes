@@ -4,14 +4,15 @@
             <div class="box1">
                 <div class="button1">领口款式</div>
                 <div class="paixu">
-                    <div  :class="{ kuang1: index == xuan1, kuang2: index !=  xuan1}"  v-for="(item,index) in lingkoukuanshi" :key="index" @click="dianji(1,index)">
+                    <div
+                        :class="{ kuang1: index == xuan1, kuang2: index != xuan1 }"
+                        v-for="(item, index) in lingkoukuanshi"
+                        :key="index"
+                        @click="dianji(1, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan1, yangshi1: index !=  xuan1}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan1, yangshi1: index != xuan1 }">{{ item.categoryName }}</div>
                     </div>
-                    <!-- <div class="kuang2">
-                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                        <div class="yangshi1">平驳</div>
-                    </div> -->
                     <div style="width: 182px"></div>
                     <div style="width: 182px"></div>
                     <div style="width: 182px"></div>
@@ -30,16 +31,15 @@
 
                 <div class="button1" style="margin-top: 40px">门襟扣</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan2, kuang2: index !=  xuan2}" v-for="(item,index) in menjinkou" :key="index" @click="dianji(2,index)">
+                    <div
+                        :class="{ kuang1: index == xuan2, kuang2: index != xuan2 }"
+                        v-for="(item, index) in menjinkou"
+                        :key="index"
+                        @click="dianji(2, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan2, yangshi1: index !=  xuan2}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan2, yangshi1: index != xuan2 }">{{ item.categoryName }}</div>
                     </div>
-
-                    <!-- <div class="kuang2">
-                        <img src="./../../assets/img/ti1.jpg" alt="" class="imgs" />
-                        <div class="yangshi1">单排一粒扣</div>
-                    </div> -->
-
                     <div style="width: 182px"></div>
                     <div style="width: 182px"></div>
                     <div style="width: 182px"></div>
@@ -50,9 +50,14 @@
 
                 <div class="button1" style="margin-top: 40px">外大袋</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan3, kuang2: index !=  xuan3}" v-for="(item,index) in waidadai" :key="index" @click="dianji(3,index)">
+                    <div
+                        :class="{ kuang1: index == xuan3, kuang2: index != xuan3 }"
+                        v-for="(item, index) in waidadai"
+                        :key="index"
+                        @click="dianji(3, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan3, yangshi1: index !=  xuan3}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan3, yangshi1: index != xuan3 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -70,9 +75,14 @@
 
                 <div class="button1" style="margin-top: 40px">背叉</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan4, kuang2: index !=  xuan4}" v-for="(item,index) in beichai" :key="index" @click="dianji(4,index)">
+                    <div
+                        :class="{ kuang1: index == xuan4, kuang2: index != xuan4 }"
+                        v-for="(item, index) in beichai"
+                        :key="index"
+                        @click="dianji(4, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan4, yangshi1: index !=  xuan4}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan4, yangshi1: index != xuan4 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -90,9 +100,14 @@
 
                 <div class="button1" style="margin-top: 40px">袖口款式</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan5, kuang2: index !=  xuan5}" v-for="(item,index) in xiukoukuanshi" :key="index" @click="dianji(5,index)">
+                    <div
+                        :class="{ kuang1: index == xuan5, kuang2: index != xuan5 }"
+                        v-for="(item, index) in xiukoukuanshi"
+                        :key="index"
+                        @click="dianji(5, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan5, yangshi1: index !=  xuan5}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan5, yangshi1: index != xuan5 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -110,9 +125,14 @@
 
                 <div class="button1" style="margin-top: 40px">手巾袋</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan6, kuang2: index !=  xuan6}" v-for="(item,index) in shoujindai" :key="index" @click="dianji(6,index)">
+                    <div
+                        :class="{ kuang1: index == xuan6, kuang2: index != xuan6 }"
+                        v-for="(item, index) in shoujindai"
+                        :key="index"
+                        @click="dianji(6, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan6, yangshi1: index !=  xuan6}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan6, yangshi1: index != xuan6 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -130,9 +150,14 @@
 
                 <div class="button1" style="margin-top: 40px">驳头眼</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan7, kuang2: index !=  xuan7}" v-for="(item,index) in botouyan" :key="index" @click="dianji(7,index)">
+                    <div
+                        :class="{ kuang1: index == xuan7, kuang2: index != xuan7 }"
+                        v-for="(item, index) in botouyan"
+                        :key="index"
+                        @click="dianji(7, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan7, yangshi1: index !=  xuan7}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan7, yangshi1: index != xuan7 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -150,9 +175,14 @@
 
                 <div class="button1" style="margin-top: 40px">外珠边</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan8, kuang2: index !=  xuan8}" v-for="(item,index) in waizhubian" :key="index" @click="dianji(8,index)">
+                    <div
+                        :class="{ kuang1: index == xuan8, kuang2: index != xuan8 }"
+                        v-for="(item, index) in waizhubian"
+                        :key="index"
+                        @click="dianji(8, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan8, yangshi1: index !=  xuan8}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan8, yangshi1: index != xuan8 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -179,9 +209,14 @@
 
                 <div class="button1" style="margin-top: 40px">里布款式</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan9, kuang2: index !=  xuan9}" v-for="(item,index) in libukuanshi" :key="index" @click="dianji(9,index)">
+                    <div
+                        :class="{ kuang1: index == xuan9, kuang2: index != xuan9 }"
+                        v-for="(item, index) in libukuanshi"
+                        :key="index"
+                        @click="dianji(9, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan9, yangshi1: index !=  xuan9}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan9, yangshi1: index != xuan9 }">{{ item.categoryName }}</div>
                     </div>
 
                     <div style="width: 182px"></div>
@@ -194,9 +229,14 @@
 
                 <div class="button1" style="margin-top: 40px">马甲款式</div>
                 <div class="paixu">
-                    <div :class="{ kuang1: index == xuan10, kuang2: index !=  xuan10}" v-for="(item,index) in majiakuanshi" :key="index" @click="dianji(10,index)">
+                    <div
+                        :class="{ kuang1: index == xuan10, kuang2: index != xuan10 }"
+                        v-for="(item, index) in majiakuanshi"
+                        :key="index"
+                        @click="dianji(10, index)"
+                    >
                         <img :src="item.img" alt="" class="imgs" />
-                        <div :class="{ yangshi: index == xuan10, yangshi1: index !=  xuan10}">{{item.categoryName}}</div>
+                        <div :class="{ yangshi: index == xuan10, yangshi1: index != xuan10 }">{{ item.categoryName }}</div>
                     </div>
 
                     <!-- <div class="kuang2">
@@ -226,13 +266,14 @@
 </template>
 
 <script>
-import { getBokuan,getTypeAndProcess } from './../../api/ml';
+import qs from 'qs';
+import { getBokuan, getTypeAndProcess } from './../../api/ml';
 export default {
     name: 'fzlb123',
     data() {
         return {
-            bokuanni: "",
-            zhubianxiao: "",
+            bokuanni: '',
+            zhubianxiao: '',
             flag: false,
             options: [
                 {
@@ -267,16 +308,16 @@ export default {
             waizhubian: [],
             libukuanshi: [],
             majiakuanshi: [],
-            xuan1: "1923847892374",
-            xuan2: "1923847892374",
-            xuan3: "1923847892374",
-            xuan4: "1923847892374",
-            xuan5: "1923847892374",
-            xuan6: "1923847892374",
-            xuan7: "1923847892374",
-            xuan8: "1923847892374",
-            xuan9: "1923847892374",
-            xuan10: "1923847892374",
+            xuan1: '1923847892374',
+            xuan2: '1923847892374',
+            xuan3: '1923847892374',
+            xuan4: '1923847892374',
+            xuan5: '1923847892374',
+            xuan6: '1923847892374',
+            xuan7: '1923847892374',
+            xuan8: '1923847892374',
+            xuan9: '1923847892374',
+            xuan10: '1923847892374'
         };
     },
     created() {},
@@ -286,27 +327,27 @@ export default {
         this.zhubianxiao = this.$store.getters.getksZhubianWidth;
     },
     methods: {
-        dianji(val,index) {
-            if(val == 1) {
-                this.xuan1 = index
-            } else if(val ==2) {
-                this.xuan2 = index
-            } else if(val ==3) {
-                this.xuan3 = index
-            } else if(val ==4) {
-                this.xuan4 = index
-            } else if(val ==5) {
-                this.xuan5 = index
-            } else if(val ==6) {
-                this.xuan6 = index
-            } else if(val ==7) {
-                this.xuan7 = index
-            } else if(val ==8) {
-                this.xuan8 = index
-            } else if(val ==9) {
-                this.xuan9 = index
-            } else if(val ==10) {
-                this.xuan10 = index
+        dianji(val, index) {
+            if (val == 1) {
+                this.xuan1 = index;
+            } else if (val == 2) {
+                this.xuan2 = index;
+            } else if (val == 3) {
+                this.xuan3 = index;
+            } else if (val == 4) {
+                this.xuan4 = index;
+            } else if (val == 5) {
+                this.xuan5 = index;
+            } else if (val == 6) {
+                this.xuan6 = index;
+            } else if (val == 7) {
+                this.xuan7 = index;
+            } else if (val == 8) {
+                this.xuan8 = index;
+            } else if (val == 9) {
+                this.xuan9 = index;
+            } else if (val == 10) {
+                this.xuan10 = index;
             }
         },
         childClick() {
@@ -325,55 +366,55 @@ export default {
                 this.$set(this.bokuan);
                 this.$set(this.zhukuan);
             });
-
+            console.log(this.$store.getters.getcategoryIds,"123412341234")
             getTypeAndProcess({
-                token: this.$store.getters.getToken,
-                mouldid: "3",
-                typeids: "52,54,53,55,56,57,58"
-            }).then(res => {
-                console.log(res,"1")
-                for(let i = 0;i<res.data.length;i++) {
-                    if(res.data[i].parameter == "领口款式") {
-                        this.lingkoukuanshi = res.data[i].categoryInfoList
-                        this.$set(this.lingkoukuanshi)
-                    } else if(res.data[i].parameter == "门襟扣") {
-                        this.menjinkou = res.data[i].categoryInfoList
-                        this.$set(this.menjinkou)
-                    } else if(res.data[i].parameter == "外大袋") {
-                        this.waidadai = res.data[i].categoryInfoList
-                        this.$set(this.waidadai)
-                    } else if(res.data[i].parameter == "背叉") {
-                        this.beichai = res.data[i].categoryInfoList
-                        this.$set(this.beichai)
-                    } else if(res.data[i].parameter == "袖口款式") {
-                        this.xiukoukuanshi = res.data[i].categoryInfoList
-                        this.$set(this.xiukoukuanshi)
-                    } else if(res.data[i].parameter == "手巾袋") {
-                        this.shoujindai = res.data[i].categoryInfoList
-                        this.$set(this.shoujindai)
-                    } else if(res.data[i].parameter == "驳头眼") {
-                        this.botouyan = res.data[i].categoryInfoList
-                        this.$set(this.botouyan)
-                    } else if(res.data[i].parameter == "外珠边") {
-                        this.waizhubian = res.data[i].categoryInfoList
-                        this.$set(this.waizhubian)
-                    } else if(res.data[i].parameter == "里布款式") {
-                        this.libukuanshi = res.data[i].categoryInfoList
-                        this.$set(this.libukuanshi)
-                    } else if(res.data[i].parameter == "马甲款式") {
-                        this.majiakuanshi = res.data[i].categoryInfoList
-                        this.$set(this.majiakuanshi)
+                    token: this.$store.getters.getToken,
+                    mouldid: '3',
+                    typeids: this.$store.getters.getcategoryIds
+                }
+            ).then((res) => {
+                console.log(res, '1');
+                for (let i = 0; i < res.data.length; i++) {
+                    if (res.data[i].parameter == '领口款式') {
+                        this.lingkoukuanshi = res.data[i].categoryInfoList;
+                        this.$set(this.lingkoukuanshi);
+                    } else if (res.data[i].parameter == '门襟扣') {
+                        this.menjinkou = res.data[i].categoryInfoList;
+                        this.$set(this.menjinkou);
+                    } else if (res.data[i].parameter == '外大袋') {
+                        this.waidadai = res.data[i].categoryInfoList;
+                        this.$set(this.waidadai);
+                    } else if (res.data[i].parameter == '背叉') {
+                        this.beichai = res.data[i].categoryInfoList;
+                        this.$set(this.beichai);
+                    } else if (res.data[i].parameter == '袖口款式') {
+                        this.xiukoukuanshi = res.data[i].categoryInfoList;
+                        this.$set(this.xiukoukuanshi);
+                    } else if (res.data[i].parameter == '手巾袋') {
+                        this.shoujindai = res.data[i].categoryInfoList;
+                        this.$set(this.shoujindai);
+                    } else if (res.data[i].parameter == '驳头眼') {
+                        this.botouyan = res.data[i].categoryInfoList;
+                        this.$set(this.botouyan);
+                    } else if (res.data[i].parameter == '外珠边') {
+                        this.waizhubian = res.data[i].categoryInfoList;
+                        this.$set(this.waizhubian);
+                    } else if (res.data[i].parameter == '里布款式') {
+                        this.libukuanshi = res.data[i].categoryInfoList;
+                        this.$set(this.libukuanshi);
+                    } else if (res.data[i].parameter == '马甲款式') {
+                        this.majiakuanshi = res.data[i].categoryInfoList;
+                        this.$set(this.majiakuanshi);
                     }
-                } 
-
-            })
+                }
+            });
         },
         handleSelectChange(value) {
-            console.log(value)
+            console.log(value);
             this.$store.commit('ksBokuan', value);
         },
         handleSelectChange1(value) {
-            console.log(value)
+            console.log(value);
             this.$store.commit('ksZhubianWidth', value);
         },
         changeStyle() {
