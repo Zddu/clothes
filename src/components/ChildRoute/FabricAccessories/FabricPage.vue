@@ -24,16 +24,16 @@
                 title="面料购买"
                 :visible.sync="dialogVisible"
                 width="35%"
-                >
+        >
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="面料编号" prop="fabricCode">
-                    <el-input disabled  v-model="ruleForm.fabricCode"></el-input>
+                    <el-input disabled v-model="ruleForm.fabricCode"></el-input>
                 </el-form-item>
                 <el-form-item label="当前库存" prop="inventory">
-                    <el-input disabled  v-model="ruleForm.inventory"></el-input>
+                    <el-input disabled v-model="ruleForm.inventory"></el-input>
                 </el-form-item>
                 <el-form-item label="购买米数" prop="fabricUnit">
-                    <el-input placeholder="请填写购买米数" v-model="ruleForm.fabricUnit"></el-input>
+                    <el-input placeholder="请填写购买米数" v-model="fabricUnit1"></el-input>
                 </el-form-item>
             </el-form>
             <div style="width: 100%;margin-left: 100px;font-size: 13px;margin-bottom: 15px;">
@@ -54,9 +54,9 @@
         name: 'FabricPage',
         data() {
             return {
-                ruleForm:{},
-
-                dialogVisible:false,
+                ruleForm: {},
+                fabricUnit1:'',
+                dialogVisible: false,
                 fontStyle: 'type-font-style',
                 fontStyle1: 'type-font-style1',
                 styleNum: '',
@@ -72,11 +72,11 @@
                 flag: false,
                 flagV: true,
                 niukouImg: require('../../../assets/img/ml.jpg'),
-                token: window.sessionStorage.getItem("Token"),
+                token: window.sessionStorage.getItem('Token'),
                 rules: {
                     fabricUnit: [
-                        { required: true, message: '请填写购买米数', trigger: 'blur' },
-                    ],
+                        { required: true, message: '请填写购买米数', trigger: 'blur' }
+                    ]
                 }
             };
         },
@@ -86,25 +86,29 @@
             this.getSingleFabricList();
         },
         methods: {
-            handleSave(){
-              this.dialogVisible = false;
+            handleSave() {
+                window.sessionStorage.setItem('mlId', this.ruleForm.id);
+                window.sessionStorage.setItem('mllong', this.fabricUnit1);
+                this.$store.commit("fabricIds",this.ruleForm.id+"/"+this.fabricUnit1);
+                console.log(window.sessionStorage.getItem("mllong"));
+                this.dialogVisible = false;
             },
             choiceStyle(val) {
                 this.styleNum = val;
-                this.dialogVisible = true
-                this.ruleForm = this.singleFabricList[val]
+                this.dialogVisible = true;
+                this.ruleForm = this.singleFabricList[val];
             },
 
             getSingleFabricList() {
                 querySingleFabricList(
-                    { token: this.token, typeId: 0 }
+                    { token: this.token, typeId: 0, fabeicCode: this.mlCode }
                 ).then(res => {
                     console.log(res);
                     this.singleFabricList = res.data;
                 });
             },
             searchCode() {
-                alert(1);
+                this.getSingleFabricList();
             },
 
             onChange() {

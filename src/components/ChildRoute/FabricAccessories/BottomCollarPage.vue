@@ -20,30 +20,30 @@
             </div>
         </div>
 
-        <el-dialog
-                title="面料购买"
-                :visible.sync="dialogVisible"
-                width="35%"
-        >
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="面料编号" prop="fabricCode">
-                    <el-input disabled  v-model="ruleForm.fabricCode"></el-input>
-                </el-form-item>
-                <el-form-item label="当前库存" prop="inventory">
-                    <el-input disabled  v-model="ruleForm.inventory"></el-input>
-                </el-form-item>
-                <el-form-item label="购买米数" prop="fabricUnit">
-                    <el-input placeholder="请填写购买米数" v-model="ruleForm.fabricUnit"></el-input>
-                </el-form-item>
-            </el-form>
-            <div style="width: 100%;margin-left: 100px;font-size: 13px;margin-bottom: 15px;">
-                <span>详情参照表</span> <span style="color: #e6a23c;cursor: pointer">《单耗对照表》</span>
-            </div>
-            <div slot="footer" class="dialog-footer">
-                <el-button style="color:#000;background: #fff" @click="dialogVisible = false">取 消</el-button>
-                <el-button style="color:#fff;background: #68666b" type="primary" @click="handleSave">保 存</el-button>
-            </div>
-        </el-dialog>
+<!--        <el-dialog-->
+<!--                title="面料购买"-->
+<!--                :visible.sync="dialogVisible"-->
+<!--                width="35%"-->
+<!--        >-->
+<!--            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">-->
+<!--                <el-form-item label="面料编号" prop="fabricCode">-->
+<!--                    <el-input disabled  v-model="ruleForm.fabricCode"></el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item label="当前库存" prop="inventory">-->
+<!--                    <el-input disabled  v-model="ruleForm.inventory"></el-input>-->
+<!--                </el-form-item>-->
+<!--                <el-form-item label="购买米数" prop="fabricUnit">-->
+<!--                    <el-input placeholder="请填写购买米数" v-model="ruleForm.fabricUnit"></el-input>-->
+<!--                </el-form-item>-->
+<!--            </el-form>-->
+<!--            <div style="width: 100%;margin-left: 100px;font-size: 13px;margin-bottom: 15px;">-->
+<!--                <span>详情参照表</span> <span style="color: #e6a23c;cursor: pointer">《单耗对照表》</span>-->
+<!--            </div>-->
+<!--            <div slot="footer" class="dialog-footer">-->
+<!--                <el-button style="color:#000;background: #fff" @click="dialogVisible = false">取 消</el-button>-->
+<!--                <el-button style="color:#fff;background: #68666b" type="primary" @click="handleSave">保 存</el-button>-->
+<!--            </div>-->
+<!--        </el-dialog>-->
     </div>
 </template>
 
@@ -97,7 +97,6 @@
             },
             choiceStyle(val) {
                 this.styleNum = val;
-                this.dialogVisible = true
             },
 
             getSingleFabricList() {

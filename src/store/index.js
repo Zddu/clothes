@@ -157,6 +157,9 @@ export default new Vuex.Store({
         getsizeIds(state) {
             return state.sizeIds
         },
+        getfabricIds(state) {
+            return state.fabricIds
+        },
         getzhuangseId(state) {
             return state.zhuangseId
         },
@@ -272,6 +275,9 @@ export default new Vuex.Store({
         },
         zhuangseId(state,data) {
             state.zhuangseId = data
+        },
+        fabricIds(state,data) {
+            state.fabricIds = data
         },
         zidingyiImg(state,data) {
             state.zidingyiImg = data
