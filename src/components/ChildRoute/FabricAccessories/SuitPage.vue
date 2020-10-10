@@ -11,39 +11,39 @@
             </el-form>
 
             <div class="type-main">
-                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2" :key="index"
-                        @click="choiceStyle(index)">
+                <a-card v-for="(item,index) in singleFabricList" :class="{ 'card-style': index.toString() == styleNum, 'card-style1': index.toString() != styleNum }" :key="index"
+                        @click="choiceStyle(index.toString())">
                     <img :class="item.fabricImg?'':imgStyle" :src="item.fabricImg" alt=""/>
-                    <p :class="styleNum===index?fontStyle:fontStyle1">{{item.fabricCode}}</p>
+                    <p :class="{ 'type-font-style': index.toString() == styleNum, 'type-font-style1': index.toString() != styleNum }">{{item.fabricCode}}</p>
                     <p style="font-size: 13px;text-align: center">当前库存：{{item.inventory}}</p>
                 </a-card>
             </div>
         </div>
 
-<!--        <el-dialog-->
-<!--                title="面料购买"-->
-<!--                :visible.sync="dialogVisible"-->
-<!--                width="35%"-->
-<!--        >-->
-<!--            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">-->
-<!--                <el-form-item label="面料编号" prop="fabricCode">-->
-<!--                    <el-input disabled  v-model="ruleForm.fabricCode"></el-input>-->
-<!--                </el-form-item>-->
-<!--                <el-form-item label="当前库存" prop="inventory">-->
-<!--                    <el-input disabled  v-model="ruleForm.inventory"></el-input>-->
-<!--                </el-form-item>-->
-<!--                <el-form-item label="购买米数" prop="fabricUnit">-->
-<!--                    <el-input placeholder="请填写购买米数" v-model="ruleForm.fabricUnit"></el-input>-->
-<!--                </el-form-item>-->
-<!--            </el-form>-->
-<!--            <div style="width: 100%;margin-left: 100px;font-size: 13px;margin-bottom: 15px;">-->
-<!--                <span>详情参照表</span> <span style="color: #e6a23c;cursor: pointer">《单耗对照表》</span>-->
-<!--            </div>-->
-<!--            <div slot="footer" class="dialog-footer">-->
-<!--                <el-button style="color:#000;background: #fff" @click="dialogVisible = false">取 消</el-button>-->
-<!--                <el-button style="color:#fff;background: #68666b" type="primary" @click="handleSave">保 存</el-button>-->
-<!--            </div>-->
-<!--        </el-dialog>-->
+        <el-dialog
+                title="面料购买"
+                :visible.sync="dialogVisible"
+                width="35%"
+        >
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="面料编号" prop="fabricCode">
+                    <el-input disabled  v-model="ruleForm.fabricCode"></el-input>
+                </el-form-item>
+                <el-form-item label="当前库存" prop="inventory">
+                    <el-input disabled  v-model="ruleForm.inventory"></el-input>
+                </el-form-item>
+                <el-form-item label="购买米数" prop="fabricUnit">
+                    <el-input placeholder="请填写购买米数" v-model="fabricUnit2"></el-input>
+                </el-form-item>
+            </el-form>
+            <div style="width: 100%;margin-left: 100px;font-size: 13px;margin-bottom: 15px;">
+                <span>详情参照表</span> <span style="color: #e6a23c;cursor: pointer">《单耗对照表》</span>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button style="color:#000;background: #fff" @click="dialogVisible = false">取 消</el-button>
+                <el-button style="color:#fff;background: #68666b" type="primary" @click="handleSave">保 存</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -55,14 +55,10 @@
         data() {
             return {
                 ruleForm:{},
-
+                fabricUnit2:'',
                 dialogVisible:false,
-                fontStyle: 'type-font-style',
-                fontStyle1: 'type-font-style1',
                 styleNum: '',
                 imgStyle: 'imgStyle',
-                style1: 'card-style',
-                style2: 'card-style1',
 
                 //面料号
                 mlCode: '',
@@ -87,19 +83,28 @@
             };
         },
         created() {
+            this.fabricUnit2 = window.sessionStorage.getItem("mllong2")?window.sessionStorage.getItem("mllong2"):''
+            this.styleNum = window.sessionStorage.getItem("styleNum2")?window.sessionStorage.getItem("styleNum2"):''
         },
         mounted() {
             this.getSingleFabricList();
         },
         methods: {
             handleSave(){
+                window.sessionStorage.setItem('mlId2', this.ruleForm.id);
+                window.sessionStorage.setItem('mllong2', this.fabricUnit2);
+                this.$store.commit("fabricIds", this.$store.getters.getfabricIds+","+this.ruleForm.id+"/"+this.fabricUnit2);
+                window.sessionStorage.setItem("styleNum2",this.styleNum);
                 this.dialogVisible = false;
             },
             choiceStyle(val) {
                 this.styleNum = val;
+                this.dialogVisible = true;
+                this.ruleForm = this.singleFabricList[val];
             },
 
             getSingleFabricList() {
+                console.log(this.$store.getters.getfabricIds);
                 querySingleFabricList(
                     { token: this.token, typeId: 1 }
                 ).then(res => {

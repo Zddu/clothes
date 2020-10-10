@@ -49,7 +49,7 @@ export default new Vuex.Store({
         jingtiSize: "",//净体尺寸
         liangtiRemark: "",//	体型备注            √
         liangtiImgs: "",//量体图片，多个以逗号隔开      √
-
+        buttonsIds:'', //按钮id
         // `````````````华丽的分割线········································
 
 
@@ -168,6 +168,9 @@ export default new Vuex.Store({
         },
         getliangtiImgs(state) {
             return state.liangtiImgs
+        },
+        getbuttonsIds(state) {
+            return state.buttonsIds
         }
     },
     mutations: {
@@ -284,7 +287,10 @@ export default new Vuex.Store({
         },
         liangtiImgs(state,data) {
             state.liangtiImgs = data
-        }
+        },
+        buttonsIds(state,data) {
+            state.buttonsIds = data
+        },
     },
     actions: {
 

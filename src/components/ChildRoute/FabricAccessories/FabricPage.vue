@@ -11,10 +11,10 @@
             </el-form>
 
             <div class="type-main">
-                <a-card v-for="(item,index) in singleFabricList" :class="styleNum===index?style1:style2" :key="index"
-                        @click="choiceStyle(index)">
+                <a-card v-for="(item,index) in singleFabricList" :class="{ cardStyle: index.toString() ===styleNum, cardStyle1: index.toString() !== styleNum }" :key="index"
+                        @click="choiceStyle(index+'')">
                     <img :class="item.fabricImg?'':imgStyle" :src="item.fabricImg" alt=""/>
-                    <p :class="styleNum===index?fontStyle:fontStyle1">{{item.fabricCode}}</p>
+                    <p :class="{ 'type-font-style': index.toString() === styleNum, 'type-font-style1': index.toString() !== styleNum }">{{item.fabricCode}}</p>
                     <p style="font-size: 13px;text-align: center">当前库存：{{item.inventory}}</p>
                 </a-card>
             </div>
@@ -57,13 +57,7 @@
                 ruleForm: {},
                 fabricUnit1:'',
                 dialogVisible: false,
-                fontStyle: 'type-font-style',
-                fontStyle1: 'type-font-style1',
                 styleNum: '',
-                imgStyle: 'imgStyle',
-                style1: 'card-style',
-                style2: 'card-style1',
-
                 //面料号
                 mlCode: '',
                 //面料数据
@@ -81,6 +75,8 @@
             };
         },
         created() {
+            this.styleNum = window.sessionStorage.getItem("styleNum1")?window.sessionStorage.getItem("styleNum1"):''
+            this.fabricUnit1 = window.sessionStorage.getItem("mllong")?window.sessionStorage.getItem("mllong"):''
         },
         mounted() {
             this.getSingleFabricList();
@@ -90,16 +86,18 @@
                 window.sessionStorage.setItem('mlId', this.ruleForm.id);
                 window.sessionStorage.setItem('mllong', this.fabricUnit1);
                 this.$store.commit("fabricIds",this.ruleForm.id+"/"+this.fabricUnit1);
-                console.log(window.sessionStorage.getItem("mllong"));
                 this.dialogVisible = false;
+                window.sessionStorage.setItem("styleNum1",this.styleNum)
             },
             choiceStyle(val) {
+                console.log(val);
                 this.styleNum = val;
                 this.dialogVisible = true;
                 this.ruleForm = this.singleFabricList[val];
             },
 
             getSingleFabricList() {
+                console.log(window.sessionStorage.getItem('styleNum1'));
                 querySingleFabricList(
                     { token: this.token, typeId: 0, fabeicCode: this.mlCode }
                 ).then(res => {
@@ -119,7 +117,7 @@
 
 <style scoped>
 
-    .card-style {
+    .cardStyle {
         width: 156px;
         height: 197px;
         background: #ffffff;
@@ -129,7 +127,7 @@
         margin-bottom: 14px;
     }
 
-    .card-style1 {
+    .cardStyle1 {
         width: 156px;
         height: 197px;
         background: #ffffff;

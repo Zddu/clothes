@@ -5,9 +5,9 @@
             <el-radio :key="item.id" v-for="(item,index) in buttonList" @change="onChange(item.id)" v-model="choiced" :label="item.id">{{item.categoryName}}</el-radio>
         </div>
         <div class="type-main">
-            <a-card :key="index" v-for="(item,index) in buttonDataList" :class="styleNum===item.id?style1:style2" @click="choiceStyle(item.id)">
+            <a-card :key="index" v-for="(item,index) in buttonDataList" :class="{ 'card-style': index.toString() === styleNum, 'card-style1': index.toString() !== styleNum }" @click="choiceStyle(item,index.toString())">
                 <img :class="imgStyle" :src="selectImg?item.img:item.img2" alt=""/>
-                <p :class="styleNum===item.id?fontStyle:fontStyle1">{{item.categoryName}}</p>
+                <p :class="{'type-font-style': index.toString() === styleNum, 'type-font-style1': index.toString() !== styleNum}">{{item.categoryName}}</p>
             </a-card>
         </div>
     </div>
@@ -35,6 +35,7 @@
             };
         },
         created() {
+            console.log(this.$store.getters.getbuttonsIds);
         },
         mounted() {
             this.getbutton();
@@ -49,17 +50,20 @@
                     this.onChange(this.choiced);
                 });
             },
-            choiceStyle(val){
-                this.selectImg = true
-                this.styleNum = val
+            choiceStyle(item,val){
+                this.selectImg = true;
+                this.styleNum = val;
+                this.$store.commit("buttonsIds",item.id);
+                window.sessionStorage.setItem("niukou-"+item.categoryId,this.styleNum);
             },
             onChange(val) {
-                console.log("select:"+val);
+                if (window.sessionStorage.getItem('niukou-' + val)){
+                    this.styleNum = window.sessionStorage.getItem('niukou-' + val)
+                }
                 getButtons(
                     {moudleId:'16',buttonTypeId:val}
                     ).then(res=>{
                     this.buttonDataList = res.data
-                    console.log(this.buttonDataList);
                 })
             }
         }
